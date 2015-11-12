@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<!--
+Author: Ben Connick
+-->
+<html>
+    <head>
+        <title>AP Calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'>
+        <style>
+        	body {
+        		background-color: #000020/*#BBDDFF*/;
+        		background-image: url("images/yellow-canvas-tiling.png");
+        		background-repeat: repeat-both;
+        		max-width: 640px;
+        	}
+        	h1 {
+        		font-size: 2.3em;
+        		font-family: "Metamorphous";
+        		margin-left: 0.2em;
+        		color: #CCDDFF;
+        		text-shadow: 0.0em 0.0em 0.1em black, 0.0em 0.0em 0.3em black; 
+        	}
+        	* {
+        		font-size: 12pt;
+        	}
+        	button:hover {
+        		cursor: pointer;
+        	}
+        	.topSpacer {
+        		width: 100%;
+        		height: 1em;
+        		display: block;
+        	}
+        	.topBar {
+        		display: block;
+        		border-radius: 0pt 0pt 5pt 5pt;
+        		border: solid 1pt grey;
+        		background-color: rgba(0,0,0,0.8);
+        		color: #ddd;
+        		width: 98%;
+        		height: 50em;
+        		position: fixed;
+        		top: -51em;
+        		left: 0px;
+        		margin-left: 1%;
+        		font-size: 12pt;
+        		transition: top 0.2s;
+        	}
+        	.bottomBar {
+        		padding: 1em;
+        		display: block;
+        		border-radius: 5pt 5pt 0pt 0pt;
+        		border: solid 1pt grey;
+        		background-color: rgba(0,0,0,0.8);
+        		color: #ddd;
+        		width: 88%;
+        		height: 6em;
+        		position: fixed;
+        		bottom: -11em;
+        		left: 0px;
+        		margin-left: 1%;
+        		font-size: 12pt;
+        		transition: bottom 0.1s;
+        	}
+        	#rollCalculation {
+        		margin: 0pt;
+        	}
+        	.closeBottomBarButton {
+        		font-family: sans-serif;
+        		/*border-radius: 2pt;
+        		border: solid 1px;
+        		border-color: #888;*/
+        		color: #888;
+        		width: 1em;
+        		height: 0.8em;
+        		padding-bottom: 0.2em;
+        		position: absolute;
+        		right: 0.5em;
+        		top: 0.5em;
+        		text-align: center;
+        	}
+        	.closeBottomBarButton:after{
+			  content: "\00d7"; /* This will render the 'X' */
+			}
+        	.closeBottomBarButton:hover {
+        		background-color: #888;
+        		border-color: white;
+        		color: white;
+        	}
+        	.classTab {
+        		border-radius: 0pt 0pt 5pt 0pt;
+        		border: solid 1pt grey;
+        		background-color: rgba(0,0,0,0.9);
+        		color: #ddd;
+        		width: 88%;
+        		height: 3.2em;
+        		position: fixed;
+        		top: -0.04em;
+        		left: 10%;
+        		margin-left: 1%;
+        		font-size: 12pt;
+        		display: none;
+        	}
+        	.topBtn:hover { 
+        		background-color: white;
+        	}
+        	.moveBox {
+        		background-color: rgba(255,255,255,0.6);
+        		border-radius: 10pt;
+        		border: solid 1px black;
+        		height: contents;
+        		width: calc(95%-40pt);
+        		margin: 10pt auto;
+        		padding: 1.6em;
+        	}
+        	.moveName {
+        		font-size: 125%;
+        		font-weight: 600;
+        		text-align: left;
+        		margin-top: 5pt;
+        		margin-bottom: 5pt;
+				font-family: "Metamorphous";
+        	}
+        	.roll {
+        		text-align: left;
+        	}
+        	.roll-attacker {
+        		color: green;
+        	}
+        	.roll-defender {
+        		color: blue;
+        	}
+        	.damage {
+        		color: #CC0000;
+        	}
+        	.effect {
+        		text-align: left;
+        	/**/
+        	}
+        	.AP {
+        		padding-top: 0.4em;
+        		padding-bottom: 0.25em;
+        		border: solid darkblue;
+				border-width: 1pt;
+        		border-radius: 50000pt;
+        		display: block;
+        		width: 100%;
+        		text-align: center;
+        		margin-top: 0.25em;
+        		font-weight: bold;
+        		color: darkblue;
+				background-color: rgba(255,255,255,0.5);
+				font-family: "Metamorphous"
+        	}
+        	.circle {
+        		width: 2em;
+        		height: 2em;
+        		/*border: solid 2pt darkblue;
+        		border-radius: 10000pt;*/
+        		display: inline-block;
+        		margin-right: 10%;
+        	}
+        	.APbox {
+        		/*padding-bottom: 10%;*/
+        		float: right;
+        	}
+        	.flavor {
+        		text-align: left;
+        		font-style: italic;
+        	}
+        	.headerBar {
+        		text-align: center;
+        	}
+        	.headerBar > span {
+        		padding-left: 10pt;
+        		padding-right: 10pt;
+        	}
+        	.addBtn {
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: #009;
+        		padding: 0.4em;
+        		margin-top: 0.5em;
+        		font-family: "Metamorphous";
+        	}
+        	.useBtn {
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: #009;
+        		padding: 0.4em;
+        		margin-top: 0.5em;
+        	}
+			.categoryLabel {
+				margin-top: 0.4em;
+				font-size: 90%;
+				color: rgba(0,0,0,0.5);
+				text-decoration: underline;
+			}
+        	.navBtn {
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.9);
+        		color: #009;
+        		padding: 0.4em;
+        		float: right;
+        		margin-right: 6pt;
+        		margin-top: 10pt;
+        		font-family: "Times";
+        		position: absolute;
+        	}
+        	.optionBtn {
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.9);
+        		color: #009;
+        		padding: 0.4em;
+        		float: right;
+        		font-family: "Times";
+        		position: absolute;
+        		font-size: 200%;
+        		width: 90%;
+        		left: 5%;
+        		font-family: "Metamorphous";
+        	}
+        	.optionsBtn {
+        		right: 0.3em;
+        		bottom: 0.4em;
+        	}
+        	.hideBtn {
+        		display: none;
+        		right: 0.3em;
+        		bottom: 0.4em;
+        	}
+        	.resetBtn { 
+        		right: 5.1em;
+        		bottom: 0.4em;
+        	}
+        	.plusOneBtn { 
+        		right: 9em;
+        		bottom: 0.4em;
+        	}
+        	.minusOneBtn { 
+        		right: 11.8em;
+        		bottom: 0.4em;
+        	}
+        	.myMovesBtn {
+        		background-color: rgba(100,255,100,0.9);
+        		top: 11.8em;
+        	}
+        	.allMovesBtn {
+        		top: 14.1em;
+        	}
+        	.mainMenuBtn {
+        		top: 16.4em;
+        	}
+        	.glossaryBtn {
+        		top: 18.7em;
+        	}
+        	.characterBtn {
+        		top: 21em;
+        		background-color: rgba(210,210,255,0.9);
+        	}
+        	.APCounter {
+        		display: inline-block;
+        		font-size: 150%;
+        		font-family: "Times";
+        		position: absolute;
+        		bottom: -0.6em;
+        		left: 0.6em;
+        	}
+        	.topRow {
+        		margin-bottom: 0.4em;
+        	}
+        	.choice {
+        		font-size: 90%;
+        		width: 8.25em;
+        		height: 3em;
+        		margin: 0.1em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		float: left;
+        	}
+        	.skill {
+        		width: 10.5em;
+        		height: 2em;
+        		padding-top: 1em;
+        		padding-left: 1em;
+        		margin: 0.1em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		float: left;
+        	}
+        	.score {
+        		width: 1.5em;
+        		height: 2em;
+        		padding-top: 1em;
+        		padding-left: 1em;
+        		margin: 0.1em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		float: right;
+        	}
+        	.decrementSkillBtn {
+        		width: 2em;
+        		height: 3em;
+        		margin: 0.1em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		float: right;
+        	}
+        	.incrementSkillBtn {
+        		width: 2em;
+        		height: 3em;
+        		margin: 0.1em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		float: right;
+        	}
+        	.superChoice {
+        		width: 8.5em;
+        		height: 6.2em;
+        	}
+        	.checked {
+        		color: #AAFFAA;
+        	}
+        	.characterCreationBox {
+        		display: none;
+        		padding: 1.5em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: black;
+        		max-width: 20em;
+        		border-width: 0.15em;
+        		border: solid rgba(0,0,143,1);
+        	}
+        	.ccTitle {
+        		margin-top: 0px;
+        		background-color: rgba(255,255,255,0.7);
+				padding: 0.5em;
+        		padding-top: 1em;
+        		padding-bottom: 1em;
+        		border-radius: 0.4em;
+        		font-weight: bold;
+        		font-size: 100%;
+        		width: 90%;
+        		text-align: center;
+				font-family: "Metamorphous";
+        	}
+        	#done {
+        		padding: 0.5em;
+        		margin-top: 0.5em;
+        		margin-bottom: 0.2em;
+        		margin-left: 6em;
+        		margin-right: 4em;
+        		border-radius: 0.3em;
+        		border-width: 0.15em;
+        	}
+        	.bigButton {
+        		width: 95%;
+        		margin: 2pt auto;
+        		border-radius: 0.3em;
+        		border-width: 0.15em;
+        		border: solid rgba(0,0,143,1);
+        		background-color: rgba(255,255,255,0.8);
+        		color: rgba(0,0,143,1);
+        		font-size: 1.2em;
+				font-family: "Metamorphous";
+				font-weight: bold;
+        	}
+        	#ccStartBtn {
+        		padding: 1.5em;
+        	}
+        	#loadBtn {
+        		padding: 1em;
+        	}
+        	#saveBtn {
+        		padding: 1em;
+        	}
+        	#aboutBtn {
+        		padding: 1em;
+        	}
+        	.highlight {
+        		background-color: rgba(0,255,0,0.5);
+        		color: rgba(0,0,143,1);
+        	}
+        	.incomplete {
+        		border: solid rgba(0,0,143,0.5);
+        		background-color: rgba(0,0,0,0.2);
+        		color: rgba(0,0,143,0.5);
+        	}
+        	.complete {
+        		border: solid rgba(0,0,143,1);
+        		background-color: rgba(255,255,255,0.5);
+        		color: rgba(0,0,143,1);
+        	}
+        	.bar {
+        		height: 1em;
+        		background-color: green;
+        		float: left;
+        		margin-right: 0.2em;
+        	}
+        	.d4 {
+        		width: 4em;
+        	}
+        	.d6 {
+        		width: 6em;
+        	}
+        	.d8 {
+        		width: 8em;
+        	}
+        	.d10 {
+        		width: 10em;
+        	}
+        	.myCharacterBox {
+        		display: none;
+        		padding-top: 0.5em;
+        		padding-bottom: 0.5em;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.5);
+        		color: #009;
+        		max-width: 23em;
+        	}
+        	.FourEmSquare {
+        		width: 4em;
+        		height: 4em;
+        	}
+        	.centerAligned { 
+        		text-align: center;
+        	}
+        	.doubleFontSize {
+        		font-size: 200%;
+        	}
+        	#characterPicture {
+        		width: 14em;
+        		border-radius: 10000px;
+        		border: solid black;
+        		border-width: 1px;
+        		background-color: rgba(255,255,255,0.3);
+        	}
+        	#characterPictureContainer {
+    
+        	}
+        	.innerCentered {
+        		margin: 0 auto;
+        		max-width: 15.6em;
+        	}
+        	#bigFourTable td {
+        		width: 50%;
+        	}
+        	#skillTable {
+        		max-width: 100%;
+        		margin: 0 auto;
+        		margin-top: 2em;
+        		border-collapse: collapse;
+        	}
+        	#skillTable td {
+        		padding: 1em;
+        		border: 1px solid #000080;
+        	}
+        	.glossaryBox {
+        		display: none;
+        		padding: 1em;
+        		margin: 0 auto;
+        		border-radius: 0.3em;
+        		background-color: rgba(255,255,255,0.8);
+        		max-width: 23em;
+        	}
+        	.statusName {
+        		width: 2em;
+        	}
+        	.statusTable {
+        		border-collapse: collapse;
+        	}
+        	.statusTable td, .statusTable tr {
+        		border-bottom: 1px solid #000081;
+        		margin: 0px;
+        		padding: 0.2em;
+        	}
+			.classPanel {
+				width: calc(100%-1em);
+				background-color: rgba(0,0,255,0.1);
+				/*border: solid rgba(0,0,143,1);*/
+				margin: 1em;
+			}
+			.classImg {
+				display: block;
+				width: 100%;
+				margin: 0px;
+			}
+			.classPanel .choice {
+				float: none;
+				width: 100%;
+				position: static;
+				font-family: "Metamorphous";
+				font-size: 125%;
+				padding-bottom: 0px;
+				height: 100%;
+			}
+			.Passive { 
+				background-color: rgba(255,255,100,0.8);
+			}
+			.Instant {
+				background-color: rgba(255,100,100,0.8);
+			}
+			#loadButtons {
+				display: none;
+			}
+			textarea {
+				width: 90%;
+				height: 10em;
+			}
+			#saveArea {
+				display: none;
+			}
+			#saveText {
+				word-wrap: break-word; 
+				background-color: rgba(255,255,255,0.6);
+				padding: 0.5em;
+			}
+			.halfEmPad {
+				padding: 0.5em;
+			}
+			h2 {
+				color: #000020;
+				font-size: 1.2em;
+				font-family: "Metamorphous";
+				background-color: rgba(255,255,255,0.5);
+				padding-left: 0.5em;
+				margin-top: 0.5em;
+				padding-top: 0.5em;
+				margin-bottom: 0.5em;
+				padding-bottom: 0.5em;
+			}
+			#mobileDebug {
+				display: none;
+			}
+			#aboutSection {
+				max-width:100%;
+				padding:1em;
+				display:none;
+				background-color: rgba(255,255,255,0.6);
+			}
+			.Q {
+				font-weight: bold;
+			}
+			.A {
+			
+			}
+			.threeBars {
+				position: fixed;
+				width: 2em;
+				right: 1em;
+				top: 1em;
+			}
+			.threeBars .bar {
+				width: 2em;
+				height: 0.3em;
+				margin-bottom: 0.3em;
+				background-color: white;
+				box-shadow: 0.05em 0.05em 0.2em black;
+			}
+			.threeBars:hover .bar {
+				background-color: #CCC;
+			}
+        </style>
+    </head>
+    <body>
+    	<div class="topSpacer"></div>
+    	<p id="mobileDebug">Debug</p>
+    	<div class="bottomBar">	
+    		<p id="rollCalculation">This ability automatically succeeds.</p>
+    		<div class="closeBottomBarButton"></div>
+    	</div>
+    	<div class="threeBars">
+    		<div class="bar"></div>
+    		<div class="bar"></div>
+    		<div class="bar"></div>
+    	</div>
+    	<div class="topBar">
+    		<!--<button class="optionBtn myMovesBtn">My Moves</button>-->
+    		<button class="optionBtn allMovesBtn">All Moves</button>
+    		<button class="optionBtn mainMenuBtn">Main Menu</button>
+    		<button class="optionBtn glossaryBtn">Glossary</button>
+    		<button class="optionBtn characterBtn">Character</button>
+    		<button class="navBtn optionsBtn">Options</button>
+    		<button class="navBtn plusOneBtn">+1</button>
+    		<button class="navBtn minusOneBtn">-1</button>
+    		<button class="navBtn resetBtn">Reset</button>
+    		<button class="navBtn hideBtn">Hide</button>
+    		<p class="APCounter">9AP</p>
+    	</div>
+    	<div id="mainMenu">
+    		<h1>Smartphones <br>& Dragons</h1>
+    		<button id="ccStartBtn" class="bigButton complete">Create a Character</button>
+    		<button id="saveBtn" class="bigButton incomplete">Export Character</button>
+    		<button id="loadBtn" class="bigButton complete">Import Character</button>
+    		<button id="aboutBtn" class="bigButton complete">About</button>
+    	</div>
+    	<div id="loadButtons">
+    		<h2 class="">Load</h2>
+    		<button id="cookieLoadBtn" class="bigButton complete halfEmPad">Load [class] on [date]</button>
+    		<h2 class="">or</h2>
+    		<textArea></textArea>
+    		<button id="textLoadBtn" class="bigButton complete">Load From Text Box</button>
+    	</div>
+    	<div id="saveArea">
+    		<button id="clipboardBtn">Copy to Clipboard</button>
+    		<p id="saveText"></p>
+    	</div>
+    	<div id="aboutSection">
+    		<p>FAQ</p>
+<br>
+    			<div class="Q">What is this?</div>
+    			<div class="A">This is a webapp interface for a 
+    			<a href="http://learntabletoprpgs.com/tabletop-rpgs-explained/index.html">
+    			tabletop roleplaying game</a> called <i>Smartphones and Dragons</i> 
+    			(name subject to change).</div>
+<br>
+    			<div class="Q">Do I play this game on the computer?</div>
+    			<div class="A">This is a Hybrid game. You use this 
+    			webapp on your smartphone to organize the game content and to do the math
+    			 for you. The actual game is played face-to-face with other people.</div>
+<br>
+    			<div class="Q">Can I play this game by myself?</div>
+    			<div class="A">No, you need at least two people to play, and at least 
+    			four to really get the experience.</div>
+<br>
+    			<div class="Q">Is this an online multiplayer game?</div>
+    			<div class="A">No, this game is meant to be played face-to-face. 
+    			All of the characters you make here are stored locally. </div>
+<br>
+    			<div class="Q">Where are the rules to this game?</div>
+    			<div class="A">Truth be told, I haven't written them yet. 
+    			They don't exist. You can find some terms in the 
+    			<a class="glossaryLink" href="#">glossary</a>, but that hasn't 
+    			been updated in a while</div>
+<br>
+				<div class="Q">Can I use this web-app for other role playing systems?</div>
+    			<div class="A">You can try, but this interface is designed specifically 
+    			for <i>Smartphones and Dragons</i>, or more accurately, <i>Smartphones 
+    			and Dragons</i> was designed in conjunction with this web-app.</div>
+<br>
+    			<div class="Q">Q?</div>
+    			<div class="A">A.</div>
+
+    	</div>
+    	<div class="characterCreationBox">
+			<p class="ccTitle">Create a Character</p>
+			<div class="innerCentered">
+				<!-- Character Class -->
+				<div id="q1" style="display: none;"></div>
+				<!-- Secondary Skill -->
+				<div id="q2" style="display: none;"></div>
+				<!-- Physical or Mental -->
+				<div id="q3" style="display: none;">
+					<button id="physicalBtn" class="choice">Physical</button>
+					<button id="mentalBtn" class="choice">Mental</button>
+				</div>
+				<!-- Dexterity or Strength -->
+				<div id="q4" style="display: none;">
+					<button id="dexterityBtn" class="choice">Dexterity</button>
+					<button id="strengthBtn" class="choice">Strength</button>
+				</div>
+				<!-- Intelligence or Spirit -->
+				<div id="q5" style="display: none;">
+					<button id="intelligenceBtn" class="choice">Intelligence</button>
+					<button id="spiritBtn" class="choice">Spirit</button>
+				</div>
+				<!-- Primary Fighting Style -->
+				<div id="q6" style="display: none;"></div>
+				<!-- Secondary Fighting Style -->
+				<div id="q7" style="display: none;"></div>
+				<!-- Moves (empty) -->
+				<div id="q8" style="display: none;"></div>
+				
+				<button id="done" class="incomplete" disabled>Next</button>
+    		</div>
+    	</div>
+    	<div class="myCharacterBox">
+    		<div class="centerAligned" id="characterPictureContainer">
+    			<img id="characterPicture" src="images/ElfMaleMagicUser.png"/>
+    			<div style="height: 1em;"></div>
+    		</div>
+    		<table id="bigFourTable" style="width:100%; font-size: 200%;">
+    			<tr>
+					<td class="centerAligned">
+						<img id="primaryWeaponImg" class="FourEmSquare" src="images/One Handed Weapons.png"/>
+					</td>
+					<td class="centerAligned">
+						<img id="secondaryWeaponImg" class="FourEmSquare" src="images/Marksmanship.png"/>
+					</td>
+    			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div id="primaryWeaponStat" class="doubleFontSize">8</div>
+					</td>
+					<td class="centerAligned">
+						<div id="secondaryWeaponStat" class="doubleFontSize">5</div>
+					</td>
+    			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div id="primaryWeaponName">Sword</div>
+					</td>
+					<td class="centerAligned">
+						<div id="secondaryWeaponName">Bow</div>
+					</td>
+    			</tr>
+    			<tr> <!--spacer-->
+    				<td colspan="3" style="height: 3em;"> </td>
+    			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<img class="FourEmSquare" src="images/shield.png"/>
+					</td>
+					<td class="centerAligned">
+						<img class="FourEmSquare" src="images/armour.png"/>
+					</td>
+    			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div id="defenseStat" class="doubleFontSize">16</div>
+					</td>
+					<td class="centerAligned">
+						<div id="damageThresholdStat" class="doubleFontSize">13</div>
+					</td>
+    			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div>Defense</div>
+					</td>
+					<td class="centerAligned">
+						<div>Damage<br>Threshold</div>
+					</td>
+    			</tr>
+    		</table>
+    		<table id="skillTable">
+    			<tr>
+    				<td>Smithing and Appraisal</td><td class="SA">0</td>
+    			</tr>
+    			<tr>
+    				<td>Acrobatics and Athletics</td><td class="AA">0</td>
+    			</tr>
+    			<tr>
+    				<td>Performance and Bluff</td><td class="PB">0</td>
+    			</tr>
+    			<tr>
+    				<td>Alchemy and Cooking</td><td class="AC">0</td>
+    			</tr>
+    			<tr>
+    				<td>Thievery and Sneaking</td><td class="TS">0</td>
+    			</tr>
+    			<tr>
+    				<td>Survival and Tracking</td><td class="ST">0</td>
+    			</tr>
+    		</table>
+    	</div>
+    	<div class="glossaryBox">
+    		<table class="statusTable">
+    			<div class="doubleFontSize">Status Effects:</div>
+    			<tr>
+    				<td class="statusName">Immobilized: </td>
+    				<td class="statusEffect">
+    				cannot leave space
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Grappled: </td>
+    				<td class="statusEffect">
+    				cannot take any action except to attack at -2 or break free (strength check)
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Frozen:<br>Paralyzed: </td>
+    				<td class="statusEffect">
+    				cannot take any action
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Poisoned:<br>Burning:<br>Blighted: </td>
+    				<td class="statusEffect">
+    				ongoing damage
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Weakened: </td>
+    				<td class="statusEffect">
+    				roll twice and take the lower result for attacks
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Prone: </td>
+    				<td class="statusEffect">
+    				roll twice and take the lower result for attack and damage (until you stand up)
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Magical sleep: </td>
+    				<td class="statusEffect">
+    				cannot take any action, and prone on waking
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Frightened: </td>
+    				<td class="statusEffect">
+    				cannot move towards source
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Slowed: </td>
+    				<td class="statusEffect">
+    				movement costs 2 AP
+    				</td>
+    			</tr>
+    			<tr>
+    				<td class="statusName">Exhausted: </td>
+    				<td class="statusEffect">
+    				receive half AP (rounded up)
+    				</td>
+    			</tr>
+    		</table>
+    	</div>
+		<div class="moveBox">
+			<div class="topRow"><p class="moveName">Fireball Why Not</p></div>
+			<div class="circle"><span class="AP">3</span></div><span class=buttonHolder><button class="addBtn">Add to <b>My Moves</b></button></span>
+			<br>
+			<!-- Roll -->
+			<div class="categoryLabel">
+				<div>Roll</div>
+				<div class="decorativeLine"></div>
+			</div>
+			<div>Acrobatics vs. Range Table</div>
+			<!-- Effect -->
+			<div class="categoryLabel">
+				<div>Effect</div>
+				<div class="decorativeLine"></div>
+			</div>
+			<div>Burn a medium area at long range, causing anyone inside to get the burning status</div>
+			<!-- Roll -->
+			<div class="categoryLabel">
+				<div>Range and Area</div>
+				<div class="decorativeLine"></div>
+			</div>
+			<div>Range: Long, Area: Medium </div>
+		</div>
+	</body>  
+	<!--script that holds the json-->
+	<script src="jsonString.js"></script>
+    <!--script that deals with the move panel behaviours-->
+	<script>
+	// Move class
+    function Move(name, roll, AP, effect, range, special) {
+    	this.name = name;
+    	this.roll = roll;
+    	this.AP = AP;
+    	this.effect = effect;
+    	this.range = range;
+    	this.special = special;
+    	this.added = false;
+    }
+    
+    // GLOBAL VARS
+    var dbg = getById("mobileDebug");
+    var allMoves = [];
+    var myMoves = [];
+	var slayerMoves = [];
+	var defenderMoves = [];
+	var scholarMoves = [];
+	var battlemageMoves = [];
+	var assasinMoves = [];
+	var hunterMoves = [];
+	
+    var character = {}; // character object, stores attributes and skills
+    character.attributes = { "Strength" : 0, "Dexterity" : 0, "Intelligence" : 0, "Spirit" : 0 };
+    character.fightingStyles = {}; // these are filled out later
+    character.skills = {}; // these are filled out later
+    character.moves = [];
+    character.meta = {"complete": false, "lastModified" : "never"};
+    var cookieList = [];
+    var AP = 9;
+    var maxAP = 9;
+    var classIndex=0;
+    var choiceText = [
+		"Create a Character",
+		"Step 1 of 8 <br> Choose your specialty",
+		"Step 2 of 8 <br> Choose your secondary skill focus",
+		"Step 3 of 8 <br> Choose your broad focus",
+		"Step 4 of 8 <br> Choose your physical focus",
+		"Step 5 of 8 <br> Choose your mental focus",
+		"Step 6 of 8 <br> Choose your primary combat focus",
+		"Step 7 of 8 <br> Choose your secondary combat focus",
+		"Step 8 of 8 <br> Choose exactly four (4) abilities"
+	];
+	character.charClass = "none";
+	var primaryFightingStyleChoice;
+	character.primaryFightingStyle = "none";
+	var secondaryFightingStyleChoice;
+	character.secondaryFightingStyle = "none";
+	var primarySkillChoice;
+	character.primarySkill = "none";
+	var secondarySkillChoice;
+	character.secondarySkillChoice = "none";
+    var fightingStyles = [
+	"Martial Combat",
+	"One Handed Weapons",
+	"Two Handed Weapons",
+	"Throwing Weapons",
+	"Marksmanship",
+	"Magic"
+	];
+	var skills = [
+	"Smithing and Appraisal",
+	"Acrobatics and Athletics",
+	"Performance and Bluff",
+	"Alchemy and Cooking",
+	"Thievery and Sneaking",
+	"Survival and Tracking"
+	];
+	var characterClasses = [
+	"Slayer", 
+	"Defender",	
+	"Scholar", 
+	"Battlemage", 
+	"Assassin", 
+	"Hunter"
+	];
+	var phyOrMen = choiceBtnGroup(["physicalBtn","mentalBtn"]);
+    var strOrDex = choiceBtnGroup(["dexterityBtn","strengthBtn"]);
+    var intOrSpi = choiceBtnGroup(["intelligenceBtn","spiritBtn"]);
+	var primarySkillChoice = {};
+	var choiceNumber = 1;
+	var lastChoice = 8;
+	var bottomTimeout;
+	
+    var moveLists = { 
+	"moves" : allMoves, 
+	"myMoves" : myMoves, 
+	"Slayer" : slayerMoves, 
+	"Defender" : defenderMoves, 
+	"Scholar" : scholarMoves, 
+	"Battlemage" : battlemageMoves, 
+	"Assassin" : assasinMoves, 
+	"Hunter" : hunterMoves 
+	}
+    allMoves.push(new Move(
+    	"Standard Attack",
+    	"Agility + Melee vs. Agility + Armor",
+    	4,
+    	"On success, ",
+    	"Damage: 1[W]",
+    	"",
+    	""
+    	)
+    );
+    allMoves.push(new Move(
+    	"Full Attack",
+    	"Agility + Melee vs. Agility + Armor",
+    	6,
+    	"On success, ",
+    	"Damage: 2[W]",
+    	"",
+    	""
+    	)
+    );
+    allMoves.push(new Move(
+    	"Trip",
+    	"Agility vs. Fighting",
+    	6,
+    	"On success, ",
+    	"Damage: 2[W]",
+    	"",
+    	""
+    	)
+    );
+    allMoves.push(new Move(
+    	"Full Attack",
+    	"Fighting vs. Fighting",
+    	6,
+    	"On success, ",
+    	"Damage: 2[W]",
+    	"",
+    	""
+    	)
+    );
+    
+    function createUseButton(moveObject) {
+		var useBtn = document.createElement("button");
+		useBtn.setAttribute("class","useBtn");
+		useBtn.innerHTML = "use";
+		useBtn.onclick = function() {
+			useAbility(moveObject);
+		}
+		return useBtn;
+    }
+    
+    function removeUseButtons(containerElem) {
+    	var UseButtons = containerElem.querySelectorAll(".useBtn");
+		for (var j=0; j<UseButtons.length; j++) {
+			UseButtons[j].parentNode.removeChild(UseButtons[j]);
+		}
+    }
+    
+    var addText = 'Add to <span style="font-weight: bold">My Moves</span>';
+    var removeText = 'Added';
+    var useText = 'Use';
+    var buttonText = addText;
+    
+    function displayMove(move) {
+    	var rollStr = "";
+    	if (move.roll != "") {
+			rollStr = '<div class="categoryLabel">Roll</div>'+
+			'<div>'+move.roll+'</div>'
+		}
+    	var rangeStr = "";
+    	if (move.range != "") {
+			rangeStr = '<div class="categoryLabel">Range and Area</div>'+
+			'<div>Range: '+move.range+' </div>'
+		}
+		
+		if (move.AP == "") {
+			move.AP = "0";
+		}
+		
+    	// create the box that displays the move
+		var container = document.createElement("div");
+		container.setAttribute("class","moveBox");
+		container.innerHTML = 
+		'<div class="topRow"><p class="moveName">'+move.name+'</p></div>'+
+		'<div class="circle"><span class="AP '+
+		move.special+'">'+
+		move.AP+'</span></div><span class=buttonHolder></span><br>'+
+		// Roll
+		rollStr +
+		// Effect
+		'<div class="categoryLabel">'+move.special+' '+'Effect</div>'+
+		'<div>'+move.effect+'</div>'+
+		// Range
+		rangeStr;
+
+		// display the box on the page
+		document.body.appendChild(container);
+		
+		// add the "add to moves" button
+		var addBtn = document.createElement("button");
+		addBtn.setAttribute("class","addBtn");
+		addBtn.innerHTML = buttonText;
+		addBtn.onclick = function() {
+			if (move.added) {
+				console.log(move.name + " removed");
+				myMoves.pop(move);
+				character.moves.pop(move.name);
+				move.added = false;
+				
+				addBtn.innerHTML = addText;
+				addBtn.style.backgroundColor = "rgba(255,255,255,0.5)";
+				
+				removeUseButtons(container);
+			}
+			else {
+				console.log(move.name + " added");
+				myMoves.push(move);
+				character.moves.push(move.name);
+				move.added = true;
+				
+				addBtn.innerHTML = removeText;
+				addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
+				
+				var useBtn = createUseButton(move);
+				removeUseButtons(container);
+				container.querySelector(".buttonHolder").appendChild(useBtn);
+			}
+		}
+		container.querySelector(".buttonHolder").appendChild(addBtn);
+		if (myMoves.indexOf(move) > -1) {
+			addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
+			addBtn.innerHTML = removeText;
+			
+			var useBtn = createUseButton(move);
+			removeUseButtons(container);
+			container.querySelector(".buttonHolder").appendChild(useBtn);
+		}
+		
+    }
+    
+    function useAbility(moveObject) {
+    	//console.log(moveObject.roll);
+    	// subtract AP
+    	addToAP(-1 * moveObject.AP)
+    	
+    	// move up info box
+    	extendUseBox();
+    	
+    	// set menu text to roll
+    	if (moveObject.roll == "") {
+    		getById("rollCalculation").innerHTML = "This ability automatically succeeds";
+    	}
+    	else {
+    		var result = tryParseRoll(moveObject.roll) 
+    		console.log(result);
+    		if (result == "" || result == undefined) {
+    			getById("rollCalculation").innerHTML = moveObject.roll;
+    		}
+    		else {
+    			getById("rollCalculation").innerHTML = result;
+    		}
+    	}
+    	
+    	// offer "simulate roll" button
+    }
+    
+    function tryParseRoll(rollStr) {
+    	var rollStrArr = rollStr.split(" ");
+    	for (var i=0; i<rollStrArr.length; i++) {
+    		var word = rollStrArr[i];
+    		
+    		if (word == "Attack") {
+    			return "1d20 + primary ["
+    			+ character.fightingStyles[character.primaryFightingStyleChoice] + "] or secondary [" 
+    			+ character.fightingStyles[character.secondaryFightingStyleChoice] + "]";
+    		}
+    		var styles_ = Object.keys(character.fightingStyles);
+    		for (var j=0; j<styles_.length; j++) {
+    			var style = styles[j];
+    			if (word == style) {
+    				return "1d20 + "+ word +"[" + character.fightingStyles[word] + "]";
+    			}
+    		}
+    		var skills_ = Object.keys(character.skills);
+    		for (var j=0; j<skills_.length; j++) {
+    			var skill = skills_[j];
+    			if (word == skill) {
+    				return "1d20 + "+ word +"[" + character.fightingStyles[word] + "]";
+    			}
+    		}
+    		var keys_ = Object.keys(character.attributes);
+    		for (var j=0; j<keys_.length; j++) {
+    			var k = keys_[j];
+    			if (word == k) {
+    				return "1d20 + "+ word +"[" + character.attributes[word] + "]";
+    			}
+    		}
+    	}
+    }
+    
+    function listMoves(moveListName) {
+    	console.log("listMoves " + moveListName);
+		for (var i=0; i<moveLists[moveListName].length; i++) {
+			displayMove(moveLists[moveListName][i]);
+		}   
+	}
+	
+	function clearMoves() {
+		var boxes = document.querySelectorAll(".moveBox");
+		for (var i=0; i<boxes.length; i++) {
+			document.body.removeChild(boxes[i]);
+		}
+
+	}
+	
+	function clearScreens() {
+		clearMoves();
+		getById("loadButtons").style.display = "none";
+		getById("mainMenu").style.display = "none";
+		getById("saveArea").style.display = "none";
+		getByClass("myCharacterBox").style.display = "none";
+		getByClass("glossaryBox").style.display = "none";
+		getById("aboutSection").style.display = "none";
+	}
+	
+    function getByClass(className) {
+    	return document.querySelector("."+className);
+    }
+    function getById(id) {
+    	return document.getElementById(id);
+    }
+	
+    function resetAP() {
+    	AP = maxAP;
+    	getByClass("APCounter").innerHTML = "" + AP + "AP";
+    }
+    function addToAP(arg) {
+    	AP += arg;
+    	getByClass("APCounter").innerHTML = "" + AP + "AP";
+    }
+    function extendMenu() {
+    	getByClass("topBar").style.top = "-28em";
+    	getByClass("optionsBtn").style.display = "none";
+    	getByClass("hideBtn").style.display = "block";
+    }
+    function retractMenu() {
+    	getByClass("topBar").style.top = "-51em";
+    	getByClass("hideBtn").style.display = "none";
+    	getByClass("optionsBtn").style.display = "block";
+    }
+    function extendUseBox() {
+    	getByClass("bottomBar").style.bottom = "-5em";
+		clearTimeout(bottomTimeout);    	
+    	bottomTimeout = setTimeout(function() {
+    		retractUseBox();
+    	},9000);
+    }
+    function retractUseBox() {
+    	getByClass("bottomBar").style.bottom = "-11em";
+    }
+
+    function hasClass(ele,cls) {
+	  return !!ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+	}
+	function addClass(ele,cls) {
+	  if (!hasClass(ele,cls)) ele.className += " "+cls;
+	}
+	function removeClass(ele,cls) {
+	  if (hasClass(ele,cls)) {
+		var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+		ele.className=ele.className.replace(reg,' ');
+	  }
+	}
+	
+	function presentChoice(choiceN) {
+		// Moves
+		if (choiceN == 8) {
+			document.body.addEventListener("click", checkSufficientMoves);
+			listMoves(characterClass.selected);
+		}
+		// Secondary Fighting Style
+		if (choiceN == 7) {
+			var excludingPrimary = [];
+			fightingStyles.forEach(function(fStyle) {
+				if (fStyle != primaryFightingStyleChoice.selected) {
+					excludingPrimary.push(fStyle)
+				}
+			});
+			secondaryFightingStyleChoice = createAndDisplayButtonGroup(excludingPrimary, getById("q7"));
+		}
+		// Primary Fighting Style
+		if (choiceN == 6) {
+			primaryFightingStyleChoice = createAndDisplayButtonGroup(fightingStyles, getById("q6"));
+		}
+		// Secondary Skill
+		if (choiceN == 2) {
+		//set primarySkillChoice.selected = result from class selection
+		primarySkillChoice.selected = skills[characterClasses.indexOf(characterClass.selected)];
+		//set correcponder character attribute
+		character.PrimarySkill = primarySkillChoice.selected;
+			var excludingPrimary = [];
+			skills.forEach(function(skill) {
+				if (skill != character.primarySkill) {
+					excludingPrimary.push(skill)
+				}
+			});
+			secondarySkillChoice = createAndDisplayButtonGroup(excludingPrimary, getById("q2"));
+		}
+		
+		if (choiceN == 1) {
+			characterClass = createAndDisplayButtonGroup(characterClasses, getById("q1"));
+			promoteToClassChoiceGroup(characterClasses, getById("q1"));
+		}
+		// clear previous choice from screen
+		if (getById("q"+ (choiceN-1) )) {
+			getById("q"+ (choiceN-1) ).style.display = "none";
+		}
+		// display current choice
+		getById("q"+choiceN).style.display = "block";
+		// set appropriate title
+		getByClass("ccTitle").innerHTML = choiceText[choiceN];
+	
+		// reset next button until choice is made
+		getById("done").setAttribute("class","incomplete");
+		getById("done").setAttribute("disabled", "true");
+	}
+
+    function choiceBtnGroup(buttonIdList, questionNum) {
+    	var groupObject = {};
+    	groupObject.selected = "none";
+    	buttonIdList.forEach(function(buttonName) {
+    		var cbtn = getById(buttonName);
+    		cbtn.onclick = function() {
+    			buttonIdList.forEach(function(buttonName) {
+    				var btn = getById(buttonName);
+    				removeClass(btn,"highlight");
+    			});
+				addClass(cbtn,"highlight");
+				getById("done").setAttribute("class","complete");
+				getById("done").removeAttribute("disabled");
+				groupObject.selected = buttonName; 
+    		}
+    	});
+    	return groupObject;
+    }    
+
+    function advanceQuestion() {
+    	choiceNumber++;
+		// present choices
+		presentChoice(choiceNumber);
+    }
+    
+    function createAndDisplayButtonGroup(listIds, container) {
+			// clear container element
+			container.innerHTML = "";
+			// loop through choices and append the buttons
+			listIds.forEach(function(id) {
+				var choiceBtn = document.createElement("button");
+				choiceBtn.setAttribute("id",id);
+				choiceBtn.setAttribute("class","choice");
+				choiceBtn.innerHTML = id;
+				container.appendChild(choiceBtn);
+			});	
+			// add the buttons to a button group
+			return choiceBtnGroup(listIds); // return the group object
+    }
+    
+	function promoteToClassChoiceGroup(listIds, container) {
+		listIds.forEach(function(id) {
+			var classButton = getById(id);
+			var classPanel = document.createElement("div");
+			classPanel.setAttribute("id",id + " panel");
+			classPanel.setAttribute("class","classPanel");
+			var classImg = document.createElement("img");
+			classImg.setAttribute("id",id + " image");
+			classImg.setAttribute("class","classImg");
+			classImg.setAttribute("src","images/" + id + ".png");
+			
+			classPanel.appendChild(classButton);
+			classButton.appendChild(classImg);
+			container.appendChild(classPanel);
+		});
+	}
+	
+    function deleteDuplicateButtons() {
+    	if (choiceNumber > 3) {
+			// special case for deleting buttons with the same id
+			getById("q"+ (choiceNumber) ).innerHTML = "";
+		}
+    }
+    
+    function closeCreator() {
+    	getByClass("characterCreationBox").style.display = "none";
+    }
+	
+	function setMyCharacterBox() {
+		getById("primaryWeaponName").innerHTML = character.primaryFightingStyle;
+		getById("primaryWeaponImg").setAttribute("src","images/"+character.primaryFightingStyle+".png");
+		getById("primaryWeaponStat").innerHTML = character.fightingStyles[character.primaryFightingStyle];
+		getById("secondaryWeaponName").innerHTML = character.secondaryFightingStyle;
+		getById("secondaryWeaponImg").setAttribute("src","images/"+character.secondaryFightingStyle+".png");
+		getById("secondaryWeaponStat").innerHTML = character.fightingStyles[character.secondaryFightingStyle];
+		getById("defenseStat").innerHTML = (character.attributes["Dexterity"]*2 + 10);
+		getById("damageThresholdStat").innerHTML = (character.attributes["Strength"]*2);
+		getById("characterPicture").setAttribute("src","images/"+character.charClass+".png")
+		getByClass("SA").innerHTML = character.skills[skills[0]];
+		getByClass("AA").innerHTML = character.skills[skills[1]];
+		getByClass("PB").innerHTML = character.skills[skills[2]];
+		getByClass("AC").innerHTML = character.skills[skills[3]];
+		getByClass("TS").innerHTML = character.skills[skills[4]];
+		getByClass("ST").innerHTML = character.skills[skills[5]];
+	}
+	
+	function addToCharacter() {
+		switch (choiceNumber) {
+		case 1:
+			primarySkillChoice.selected = skills[characterClasses.indexOf(characterClass.selected)];
+			character.primarySkill = primarySkillChoice.selected;
+			// update character obj 
+			character.charClass = characterClass.selected;
+			break;
+		case 2:
+			// update character obj 
+			character.secondarySkill = secondarySkillChoice.selected;
+			break;
+		case 3:
+			// add base points
+			if (phyOrMen.selected == "physicalBtn") {
+				character.attributes["Strength"] += 2;
+				character.attributes["Dexterity"] += 2;
+				character.attributes["Intelligence"] += 1;
+				character.attributes["Spirit"] += 1;
+			}
+			else {
+				character.attributes["Strength"] += 1;
+				character.attributes["Dexterity"] += 1;
+				character.attributes["Intelligence"] += 2;
+				character.attributes["Spirit"] += 2;
+			}
+			break;
+		case 4:
+			// add points to physical attr
+			if (strOrDex.selected == "dexterityBtn") {
+				character.attributes["Strength"] += 1;
+				character.attributes["Dexterity"] += 2;
+			}
+			else {
+				character.attributes["Strength"] += 2;
+				character.attributes["Dexterity"] += 1;
+			}
+			break;
+		case 5:
+			// add points to mental attr
+			if (intOrSpi.selected == "intelligenceBtn") {
+				character.attributes["Spirit"] += 1;
+				character.attributes["Intelligence"] += 2;
+			}
+			else {
+				character.attributes["Intelligence"] += 1;
+				character.attributes["Spirit"] += 2;
+			}
+			// Fill character skills
+			character.fightingStyles = {
+			"Martial Combat" : character.attributes["Dexterity"],
+			"One Handed Weapons" : character.attributes["Dexterity"],
+			"Two Handed Weapons": character.attributes["Strength"],
+			"Throwing Weapons" : character.attributes["Dexterity"],
+			"Marksmanship" : character.attributes["Dexterity"],
+			"Magic" : character.attributes["Spirit"]
+			}
+			character.skills = {
+			"Alchemy and Cooking" : character.attributes["Intelligence"],
+			"Smithing and Appraisal" : character.attributes["Intelligence"],
+			"Survival and Tracking" : character.attributes["Intelligence"],
+			"Thievery and Sneaking" : character.attributes["Dexterity"],
+			"Acrobatics and Athletics" : character.attributes["Strength"],
+			"Performance and Bluff" : character.attributes["Spirit"]
+			}
+			character.skills[primarySkillChoice.selected] += 6;
+			character.skills[secondarySkillChoice.selected] += 3;
+			break;
+		case 6:
+			character.fightingStyles[primaryFightingStyleChoice.selected] += 6;
+			// update character obj 
+			character.primaryFightingStyle = primaryFightingStyleChoice.selected;
+			break;
+		case 7:
+			console.log(character.skills[skills[4]]);
+			character.fightingStyles[secondaryFightingStyleChoice.selected] += 3;
+			// update character obj 
+			character.secondaryFightingStyle = secondaryFightingStyleChoice.selected;
+			break;
+		case 8:
+			setMyCharacterBox();
+			document.body.removeEventListener("click", checkSufficientMoves);
+			// create characterCookie
+			completeCharacter();
+			var d = new Date();
+			console.log(d.toISOString());
+			//document.cookie = 'time=' + d.toISOString() + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
+			character.meta.lastModified = d.toISOString();
+			document.cookie = 'character=' + JSON.stringify(character) + '; expires=Thu, 18 Dec 2020 12:00:00 UTC'; 
+			var saveMoveNames = [];
+			console.log("character save complete");
+			break;
+		default:
+			break;
+		}
+	}
+	
+	function completeCharacter() {
+		character.meta.complete = true;
+		removeClass(getById("saveBtn"), "incomplete");
+		addClass(getById("saveBtn"), "complete");
+	}
+	
+	function checkSufficientMoves() {
+		if (choiceNumber > 7) {
+			console.log(myMoves.length);
+			if (myMoves.length == 4) {
+				console.log("complete");
+				window.scroll(0,0);
+				addClass(getById("done"),"complete");
+				getById("done").removeAttribute("disabled");
+			}
+			else {
+				removeClass(getById("done"),"complete");
+				getById("done").setAttribute("disabled",true);
+			}
+		}
+	}
+	
+	function showCharacter() {
+		dbg.innerHTML = "showCharacter started";
+		if (!character.meta.complete) {
+			//console.log(character.attributes);
+			//console.log(character.meta.complete);
+			console.log("incomplete character data");
+			return;
+		}
+		getByClass("myCharacterBox").style.display = "block";
+	}
+	
+	var jsonObj;
+	function loadJSON() {
+		jsonObj = JSON.parse(jsonString);
+		jsonObj.moves.forEach(function(move) {
+			createMoveFromJSON(move);
+		});
+	}
+	
+	function createMoveFromJSON(m) {
+		var newMove = new Move(m.Name, m.Roll, m.AP, m.Effect, m.Range, m.Special);
+		allMoves.push(newMove);
+		if (moveLists[m.Class] != null) {
+		moveLists[m.Class].push(newMove);
+		} else {
+		console.log(m.Class + " class could not be identified");
+		}
+	}
+	
+	function hideStartingButtons() {
+		getById("mainMenu").style.display = "none";
+	}
+	
+	function showLoadingButtons() {
+		getById("loadButtons").style.display = "block";
+	}
+	
+	function hideLoadingButtons() {
+		getById("loadButtons").style.display = "none";
+	}
+	
+	function resetCharacter() {
+		// Fill character skills
+		character.attributes["Strength"] = 0;
+		character.attributes["Dexterity"] = 0;
+		character.attributes["Intelligence"] = 0;
+		character.attributes["Spirit"] = 0;
+		
+		character.fightingStyles = {
+		"Martial Combat" : 0,
+		"One Handed Weapons" : 0,
+		"Two Handed Weapons": 0,
+		"Throwing Weapons" : 0,
+		"Marksmanship" : 0,
+		"Magic" : 0,
+		}
+		character.skills = {
+		"Alchemy and Cooking" : 0,
+		"Smithing and Appraisal" : 0,
+		"Survival and Tracking" : 0,
+		"Thievery and Sneaking" : 0,
+		"Acrobatics and Athletics" : 0,
+		"Performance and Bluff" : 0
+		}
+	}
+	
+	function loadCharacterFromCookie() {
+		for (var i=0; i<cookieList.length; i++) {
+			if (cookieList[i].indexOf("character=") > -1) {
+				var start = cookieList[i].indexOf("{");
+				var end = cookieList[i].length;
+				loadCharacterFromString(cookieList[i].substring(start,end));
+				break;
+			}
+		}
+	}
+	
+	function loadCharacterFromString(str) {
+		character = JSON.parse(str);
+		clearScreens();
+		hideStartingButtons();
+		console.log("Character Loaded");
+		setMyCharacterBox();
+		completeCharacter();
+		// import moves from string
+		character.moves.forEach(function(moveName) {
+			for (var i=0; i<allMoves.length; i++) {
+				if (allMoves[i].name == moveName) {
+					myMoves.push(allMoves[i]);
+					break;
+				}
+			}
+		});
+		dbg.innerHTML = "loadCharacterFromString run";
+		showCharacter();
+		listMoves("myMoves");
+	}
+	
+	function setCookieButtonText() {
+		// get load button text
+			var className = "";
+			var dateString = "";
+			for (var i=0; i<cookieList.length; i++) {
+				// get characterName
+				if (cookieList[i].indexOf("character=") > -1) {
+					var end = cookieList[i].length;
+					className = cookieList[i].substring(cookieList[i].indexOf('"charClass":')+13,end);
+					end = className.indexOf('"');
+					className = className.substring(0,end); 
+					end = cookieList[i].length;
+					cookieList[i].indexOf('"lastModified":')
+					var start = cookieList[i].indexOf('"lastModified":')+16
+					dateString = cookieList[i].substring(start,start + 10);
+				}			
+			}
+			/*console.log(cookieList[0]);
+			var tempStr = cookieList[0];
+			var end = tempStr.length;
+			className = tempStr.substring(tempStr.indexOf('"charClass":')+13,end);
+			end = className.indexOf('"');
+			className = className.substring(0,end); 
+			end = tempStr.length;
+			tempStr.indexOf('"lastModified":')
+			var start = tempStr.indexOf('"lastModified":')+16
+			dateString = tempStr.substring(start,start + 10);
+			getById("cookieLoadBtn").innerHTML = className + " on " + dateString;
+			*/
+			getById("cookieLoadBtn").innerHTML = className + " on " + dateString;
+			if (className == "") {
+				 getById("cookieLoadBtn").innerHTML = "Browser does not have any character data";
+			}
+	}
+	
+	function loadCookies() {
+		cookieList = [];
+		//console.log("COOKIE TEXT\n********************\n" + document.cookie);
+		if (document.cookie != "" && document.cookie != null) {
+			var startIndex = 0;
+			// load cookies
+			for (var i=0; i<document.cookie.length; i++) {
+				if (document.cookie[i] == ";") {
+					//console.log("end of cookie found");
+					cookieList.push(document.cookie.substring(startIndex,i));
+					startIndex = i+1;
+				}
+			}
+			// last cookie may not have semicolon
+			if (startIndex+1 < document.cookie.length) {
+				cookieList.push(document.cookie.substring(startIndex,document.cookie.length));
+			}
+		}
+	}
+	
+	function mobileDebug(enabled) {
+		if (enabled) {
+			dbg.style.display = "block";
+		} else {
+			dbg.style.display = "none";
+		}
+	}
+	
+	function setupCharacterExport() {
+		var saveMoveNames = [];
+		myMoves.forEach(function(m) {
+			saveMoveNames.push(m.name);
+		});
+		getById("saveArea").style.display = "block";
+		getById("saveText").innerHTML = JSON.stringify(character);
+	}
+	
+	function clipboardCopyCharacterText() {
+		var text = document.querySelector('#saveText');
+		if (document.body.createTextRange) { // ms
+			var range = doc.body.createTextRange();
+			range.moveToElementText(text);
+			range.select();
+    	} else if (window.getSelection) { // moz, opera, webkit
+			var selection = window.getSelection();            
+			var range = document.createRange();
+			range.selectNodeContents(text);
+			selection.removeAllRanges();
+			selection.addRange(range);
+        } else {
+			var textField = document.createElement('textarea');
+			textField.innerText = text.innerHTML;
+			document.body.appendChild(textField);
+			textField.select();
+			document.execCommand('copy');
+			textField.remove();
+        }
+		try {
+			var successful = document.execCommand('copy');
+			var msg = successful ? 'successful' : 'unsuccessful';
+			console.log('Copying text command was ' + msg);
+		} catch (err) {
+			console.log('Oops, unable to copy');
+		}
+	}
+	
+	// on clicks
+	getByClass("characterBtn").onclick = function() {
+		retractMenu();
+    	clearScreens();
+    	setMyCharacterBox()
+		showCharacter();
+		listMoves("myMoves");
+	}
+	getByClass("glossaryBtn").onclick = function() {
+		retractMenu();
+    	clearScreens();
+		getByClass("glossaryBox").style.display = "block";
+	}
+    getByClass("mainMenuBtn").onclick = function() {
+		retractMenu();
+		clearScreens();
+		getById("mainMenu").style.display = "block";
+	}
+    getByClass("allMovesBtn").onclick = function() {
+    	retractMenu();
+    	clearScreens();
+    	listMoves("moves");
+    }
+    getByClass("resetBtn").onclick = function () {
+    	resetAP();
+    }
+    getByClass("plusOneBtn").onclick = function () {
+    	addToAP(1);
+    }
+    getByClass("minusOneBtn").onclick = function () {
+    	addToAP(-1);
+    }
+    getByClass("bottomBar").onclick = function () {
+    	retractUseBox();
+    }
+    getByClass("optionsBtn").onclick = function() {
+    	extendMenu();
+    }
+    getByClass("threeBars").onclick = function() {
+    	extendMenu();
+    }  
+    getByClass("hideBtn").onclick = function() {
+    	retractMenu();
+    }
+    getById("aboutBtn").onclick = function() {
+    	clearScreens();
+    	getById("aboutSection").style.display = "block";
+    }
+	getById("loadBtn").onclick = function() {
+		hideStartingButtons();
+		showLoadingButtons();
+	}
+	getById("textLoadBtn").onclick = function() {
+		hideLoadingButtons();
+		//console.log(document.querySelector("textarea").value);
+		loadCharacterFromString(document.querySelector("textarea").value);
+	}
+	getById("cookieLoadBtn").onclick = function() {
+		hideLoadingButtons();
+		loadCharacterFromCookie();
+	}
+	getById("done").onclick = function() {
+		deleteDuplicateButtons();
+		addToCharacter();
+		if (choiceNumber == lastChoice) {
+			closeCreator();
+			clearMoves();
+			showCharacter();
+			listMoves("myMoves");
+			return;
+		}
+		advanceQuestion();	
+	}
+	getById("ccStartBtn").onclick = function() {
+		clearScreens();
+		resetCharacter()
+		getByClass("characterCreationBox").style.display = "block";
+		presentChoice(choiceNumber);
+		hideStartingButtons();
+	}
+	getById("saveBtn").onclick = function() {
+		clearScreens();
+		setupCharacterExport();
+	}
+	getById("clipboardBtn").onclick = function() {
+		clipboardCopyCharacterText();
+	}
+	
+	function init() {
+		mobileDebug(false);
+		loadJSON();
+		loadCookies();
+		setCookieButtonText();
+		clearMoves();
+	}
+	init();
+	
+	</script>
+</html>
