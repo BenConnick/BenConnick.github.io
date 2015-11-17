@@ -47,6 +47,7 @@ Author: Ben Connick
         		margin-left: 1%;
         		font-size: 12pt;
         		transition: top 0.2s;
+        		z-index: 100;
         	}
         	.bottomBar {
         		padding: 1em;
@@ -435,15 +436,20 @@ Author: Ben Connick
         	.doubleFontSize {
         		font-size: 200%;
         	}
+        	.oneAndAHalfFontSize { font-size: 150%; }
         	#characterPicture {
         		width: 14em;
         		border-radius: 10000px;
         		border: solid black;
         		border-width: 1px;
         		background-color: rgba(255,255,255,0.3);
+        		position: absolute;
+				left: calc(50% - 6.5em);
+				top: 1em;
+				z-index: 0;
         	}
         	#characterPictureContainer {
-    
+				position: relative;
         	}
         	.innerCentered {
         		margin: 0 auto;
@@ -487,19 +493,26 @@ Author: Ben Connick
 				/*border: solid rgba(0,0,143,1);*/
 				margin: 1em;
 			}
+			.classButton {
+				padding: 0.1em;
+				width: 6.1em;
+				height: 3em;
+				font-size: 0.8em;
+			}
 			.classImg {
 				display: block;
 				width: 100%;
 				margin: 0px;
 			}
 			.classPanel .choice {
-				float: none;
-				width: 100%;
+				float: left;
 				position: static;
 				font-family: "Metamorphous";
-				font-size: 125%;
-				padding-bottom: 0px;
-				height: 100%;
+				font-size: 60%;
+				padding: 0px;
+				width: 30%;
+				height: 7.5em;
+				overflow: hidden;
 			}
 			.Passive { 
 				background-color: rgba(255,255,100,0.8);
@@ -556,16 +569,66 @@ Author: Ben Connick
 				width: 2em;
 				right: 1em;
 				top: 1em;
+				z-index: 10;
 			}
 			.threeBars .bar {
-				width: 2em;
-				height: 0.3em;
+				width: 1.8em;
+				height: 0.2em;
 				margin-bottom: 0.3em;
 				background-color: white;
 				box-shadow: 0.05em 0.05em 0.2em black;
 			}
 			.threeBars:hover .bar {
 				background-color: #CCC;
+			}
+			#attributeTable {
+				text-align: center;
+				width: 18em;
+				margin: 0 auto;
+				margin-bottom: 1em;
+			}
+			#attributeTable td {
+			}
+			.middleRowSpacer {
+				height: 12em;
+			}
+			.middleColSpacer {
+				width: 8em;
+			}
+			#choiceDescriptionText {
+			
+			}
+			.classPic {
+				width: 95%;
+			}
+			.tableSectionHeader {
+				text-align: center;
+				height: 1em; 
+				padding-top: 1.5em; 
+				padding-bottom: 1em;"
+			}
+			.tableSectionHeader span {
+				font-size: 200%;
+				font-family: "Metamorphous";
+				color: #0d5d0d;
+			}
+			.characterName {
+				font-size: 2em;
+				text-align: center;
+				margin-top: 0.6em;
+				margin-bottom: 0.1em;
+				font-family: "Metamorphous";
+				color: #0d5d0d;
+			}
+			.characterClass { 
+				font-size: 1em;
+				text-align: center;
+				margin-bottom: 0.8em;
+				font-family: "Metamorphous";
+			}
+			.wepDamage {
+				color: red;
+				font-size: 120%;
 			}
         </style>
     </head>
@@ -592,7 +655,7 @@ Author: Ben Connick
     		<button class="navBtn minusOneBtn">-1</button>
     		<button class="navBtn resetBtn">Reset</button>
     		<button class="navBtn hideBtn">Hide</button>
-    		<p class="APCounter">9AP</p>
+    		<p class="APCounter">10AP</p>
     	</div>
     	<div id="mainMenu">
     		<h1>Smartphones <br>& Dragons</h1>
@@ -677,16 +740,43 @@ Author: Ben Connick
 				<div id="q7" style="display: none;"></div>
 				<!-- Moves (empty) -->
 				<div id="q8" style="display: none;"></div>
-				
+				<!-- Name -->
+				<div id="q9" style="display: none;">
+					<input type="text" style="width:100%;" id="nameField" value="Name">
+				</div>
+				<div id="choiceDescriptionContainer">
+					<p id="choiceDescriptionText"></p>	
+				</div>
 				<button id="done" class="incomplete" disabled>Next</button>
     		</div>
     	</div>
     	<div class="myCharacterBox">
+    		<div class="characterName">Name</div>
+    		<div class="characterClass">Class</div>
     		<div class="centerAligned" id="characterPictureContainer">
-    			<img id="characterPicture" src="images/ElfMaleMagicUser.png"/>
-    			<div style="height: 1em;"></div>
+    		<table id="attributeTable">
+    			<tr>
+					<td>Strength</td><td class="middleColSpacer">&nbsp&nbsp&nbsp&nbsp</td><td>Dexterity</td>
+				</tr>
+				<tr>
+					<td class="str"></td><td class="middleColSpacer"></td><td class="dex"></td>
+    			</tr>
+    			<tr>
+    				<td colSpan=3 class="middleRowSpacer"></td>
+    			</tr>
+				<tr>
+					<td>Intelligence</td><td class="middleColSpacer"></td><td>Spirit</td>
+				</tr>
+				<tr>
+					<td class="int"></td><td class="middleColSpacer"></td><td class="spi"></td>
+				</tr>
+    			<img id="characterPicture" src="images/Slayer.png"/>
+    			</table>
     		</div>
     		<table id="bigFourTable" style="width:100%; font-size: 200%;">
+    			<tr> <!--spacer-->
+    				<td colspan="2" class="tableSectionHeader"><span>Fighting</span></td>
+    			</tr>
     			<tr>
 					<td class="centerAligned">
 						<img id="primaryWeaponImg" class="FourEmSquare" src="images/One Handed Weapons.png"/>
@@ -695,14 +785,29 @@ Author: Ben Connick
 						<img id="secondaryWeaponImg" class="FourEmSquare" src="images/Marksmanship.png"/>
 					</td>
     			</tr>
+    			
     			<tr>
 					<td class="centerAligned">
-						<div id="primaryWeaponStat" class="doubleFontSize">8</div>
+						<div id="primaryFightingStyleName">Sword</div>
 					</td>
 					<td class="centerAligned">
-						<div id="secondaryWeaponStat" class="doubleFontSize">5</div>
+						<div id="secondaryFightingStyleName">Bow</div>
 					</td>
     			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div id="primaryFightingStyleStat" class="doubleFontSize">8</div>
+					</td>
+					<td class="centerAligned">
+						<div id="secondaryFightingStyleStat" class="doubleFontSize">5</div>
+					</td>
+    			</tr>
+    			
+    			
+    			<tr> <!--spacer-->
+    				<td colspan="2" class="tableSectionHeader"><span>Weapons</span></td>
+    			</tr>
+    			
     			<tr>
 					<td class="centerAligned">
 						<div id="primaryWeaponName">Sword</div>
@@ -711,9 +816,19 @@ Author: Ben Connick
 						<div id="secondaryWeaponName">Bow</div>
 					</td>
     			</tr>
-    			<tr> <!--spacer-->
-    				<td colspan="3" style="height: 3em;"> </td>
+    			<tr>
+					<td class="centerAligned">
+						<div id="primaryWeaponDamage" class="wepDamage">8</div>
+					</td>
+					<td class="centerAligned">
+						<div id="secondaryWeaponDamage" class="wepDamage">5</div>
+					</td>
     			</tr>
+    			
+    			<tr> <!--spacer-->
+    				<td colspan="2" class="tableSectionHeader"><span>Defenses</span></td>
+    			</tr>
+    			
     			<tr>
 					<td class="centerAligned">
 						<img class="FourEmSquare" src="images/shield.png"/>
@@ -724,20 +839,21 @@ Author: Ben Connick
     			</tr>
     			<tr>
 					<td class="centerAligned">
-						<div id="defenseStat" class="doubleFontSize">16</div>
-					</td>
-					<td class="centerAligned">
-						<div id="damageThresholdStat" class="doubleFontSize">13</div>
-					</td>
-    			</tr>
-    			<tr>
-					<td class="centerAligned">
 						<div>Defense</div>
 					</td>
 					<td class="centerAligned">
 						<div>Damage<br>Threshold</div>
 					</td>
     			</tr>
+    			<tr>
+					<td class="centerAligned">
+						<div id="defenseStat" class="doubleFontSize">16</div>
+					</td>
+					<td class="centerAligned">
+						<div id="damageThresholdStat" class="doubleFontSize">13</div>
+					</td>
+    			</tr>
+    			
     		</table>
     		<table id="skillTable">
     			<tr>
@@ -868,6 +984,7 @@ Author: Ben Connick
     var dbg = getById("mobileDebug");
     var allMoves = [];
     var myMoves = [];
+    var basicMoves = [];
 	var slayerMoves = [];
 	var defenderMoves = [];
 	var scholarMoves = [];
@@ -875,26 +992,36 @@ Author: Ben Connick
 	var assasinMoves = [];
 	var hunterMoves = [];
 	
+	var choiceDescriptions = {
+		"Slayer" : "<br><img src='images/Slayer.png' class='classPic'/><br>The Slayer is a monster specialist. Tough and damage-focused.",
+		"Defender" : "<br><img src='images/Defender.png' class='classPic'/><br>The Defender is a professional soldier. Battle hardened and team-focused.",
+		"Battlemage" : "<br><img src='images/Battlemage.png' class='classPic'/><br>The Battlemage is an expert on combat-magic. Powerful and control-focused.",
+		"Scholar" : "<br><img src='images/Scholar.png' class='classPic'/><br>The Scholar is a arcane techniques. Intelligent and tactics-focused.",
+		"Assassin" : "<br><img src='images/Assassin.png' class='classPic'/><br>The Assassin is a contract killer. Ruthless and target-focused.",
+		"Hunter" : "<br><img src='images/Hunter.png' class='classPic'/><br>The Hunter is a master of thriving in nature. Keen and trap-focused."
+	}
     var character = {}; // character object, stores attributes and skills
+    character.name = "Anonymous";
     character.attributes = { "Strength" : 0, "Dexterity" : 0, "Intelligence" : 0, "Spirit" : 0 };
     character.fightingStyles = {}; // these are filled out later
     character.skills = {}; // these are filled out later
     character.moves = [];
     character.meta = {"complete": false, "lastModified" : "never"};
     var cookieList = [];
-    var AP = 9;
-    var maxAP = 9;
+    var AP = 10;
+    var maxAP = 10;
     var classIndex=0;
     var choiceText = [
 		"Create a Character",
-		"Step 1 of 8 <br> Choose your specialty",
-		"Step 2 of 8 <br> Choose your secondary skill focus",
-		"Step 3 of 8 <br> Choose your broad focus",
-		"Step 4 of 8 <br> Choose your physical focus",
-		"Step 5 of 8 <br> Choose your mental focus",
-		"Step 6 of 8 <br> Choose your primary combat focus",
-		"Step 7 of 8 <br> Choose your secondary combat focus",
-		"Step 8 of 8 <br> Choose exactly four (4) abilities"
+		"Step 1 of 9 <br> Choose your specialty",
+		"Step 2 of 9 <br> Choose your secondary skill focus",
+		"Step 3 of 9 <br> Choose your broad focus",
+		"Step 4 of 9 <br> Choose your physical focus",
+		"Step 5 of 9 <br> Choose your mental focus",
+		"Step 6 of 9 <br> Choose your primary combat focus",
+		"Step 7 of 9 <br> Choose your secondary combat focus",
+		"Step 8 of 9 <br> Choose exactly four (4) abilities",
+		"Step 9 of 9 <br> Choose a name"
 	];
 	character.charClass = "none";
 	var primaryFightingStyleChoice;
@@ -934,12 +1061,45 @@ Author: Ben Connick
     var intOrSpi = choiceBtnGroup(["intelligenceBtn","spiritBtn"]);
 	var primarySkillChoice = {};
 	var choiceNumber = 1;
-	var lastChoice = 8;
+	var lastChoice = 9;
 	var bottomTimeout;
+	var choiceTextElem = getById("choiceDescriptionText");
+	
+	var weaponDefaults = {
+		"Martial Combat" : "Fists",
+		"One Handed Weapons" : "Adventurer's Shortsword",
+		"Two Handed Weapons" : "Adventurer's Battleaxe",
+		"Throwing Weapons" : "Adventurer's Throwing-Knives",
+		"Marksmanship" : "Adventurer's Longbow",
+		"Magic" : "Adventerer's Staff"
+	};
+	
+	function Weapon(nameArg, damageArg, APArg, bonusArg, typeArg, specialArg) {
+		this.name = nameArg;
+		this.AP = APArg;
+		this.bonus = bonusArg;
+		this.damage = damageArg;
+		this.type = typeArg;
+		this.special = specialArg;
+		this.print = function() {
+			return this.name + ": " + this.damage + " " + this.type + " damage, " + this.AP + " AP drain, " + this.bonus + " bonus attack, special:" + this.special;
+		}; 
+	}
+	
+	var weapons = [];
+	weapons.push(new Weapon("Fists","d4 + Strength","-1",0,"melee",""));
+	weapons.push(new Weapon("Adventurer's Shortsword","d6 + Strength","+0",1,"melee",""));
+	weapons.push(new Weapon("Adventurer's Battleaxe","d10 + Strength","+1",0,"melee",""));
+	weapons.push(new Weapon("Adventurer's Throwing-Knives","d8 + Strength","+0",0,"ranged",""));
+	weapons.push(new Weapon("Adventurer's Longbow","d8","+0",0,"ranged",""));
+	weapons.push(new Weapon("Adventurer's Staff","d4 + Strength","+0",0,"melee","Magic +1"));
+	weapons.push(new Weapon("Longsword","d8 + Strength","+0",0,"melee",""));
+	weapons.push(new Weapon("Throwing Spear","d8 + Strength","+0",0,"ranged",""));
 	
     var moveLists = { 
 	"moves" : allMoves, 
-	"myMoves" : myMoves, 
+	"myMoves" : myMoves,
+	"basic" : basicMoves, 
 	"Slayer" : slayerMoves, 
 	"Defender" : defenderMoves, 
 	"Scholar" : scholarMoves, 
@@ -947,46 +1107,79 @@ Author: Ben Connick
 	"Assassin" : assasinMoves, 
 	"Hunter" : hunterMoves 
 	}
-    allMoves.push(new Move(
-    	"Standard Attack",
-    	"Agility + Melee vs. Agility + Armor",
+	
+	// Basic moves
+	basicMoves.push(new Move(
+		"Move",
+		"",
+		1,
+		"Move one space",
+		"Self",
+		""
+		)
+	);
+    basicMoves.push(new Move(
+    	"Melee Attack",
+    	"Attack vs. Defense",
     	4,
-    	"On success, ",
-    	"Damage: 1[W]",
-    	"",
+    	"Roll Weapon Damage against your opponent's Damage Threshold.",
+    	"Touch",
     	""
     	)
     );
-    allMoves.push(new Move(
-    	"Full Attack",
-    	"Agility + Melee vs. Agility + Armor",
+    basicMoves.push(new Move(
+    	"Ranged Attack",
+    	"Attack vs. Range Table",
+    	5,
+    	"Roll Weapon Damage against your opponent's Damage Threshold.",
+    	"Touch",
+    	""
+    	)
+    );
+    basicMoves.push(new Move(
+    	"Melee Full Attack",
+    	"Attack vs. Defense",
     	6,
-    	"On success, ",
-    	"Damage: 2[W]",
-    	"",
+    	"Roll 2 * Weapon Damage against your opponent's Damage Threshold.",
+    	"Touch",
     	""
     	)
     );
-    allMoves.push(new Move(
+    basicMoves.push(new Move(
     	"Trip",
-    	"Agility vs. Fighting",
-    	6,
-    	"On success, ",
-    	"Damage: 2[W]",
-    	"",
+    	"Athletics vs. Defense",
+    	5,
+    	"Target has the prone status",
+    	"Touch",
     	""
     	)
     );
-    allMoves.push(new Move(
-    	"Full Attack",
-    	"Fighting vs. Fighting",
-    	6,
-    	"On success, ",
-    	"Damage: 2[W]",
+    basicMoves.push(new Move(
+    	"Full Defense",
     	"",
+    	6,
+    	"Defense +2 until the start of your next turn",
+    	"Self",
     	""
     	)
     );
+    
+    // Mark basic moves
+    basicMoves.forEach(function(m) {
+    	m.basic = true;
+    	myMoves.push(m);
+    	allMoves.push(m);
+    });
+    
+    function getWeapon(name) {
+    	for (var i=0; i<weapons.length; i++) {
+    		if (weapons[i].name == name) {
+    			return weapons[i];
+    		}
+    	}
+    	// if none
+    	return getWeapon("Fists");
+    }
     
     function createUseButton(moveObject) {
 		var useBtn = document.createElement("button");
@@ -1025,6 +1218,10 @@ Author: Ben Connick
 		if (move.AP == "") {
 			move.AP = "0";
 		}
+		var special = "";
+		if (move.special != "" && move.special != null) {
+			special = ' ['+move.special+']';
+		}
 		
     	// create the box that displays the move
 		var container = document.createElement("div");
@@ -1037,7 +1234,7 @@ Author: Ben Connick
 		// Roll
 		rollStr +
 		// Effect
-		'<div class="categoryLabel">'+move.special+' '+'Effect</div>'+
+		'<div class="categoryLabel">On Success'+special+'</div>'+
 		'<div>'+move.effect+'</div>'+
 		// Range
 		rangeStr;
@@ -1045,41 +1242,46 @@ Author: Ben Connick
 		// display the box on the page
 		document.body.appendChild(container);
 		
-		// add the "add to moves" button
-		var addBtn = document.createElement("button");
-		addBtn.setAttribute("class","addBtn");
-		addBtn.innerHTML = buttonText;
-		addBtn.onclick = function() {
-			if (move.added) {
-				console.log(move.name + " removed");
-				myMoves.pop(move);
-				character.moves.pop(move.name);
-				move.added = false;
+		if (move.basic != true) {
+			// add the "add to moves" button
+			var addBtn = document.createElement("button");
+			addBtn.setAttribute("class","addBtn");
+			addBtn.innerHTML = buttonText;
+			addBtn.onclick = function() {
+				if (move.added) {
+					console.log(move.name + " removed");
+					myMoves.pop(move);
+					character.moves.pop(move.name);
+					move.added = false;
 				
-				addBtn.innerHTML = addText;
-				addBtn.style.backgroundColor = "rgba(255,255,255,0.5)";
+					addBtn.innerHTML = addText;
+					addBtn.style.backgroundColor = "rgba(255,255,255,0.5)";
 				
-				removeUseButtons(container);
+					removeUseButtons(container);
+				}
+				else {
+					console.log(move.name + " added");
+					myMoves.push(move);
+					console.log(myMoves);
+					character.moves.push(move.name);
+					move.added = true;
+				
+					addBtn.innerHTML = removeText;
+					addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
+				
+					var useBtn = createUseButton(move);
+					removeUseButtons(container);
+					container.querySelector(".buttonHolder").appendChild(useBtn);
+				}
 			}
-			else {
-				console.log(move.name + " added");
-				myMoves.push(move);
-				character.moves.push(move.name);
-				move.added = true;
-				
-				addBtn.innerHTML = removeText;
+			container.querySelector(".buttonHolder").appendChild(addBtn);
+			if (myMoves.indexOf(move) > -1) {
 				addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
-				
-				var useBtn = createUseButton(move);
-				removeUseButtons(container);
-				container.querySelector(".buttonHolder").appendChild(useBtn);
+				addBtn.innerHTML = removeText;
 			}
 		}
-		container.querySelector(".buttonHolder").appendChild(addBtn);
-		if (myMoves.indexOf(move) > -1) {
-			addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
-			addBtn.innerHTML = removeText;
-			
+		
+		if (myMoves.indexOf(move) > -1) {		
 			var useBtn = createUseButton(move);
 			removeUseButtons(container);
 			container.querySelector(".buttonHolder").appendChild(useBtn);
@@ -1120,12 +1322,12 @@ Author: Ben Connick
     		
     		if (word == "Attack") {
     			return "1d20 + primary ["
-    			+ character.fightingStyles[character.primaryFightingStyleChoice] + "] or secondary [" 
-    			+ character.fightingStyles[character.secondaryFightingStyleChoice] + "]";
+    			+ character.fightingStyles[character.primaryFightingStyle] + "] or secondary [" 
+    			+ character.fightingStyles[character.secondaryFightingStyle] + "]";
     		}
     		var styles_ = Object.keys(character.fightingStyles);
     		for (var j=0; j<styles_.length; j++) {
-    			var style = styles[j];
+    			var style = styles_[j];
     			if (word == style) {
     				return "1d20 + "+ word +"[" + character.fightingStyles[word] + "]";
     			}
@@ -1134,24 +1336,38 @@ Author: Ben Connick
     		for (var j=0; j<skills_.length; j++) {
     			var skill = skills_[j];
     			if (word == skill) {
-    				return "1d20 + "+ word +"[" + character.fightingStyles[word] + "]";
+    				return "1d20 + "+ word +"[" + character.skills[skill] + "]";
+    			}
+    			if (word == skill.split(" and ")[0]) {
+    				return "1d20 + "+ word +"[" + character.skills[skill] + "]";
+    			}
+    			console.log(skill.split(" and ")[1]);
+    			if (word == skill.split(" and ")[1]) {
+    				return "1d20 + "+ word +"[" + character.skills[skill] + "]";
     			}
     		}
     		var keys_ = Object.keys(character.attributes);
     		for (var j=0; j<keys_.length; j++) {
     			var k = keys_[j];
     			if (word == k) {
-    				return "1d20 + "+ word +"[" + character.attributes[word] + "]";
+    				return "1d20 + "+ k +"[" + character.attributes[k] + "]";
     			}
     		}
     	}
     }
     
     function listMoves(moveListName) {
-    	console.log("listMoves " + moveListName);
+    	console.log("listMoves " + moveListName + " " + moveLists[moveListName].length);
 		for (var i=0; i<moveLists[moveListName].length; i++) {
 			displayMove(moveLists[moveListName][i]);
 		}   
+	}
+	
+	function listMyMoves() {
+		console.log("listMoves " + myMoves + " " + myMoves.length);
+		for (var i=0; i<myMoves.length; i++) {
+			displayMove(myMoves[i]);
+		} 
 	}
 	
 	function clearMoves() {
@@ -1222,12 +1438,21 @@ Author: Ben Connick
 	}
 	
 	function presentChoice(choiceN) {
-		// Moves
+		// Choice 9 (Name) below
+		
+		// 8 Moves
 		if (choiceN == 8) {
+			// Reset to basic moves
+			myMoves = [];
+			console.log("moves RESET");
+			basicMoves.forEach(function(m) {
+				m.basic = true;
+				myMoves.push(m);
+			});
 			document.body.addEventListener("click", checkSufficientMoves);
 			listMoves(characterClass.selected);
 		}
-		// Secondary Fighting Style
+		// 7 Secondary Fighting Style
 		if (choiceN == 7) {
 			var excludingPrimary = [];
 			fightingStyles.forEach(function(fStyle) {
@@ -1237,12 +1462,13 @@ Author: Ben Connick
 			});
 			secondaryFightingStyleChoice = createAndDisplayButtonGroup(excludingPrimary, getById("q7"));
 		}
-		// Primary Fighting Style
+		// 6 Primary Fighting Style
 		if (choiceN == 6) {
 			primaryFightingStyleChoice = createAndDisplayButtonGroup(fightingStyles, getById("q6"));
 		}
-		// Secondary Skill
+		// 5 Secondary Skill
 		if (choiceN == 2) {
+		choiceTextElem.style.display = "none";
 		//set primarySkillChoice.selected = result from class selection
 		primarySkillChoice.selected = skills[characterClasses.indexOf(characterClass.selected)];
 		//set correcponder character attribute
@@ -1255,23 +1481,31 @@ Author: Ben Connick
 			});
 			secondarySkillChoice = createAndDisplayButtonGroup(excludingPrimary, getById("q2"));
 		}
-		
+		// 4 Class
 		if (choiceN == 1) {
 			characterClass = createAndDisplayButtonGroup(characterClasses, getById("q1"));
 			promoteToClassChoiceGroup(characterClasses, getById("q1"));
 		}
-		// clear previous choice from screen
+		// 3 clear previous choice from screen
 		if (getById("q"+ (choiceN-1) )) {
 			getById("q"+ (choiceN-1) ).style.display = "none";
 		}
-		// display current choice
+		// 2 display current choice
 		getById("q"+choiceN).style.display = "block";
-		// set appropriate title
+		// 1 set appropriate title
 		getByClass("ccTitle").innerHTML = choiceText[choiceN];
 	
 		// reset next button until choice is made
 		getById("done").setAttribute("class","incomplete");
 		getById("done").setAttribute("disabled", "true");
+		
+		// Name
+		if (choiceN == 9) {
+			clearMoves();
+			getById("done").setAttribute("class","complete");
+			getById("done").removeAttribute("disabled");
+			listMyMoves();
+		}
 	}
 
     function choiceBtnGroup(buttonIdList, questionNum) {
@@ -1287,11 +1521,19 @@ Author: Ben Connick
 				addClass(cbtn,"highlight");
 				getById("done").setAttribute("class","complete");
 				getById("done").removeAttribute("disabled");
-				groupObject.selected = buttonName; 
+				groupObject.selected = buttonName;
+				if (choiceDescriptions[buttonName] != "" && choiceDescriptions[buttonName] != null) {
+					choiceTextElem.innerHTML = choiceDescriptions[buttonName];
+					choiceTextElem.style.display = "block";
+				} 
+				else {
+					choiceTextElem.innerHTML = "";
+					choiceTextElem.style.display = "none";
+				}
     		}
     	});
     	return groupObject;
-    }    
+    }
 
     function advanceQuestion() {
     	choiceNumber++;
@@ -1317,6 +1559,8 @@ Author: Ben Connick
 	function promoteToClassChoiceGroup(listIds, container) {
 		listIds.forEach(function(id) {
 			var classButton = getById(id);
+			addClass(classButton,"classButton");
+			/*
 			var classPanel = document.createElement("div");
 			classPanel.setAttribute("id",id + " panel");
 			classPanel.setAttribute("class","classPanel");
@@ -1327,12 +1571,12 @@ Author: Ben Connick
 			
 			classPanel.appendChild(classButton);
 			classButton.appendChild(classImg);
-			container.appendChild(classPanel);
+			container.appendChild(classPanel);*/
 		});
 	}
 	
     function deleteDuplicateButtons() {
-    	if (choiceNumber > 3) {
+    	if (choiceNumber > 1 && choiceNumber < 9) {
 			// special case for deleting buttons with the same id
 			getById("q"+ (choiceNumber) ).innerHTML = "";
 		}
@@ -1343,12 +1587,22 @@ Author: Ben Connick
     }
 	
 	function setMyCharacterBox() {
-		getById("primaryWeaponName").innerHTML = character.primaryFightingStyle;
+		getByClass("characterName").innerHTML = character.name;
+		getByClass("characterClass").innerHTML = character.charClass;
+		getByClass("str").innerHTML = character.attributes["Strength"];
+		getByClass("dex").innerHTML = character.attributes["Dexterity"];
+		getByClass("int").innerHTML = character.attributes["Intelligence"];
+		getByClass("spi").innerHTML = character.attributes["Spirit"];
+		getById("primaryFightingStyleName").innerHTML = character.primaryFightingStyle;
 		getById("primaryWeaponImg").setAttribute("src","images/"+character.primaryFightingStyle+".png");
-		getById("primaryWeaponStat").innerHTML = character.fightingStyles[character.primaryFightingStyle];
-		getById("secondaryWeaponName").innerHTML = character.secondaryFightingStyle;
+		getById("primaryFightingStyleStat").innerHTML = character.fightingStyles[character.primaryFightingStyle];
+		getById("primaryWeaponName").innerHTML = character.primaryWeaponName;
+		getById("primaryWeaponDamage").innerHTML = getWeapon(character.primaryWeaponName).damage;
+		getById("secondaryFightingStyleName").innerHTML = character.secondaryFightingStyle;
 		getById("secondaryWeaponImg").setAttribute("src","images/"+character.secondaryFightingStyle+".png");
-		getById("secondaryWeaponStat").innerHTML = character.fightingStyles[character.secondaryFightingStyle];
+		getById("secondaryFightingStyleStat").innerHTML = character.fightingStyles[character.secondaryFightingStyle];
+		getById("secondaryWeaponName").innerHTML = character.secondaryWeaponName;
+		getById("secondaryWeaponDamage").innerHTML = getWeapon(character.secondaryWeaponName).damage;
 		getById("defenseStat").innerHTML = (character.attributes["Dexterity"]*2 + 10);
 		getById("damageThresholdStat").innerHTML = (character.attributes["Strength"]*2);
 		getById("characterPicture").setAttribute("src","images/"+character.charClass+".png")
@@ -1429,28 +1683,26 @@ Author: Ben Connick
 			character.skills[secondarySkillChoice.selected] += 3;
 			break;
 		case 6:
+			// Primary Fighting Style
 			character.fightingStyles[primaryFightingStyleChoice.selected] += 6;
 			// update character obj 
 			character.primaryFightingStyle = primaryFightingStyleChoice.selected;
+			character.primaryWeaponName = weaponDefaults[character.primaryFightingStyle];
 			break;
 		case 7:
+			// Secondary Fighting Style
 			console.log(character.skills[skills[4]]);
 			character.fightingStyles[secondaryFightingStyleChoice.selected] += 3;
 			// update character obj 
 			character.secondaryFightingStyle = secondaryFightingStyleChoice.selected;
+			character.secondaryWeaponName = weaponDefaults[character.secondaryFightingStyle];
 			break;
 		case 8:
-			setMyCharacterBox();
 			document.body.removeEventListener("click", checkSufficientMoves);
-			// create characterCookie
+			break;
+		case 9:
+			character.name = getById("nameField").value;
 			completeCharacter();
-			var d = new Date();
-			console.log(d.toISOString());
-			//document.cookie = 'time=' + d.toISOString() + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
-			character.meta.lastModified = d.toISOString();
-			document.cookie = 'character=' + JSON.stringify(character) + '; expires=Thu, 18 Dec 2020 12:00:00 UTC'; 
-			var saveMoveNames = [];
-			console.log("character save complete");
 			break;
 		default:
 			break;
@@ -1458,6 +1710,14 @@ Author: Ben Connick
 	}
 	
 	function completeCharacter() {
+		setMyCharacterBox();
+		var d = new Date();
+		console.log(d.toISOString());
+		//document.cookie = 'time=' + d.toISOString() + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
+		character.meta.lastModified = d.toISOString();
+		document.cookie = 'character=' + JSON.stringify(character) + '; expires=Thu, 18 Dec 2020 12:00:00 UTC'; 
+		var saveMoveNames = [];
+		console.log("character save complete");
 		character.meta.complete = true;
 		removeClass(getById("saveBtn"), "incomplete");
 		addClass(getById("saveBtn"), "complete");
@@ -1466,7 +1726,7 @@ Author: Ben Connick
 	function checkSufficientMoves() {
 		if (choiceNumber > 7) {
 			console.log(myMoves.length);
-			if (myMoves.length == 4) {
+			if (myMoves.length == 4 + basicMoves.length) {
 				console.log("complete");
 				window.scroll(0,0);
 				addClass(getById("done"),"complete");
@@ -1574,20 +1834,20 @@ Author: Ben Connick
 		});
 		dbg.innerHTML = "loadCharacterFromString run";
 		showCharacter();
-		listMoves("myMoves");
+		listMyMoves();
 	}
 	
 	function setCookieButtonText() {
 		// get load button text
-			var className = "";
+			var cName = "";
 			var dateString = "";
 			for (var i=0; i<cookieList.length; i++) {
 				// get characterName
 				if (cookieList[i].indexOf("character=") > -1) {
 					var end = cookieList[i].length;
-					className = cookieList[i].substring(cookieList[i].indexOf('"charClass":')+13,end);
-					end = className.indexOf('"');
-					className = className.substring(0,end); 
+					cName = cookieList[i].substring(cookieList[i].indexOf('"name":')+8,end);
+					end = cName.indexOf('"');
+					cName = cName.substring(0,end); 
 					end = cookieList[i].length;
 					cookieList[i].indexOf('"lastModified":')
 					var start = cookieList[i].indexOf('"lastModified":')+16
@@ -1606,15 +1866,15 @@ Author: Ben Connick
 			dateString = tempStr.substring(start,start + 10);
 			getById("cookieLoadBtn").innerHTML = className + " on " + dateString;
 			*/
-			getById("cookieLoadBtn").innerHTML = className + " on " + dateString;
-			if (className == "") {
+			getById("cookieLoadBtn").innerHTML = cName + " on " + dateString;
+			if (cName == "") {
 				 getById("cookieLoadBtn").innerHTML = "Browser does not have any character data";
 			}
 	}
 	
 	function loadCookies() {
 		cookieList = [];
-		//console.log("COOKIE TEXT\n********************\n" + document.cookie);
+		console.log("COOKIE TEXT\n********************\n" + document.cookie);
 		if (document.cookie != "" && document.cookie != null) {
 			var startIndex = 0;
 			// load cookies
@@ -1684,7 +1944,7 @@ Author: Ben Connick
     	clearScreens();
     	setMyCharacterBox()
 		showCharacter();
-		listMoves("myMoves");
+		listMyMoves();
 	}
 	getByClass("glossaryBtn").onclick = function() {
 		retractMenu();
@@ -1742,11 +2002,11 @@ Author: Ben Connick
 	getById("done").onclick = function() {
 		deleteDuplicateButtons();
 		addToCharacter();
-		if (choiceNumber == lastChoice) {
+		if (choiceNumber >= lastChoice) {
 			closeCreator();
 			clearMoves();
 			showCharacter();
-			listMoves("myMoves");
+			listMyMoves();
 			return;
 		}
 		advanceQuestion();	
@@ -1765,6 +2025,8 @@ Author: Ben Connick
 	getById("clipboardBtn").onclick = function() {
 		clipboardCopyCharacterText();
 	}
+	
+	window.onbeforeunload = function() { return "Are you sure you want to leave? All unsaved progress will be lost."; }
 	
 	function init() {
 		mobileDebug(false);
