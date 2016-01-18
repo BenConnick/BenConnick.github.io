@@ -145,7 +145,7 @@ Author: Ben Connick
         		padding-left: 0.5em;
         		padding-right: 0.5em;
         		background-color: rgba(255,255,255,0.6);
-        		/*border-radius: 10pt;*/
+        		/*border-radius: 1pt;*/
         		/*border: solid 1px black;*/
         		height: 0;
         		overflow: hidden;
@@ -2841,19 +2841,21 @@ Author: Ben Connick
 	}
 	
 	function Collapser(container, clickElem, innerElem) {
-		this.index = collapserObjects.length;
+		this.uniqueId = container.id;
 		this.container = container;
 		this.clickElem = clickElem;
 		this.innerElem = innerElem;
 		this.expanded = false;
 		this.toggle = function() {
 			if (this.expanded) {
+				window.scrollBy(0,-1*innerElem.clientHeight);
 				this.expanded = false;
 				this.innerElem.style.height = '0'
 				this.innerElem.style.overflow = "hidden";
 			} else {
 				this.innerElem.style.height = 'auto'
 				this.expanded = true;
+				window.scrollBy(0,innerElem.clientHeight);
 			}
 		}
 		this.clickElem.onclick = function(event) {
