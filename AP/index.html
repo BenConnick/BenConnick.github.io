@@ -134,19 +134,30 @@ Author: Ben Connick
         	}
         	.moveBox {
         		background-color: rgba(255,255,255,0.6);
-        		border-radius: 10pt;
+        		border-radius: 0pt;
         		border: solid 1px black;
         		height: contents;
         		width: calc(95%-40pt);
-        		margin: 10pt auto;
-        		padding: 1.6em;
+        		margin: 2pt auto;
+        		padding: 0em;
+        	}
+        	.innerMoveBox {
+        		padding-left: 0.5em;
+        		padding-right: 0.5em;
+        		background-color: rgba(255,255,255,0.6);
+        		/*border-radius: 10pt;*/
+        		/*border: solid 1px black;*/
+        		height: 0;
+        		overflow: hidden;
+        		width: calc(95%-40pt);
+        		transition: height 0.5s;
         	}
         	.moveName {
         		font-size: 125%;
         		font-weight: 600;
         		text-align: left;
-        		margin-top: 5pt;
-        		margin-bottom: 5pt;
+        		margin: 1pt;
+        		margin-left: 4pt;
 				font-family: "IM Fell English SC";
         	}
         	.roll {
@@ -1394,7 +1405,7 @@ Author: Ben Connick
 	var keywords = {};
 	var glossaryHistory = [];
 	var glossaryForward = [];
-	var collapserObjects = [];
+	var collapserObjects = {};
 	
 	var choiceDescriptions = {
 		"Slayer" : "<br><img src='images/Slayer.png' class='classPic'/><br>The Slayer is a monster specialist. Tough and damage-focused.",
@@ -1761,6 +1772,7 @@ Author: Ben Connick
     	displayMove(move, hideButton, document.body);
     }
     
+    var abilityBoxUniqueId = 0;
     function displayMove(move, hideButton, containerElem) {
     	if (containerElem == null) { containerElem = document.body; }
     	var rollStr = "";
@@ -1772,7 +1784,7 @@ Author: Ben Connick
 		if (move.difficulty != null && move.difficulty != "") {
 			diffStr = '<div class="categoryLabel">Difficulty</div>'+move.difficulty;
 		}
-		console.log(diffStr);
+    	
     	var rangeStr = "";
     	if (move.range != "") {
 			rangeStr = '<div class="categoryLabel">Range</div>'+
@@ -1796,10 +1808,14 @@ Author: Ben Connick
 		} 
 		
     	// create the box that displays the move
+		var outerContainer = document.createElement("div");
+		outerContainer.setAttribute("class","moveBox");
+		// increase unique Id for collapsing
+		abilityBoxUniqueId++;
+		outerContainer.innerHTML = '<div class="topRow" id="AB'+abilityBoxUniqueId+'"><p class="moveName">'+move.name+'</p></div>';
 		var container = document.createElement("div");
-		container.setAttribute("class","moveBox");
+		container.setAttribute("class","innerMoveBox");
 		container.innerHTML = 
-		'<div class="topRow"><p class="moveName">'+move.name+'</p></div>'+
 		'<div class="circle keyword" style="text-decoration: none" onclick="d(\'AP\')">'+
 		'<span class="AP">'+
 		move.AP+'</span></div><span class=buttonHolder></span><br>'+
@@ -1814,7 +1830,8 @@ Author: Ben Connick
 		parseKeywords(rangeStr);
 
 		// display the box on the page
-		containerElem.appendChild(container);
+		outerContainer.appendChild(container);
+		containerElem.appendChild(outerContainer);
 		
 		if (!move.basic && hideButton == false) {
 			// add the "add to moves" button
@@ -1861,6 +1878,7 @@ Author: Ben Connick
 			container.querySelector(".buttonHolder").appendChild(useBtn);
 		}
 		
+		 collapserObjects["AB"+abilityBoxUniqueId] = new Collapser(outerContainer,outerContainer.querySelector(".topRow"),container);
     }
     
     function useAbility(moveObject) {
@@ -1901,16 +1919,53 @@ Author: Ben Connick
     }
     
     function tryParseRoll(rollStr) {
+    	var newStr = "";
     	var rollStrArr = rollStr.split(" ");
-    	for (var i=0; i<rollStrArr.length; i++) {
+    	for (var i=0; i<rollStrArr.length; i++) {6
     		var word = rollStrArr[i];
-    		
-    		if (word == "Attack") {
-    			return "d20 + "+character.attributes["Agility"];
-    		}
-    		if (word == "Defense") {
-    			return "d20 + "+archetypes[character.charClass].Defense;
-    		}
+    		var found = false;
+    		switch (word) {
+				case "Attack":
+					found = true;
+					newStr += "d20 + "+character.attributes["Agility"];
+					break;
+				case "Defense":
+					found = true; 
+					newStr += "d20 + "+archetypes[character.charClass].Defense;
+					break;
+			}
+			var skills_ = Object.keys(character.skills);
+			for (var j=0; j<skills_.length; j++) {
+				if (found) { break; }
+				var skill = skills_[j];
+				if (word == skill) {
+					found = true;
+					newStr += "1d20 + "+ word +"[" + character.skills[skill] + "]";
+					break;
+				}
+				else if (word == skill.split(" and ")[0]) {
+					found = true;
+					newStr += "d20 + "+ word +"[" + character.skills[skill] + "]";
+					break;
+				}
+				//console.log(skill.split(" and ")[1]);
+				else if (word == skill.split(" and ")[1]) {
+					found = true;
+					newStr += "d20 + "+ word +"[" + character.skills[skill] + "]";
+					break;
+				}
+			}
+			var keys_ = Object.keys(character.attributes);
+			for (var j=0; j<keys_.length; j++) {
+				if (found) { break; }
+				var k = keys_[j];
+				if (word == k) {
+					found = true;
+					newStr += "d20 + " + character.attributes[k];
+					break;
+				}
+			}
+			
     		/*var styles_ = Object.keys(character.fightingStyles);
     		for (var j=0; j<styles_.length; j++) {
     			var style = styles_[j];
@@ -1918,29 +1973,11 @@ Author: Ben Connick
     				return "1d20 + "+ word +"[" + character.fightingStyles[word] + "]";
     			}
     		}*/
-    		var skills_ = Object.keys(character.skills);
-    		for (var j=0; j<skills_.length; j++) {
-    			var skill = skills_[j];
-    			if (word == skill) {
-    				return "1d20 + "+ word +"[" + character.skills[skill] + "]";
-    			}
-    			if (word == skill.split(" and ")[0]) {
-    				return "d20 + "+ word +"[" + character.skills[skill] + "]";
-    			}
-    			console.log(skill.split(" and ")[1]);
-    			if (word == skill.split(" and ")[1]) {
-    				return "d20 + "+ word +"[" + character.skills[skill] + "]";
-    			}
-    		}
-    		var keys_ = Object.keys(character.attributes);
-    		for (var j=0; j<keys_.length; j++) {
-    			var k = keys_[j];
-    			if (word == k) {
-    				return "d20 + " + character.attributes[k];
-    			}
+    		if (!found) {
+    			newStr += word;
     		}
     	}
-    	return rollStr;
+    	return newStr;
     }
     
     function listMoves(moveListName) {
@@ -2804,10 +2841,11 @@ Author: Ben Connick
 	}
 	
 	function Collapser(container, clickElem, innerElem) {
+		this.index = collapserObjects.length;
 		this.container = container;
 		this.clickElem = clickElem;
 		this.innerElem = innerElem;
-		this.expanded = true;
+		this.expanded = false;
 		this.toggle = function() {
 			if (this.expanded) {
 				this.expanded = false;
@@ -2818,8 +2856,9 @@ Author: Ben Connick
 				this.expanded = true;
 			}
 		}
-		this.clickElem.onclick = function() {
-			this.toggle();
+		this.clickElem.onclick = function(event) {
+			console.log(event.currentTarget.id);
+			collapserObjects[event.currentTarget.id].toggle();
 		}
 	}
 	
