@@ -222,6 +222,7 @@ Author: Ben Connick
         		color: #009;
         		padding: 0.4em;
         		margin-top: 0.5em;
+        		margin-bottom: 0.3em;
         		font-family: "IM Fell English SC";
         		font-size: 1em;
         	}
@@ -1876,12 +1877,12 @@ Author: Ben Connick
 					addBtn.innerHTML = removeText;
 					addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
 				
-					var useBtn = createUseButton(move);
-					removeUseButtons(container);
-					container.querySelector(".buttonHolder").appendChild(useBtn);
+					//var useBtn = createUseButton(move);
+					//removeUseButtons(container);
+					//container.querySelector(".buttonHolder").appendChild(useBtn);
 				}
 			}
-			container.querySelector(".buttonHolder").appendChild(addBtn);
+			container.appendChild(addBtn);
 			if (myMoves.indexOf(move) > -1) {
 				addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
 				addBtn.innerHTML = removeText;
