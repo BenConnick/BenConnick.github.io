@@ -4,7 +4,7 @@ Author: Ben Connick
 -->
 <html>
     <head>
-        <title>S&D 0.0.2</title>
+        <title>S&D 0.0.4</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 		<!--<link href='https://fonts.googleapis.com/css?family=IM Fell English SC' rel='stylesheet' type='text/css'>-->
@@ -159,6 +159,7 @@ Author: Ben Connick
         		margin: 1pt;
         		margin-left: 4pt;
 				font-family: "IM Fell English SC";
+				display: inline;
         	}
         	.roll {
         		text-align: left;
@@ -180,7 +181,9 @@ Author: Ben Connick
         		border: solid darkblue;
 				border-width: 1pt;
         		border-radius: 50000pt;
-        		display: block;
+        		/* Hide this element in this version */
+        		position: absolute;
+        		display: none;
         		width: 100%;
         		text-align: center;
         		margin-top: 0.25em;
@@ -226,9 +229,10 @@ Author: Ben Connick
         		border-radius: 0.3em;
         		background-color: rgba(255,255,255,0.5);
         		color: #009;
-        		padding: 0.4em;
-        		margin-top: 0.5em;
+        		margin: 0.1em;
+        		margin-top: 0.3em;
         		font-size: 1em;
+        		display: inline-block;
         	}
 			.categoryLabel {
 				margin-top: 0.4em;
@@ -307,7 +311,9 @@ Author: Ben Connick
         		left: 0.6em;
         	}
         	.topRow {
+        		display: inline-block;
         		margin-bottom: 0.4em;
+        		width: calc(100% - 6.5em);
         	}
         	.choice {
         		font-size: 90%;
@@ -1327,7 +1333,7 @@ Author: Ben Connick
 			</div>
     	</div>
 		<div class="moveBox">
-			<div class="topRow"><p class="moveName">Fireball Why Not</p></div>
+			<div class="topRow"><p class="moveName">An Error Has Occured</p></div>
 			<div class="circle"><span class="AP">3</span></div><span class=buttonHolder><button class="addBtn">Add to <b>My Moves</b></button></span>
 			<br>
 			<!-- Roll -->
@@ -1335,19 +1341,19 @@ Author: Ben Connick
 				<div>Roll</div>
 				<div class="decorativeLine"></div>
 			</div>
-			<div>Acrobatics vs. Range Table</div>
+			<div>Contact creator for tech support bxc3201@rit.edu</div>
 			<!-- Effect -->
 			<div class="categoryLabel">
 				<div>Effect</div>
 				<div class="decorativeLine"></div>
 			</div>
-			<div>Burn a medium area at long range, causing anyone inside to get the burning status</div>
+			<div>If you are seeing this message, the program is broken.</div>
 			<!-- Roll -->
 			<div class="categoryLabel">
 				<div>Range and Area</div>
 				<div class="decorativeLine"></div>
 			</div>
-			<div>Range: Long, Area: Medium </div>
+			<div>Try reloading the page. If that does not fix the problem, try using a different browser.</div>
 		</div>
 		<div class="helpfulHint">
 			Confused? View the <span class="link" id="quickReferenceLink">Quick Reference</span>, or <span class="link" id="combatExampleLink">Combat Example</span>.
@@ -1522,7 +1528,7 @@ Author: Ben Connick
 			"Weapon2" : "Longbow",
 			"Attributes" : [6,4,4,2],
 			"Attack" : 5,
-			"Defense" : 4,
+			"Defense" : 3,
 			"HP" : 15
 		},
 		"Defender" : 
@@ -1531,7 +1537,7 @@ Author: Ben Connick
 			"Weapon2" : "Buckler-Shield",
 			"Attributes" : [5,5,2,4],
 			"Attack" : 4,
-			"Defense" : 5,
+			"Defense" : 4,
 			"HP" : 16
 		},
 		"Scholar" : 
@@ -1540,7 +1546,7 @@ Author: Ben Connick
 			"Weapon2" : "Throwing-Knives",
 			"Attributes" : [2,4,7,6],
 			"Attack" : 3,
-			"Defense" : 1,
+			"Defense" : 2,
 			"HP" : 12
 		},
 		"Battlemage" : 
@@ -1745,7 +1751,7 @@ Author: Ben Connick
     function createUseButton(moveObject) {
 		var useBtn = document.createElement("button");
 		useBtn.setAttribute("class","useBtn");
-		useBtn.innerHTML = "use";
+		useBtn.innerHTML = "use (" + moveObject.AP + " AP)";
 		useBtn.onclick = function() {
 			useAbility(moveObject);
 		}
@@ -1812,13 +1818,16 @@ Author: Ben Connick
 		outerContainer.setAttribute("class","moveBox");
 		// increase unique Id for collapsing
 		abilityBoxUniqueId++;
+		// create outer shell and name
 		outerContainer.innerHTML = '<div class="topRow" id="AB'+abilityBoxUniqueId+'"><p class="moveName">'+move.name+'</p></div>';
+		// create inner part and contents
 		var container = document.createElement("div");
 		container.setAttribute("class","innerMoveBox");
 		container.innerHTML = 
-		'<div class="circle keyword" style="text-decoration: none" onclick="d(\'AP\')">'+
+		/*'<div class="circle keyword" style="text-decoration: none" onclick="d(\'AP\')">'+
 		'<span class="AP">'+
 		move.AP+'</span></div><span class=buttonHolder></span><br>'+
+		*/
 		// Roll
 		parseKeywords(rollStr) + diffStr +
 		// Reaction Trigger
@@ -1830,6 +1839,13 @@ Author: Ben Connick
 		parseKeywords(rangeStr);
 
 		// display the box on the page
+		if (myMoves.indexOf(move) > -1) {
+			//	add use button	
+			var useBtn = createUseButton(move);
+			useBtn.setAttribute("class","useBtn");
+			removeUseButtons(container);
+			outerContainer.appendChild(useBtn);
+		}
 		outerContainer.appendChild(container);
 		containerElem.appendChild(outerContainer);
 		
@@ -1870,12 +1886,6 @@ Author: Ben Connick
 				addBtn.style.backgroundColor = "rgba(0,255,0,0.5)";
 				addBtn.innerHTML = removeText;
 			}
-		}
-		
-		if (myMoves.indexOf(move) > -1) {		
-			var useBtn = createUseButton(move);
-			removeUseButtons(container);
-			container.querySelector(".buttonHolder").appendChild(useBtn);
 		}
 		
 		 collapserObjects["AB"+abilityBoxUniqueId] = new Collapser(outerContainer,outerContainer.querySelector(".topRow"),container);
