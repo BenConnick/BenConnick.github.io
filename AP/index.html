@@ -11,6 +11,7 @@ Author: Ben Connick
         <link href='https://fonts.googleapis.com/css?family=IM Fell English SC' rel='stylesheet' type='text/css'>
         <style>
         	body {
+        		margin: 0 auto;
         		background-color: #000020/*#BBDDFF*/;
         		background-image: url("images/yellow-canvas-tiling.png");
         		background-repeat: repeat-both;
@@ -2722,6 +2723,7 @@ Author: Ben Connick
 			//console.log("j: " + j);
 			//console.log(defObj.Tags[j]);
 			var keyIndex = lowerString.indexOf(tag.toLowerCase());
+			if (tag == "Marked") console.log('"Marked" found? '+keyIndex);
 			// if the term is found
 			if (keyIndex >= 0) {
 				cont = false;
