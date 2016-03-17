@@ -1,0 +1,168 @@
+
+#ddBtn {
+	background-image: url("images/DreamDiver.jpg");
+	background-position: center;
+}
+
+#dtBtn {
+	background-image: url("images/comingsoon.png");
+	background-position: center;
+}
+
+#stsBtn {
+	background-image: url("images/smashTheStackPreview.jpg");
+	background-position: center;
+}
+
+#dguBtn {
+	background-image: url("images/DontGrowUp.png");
+	background-size: 12%;
+	background-position: center;
+}
+
+#sndBtn {
+	background-image: url("images/smartphonesanddragons.jpg");
+}
+
+#douBtn {
+	background-image: url("images/boy.png");
+}
+
+#chupBtn {
+	background-image: url("images/chupacabra.png");
+}
+
+#dbBtn {
+	background-image: url("images/DigitalBardPreview.png");
+}
+
+#loiBtn {
+	background-image: url("images/BrettJordan.jpg");
+}
+
+#seBtn {
+	background-image: url("images/infAlg.jpg");
+}
+
+#dqiBtn {
+	background-image: url("images/DontQuestionIt.jpg");
+}
+
+#geBtn {
+	background-image: url("images/googlyEyes.jpg");
+}
+
+#ftBtn {
+	background-image: url("images/emoney.jpg");
+}
+
+#cvrBtn {
+	background-image: url("images/CatsVsRobots.jpg");
+}
+
+#phBtn { 
+	background-image: url("images/procrastinatorhero.jpg");
+}
+#musBtn {
+	background-image: url("images/museLabel.png");
+}
+
+#googlyScreenshot {
+    cursor: pointer;
+    background-image: url("images/googlyEyes.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#sticky {
+    width: 245px;
+    height: 244px;
+    background-image: url("images/playme.jpg");
+    background-size: 100%, 100%;
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    cursor: pointer;
+}
+
+#emoney {
+    cursor: pointer;
+    background-image: url("images/emoney.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#CvRscreenshot {
+    cursor: pointer;
+    background-image: url("images/CatsVsRobots.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#PHscreenshot {
+    margin-top: 25px;
+    cursor: pointer;
+    background-image: url("images/procrastinatorhero.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#dontQuestionItScreenshot {
+	margin-top: 25px;
+	
+    background-image: url("images/DontQuestionIt.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#digitalBardScreenshot {
+	margin-top: 25px;
+    cursor: pointer;
+    background-image: url("images/DigitalBardFull.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#chupacabraScreenshot {
+	margin-top: 25px;
+
+    background-image: url("images/chupacabraFull.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#smartphonesAndDragonsScreenshot {
+	background-image: url("images/SmartphonesAndDragonsCollage.png");
+	margin-top: 25px;
+    cursor: pointer;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#safexScreenshot {
+	background-image: url("images/safexScreenshot.jpg");
+	margin-top: 25px;
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#dreamsOfUsScreenshot {
+	background-image: url("images/DreamsOfUsScreenshot.png");
+	margin-top: 25px;
+	
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#dreamDiverScreenshot {
+	background-image: url("images/DreamDiverScreenshot.jpg");
+	margin-top: 25px;
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.screenshot {
+	width: 768px;
+    height: 603px;
+    margin: 0 auto;
+}

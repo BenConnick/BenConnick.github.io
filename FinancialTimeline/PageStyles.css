@@ -1,0 +1,451 @@
+
+/* 
+    Created on : Jul 22, 2014, 10:38:20 AM
+    Author     : bconnick
+*/
+
+
+html {
+    height:100%;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+body {
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    display:inline;
+    background-color: black;
+    padding: 0px;
+    margin: 0px;
+    //background-image: url("images/BG.jpg");
+    background-size: 100%;
+}
+
+/* The biggest box, maintains its aspect ratio */
+#bounds {
+    width: 100vw; 
+    height: 64.7vw;
+    max-height: 100vh;
+    max-width: 154.6vh; /* 17/11 = 1.5456 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+}
+
+/* this is the way the user controls the graph */
+#slider {
+    position: absolute;
+    z-index: 1000;
+    top: 6%;
+    width: 100%;
+    height: 80%;
+    opacity: 0.0;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* the screen (bounds) is divided into three separate parts, and this is the top */
+#top {
+    position: relative;
+    color: #fff;
+    height: 6%;
+    background-color: black;
+    background-image: url("images/top_bar.jpg");
+    background-size: 100%;
+}
+
+/* div */
+#title {
+    position: relative;
+    //background-image: url("images/interactive_timeline_title.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    top: 10%;
+    height: 90%;
+}
+
+// resize background for firefox
+@-moz-document url-prefix() {
+    #mid {
+        background-size: 100.5%;
+    }
+}
+
+/* the middle part, whose contents change independent of the top and bottom */
+#mid {
+    position: relative;
+    height: 80%;
+    background-color: black;
+    background-image: url("images/BG.jpg"); 
+    background-position-x: 4px;
+    background-position-y: 2px;
+    //background-position: 0.002697% 0.002607%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+@-moz-document url-prefix() {
+    #mid {
+        background-size: 100.5%;
+    }
+}
+
+
+/* A fade for the transition between screens, contained by mid */
+#background_curtain {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+}
+
+/* the place where all the light buttons are */
+#bottom {
+    position: relative;
+    height: 14%;
+    background-color: black;
+    background-image: url("images/bottom_bar_black.jpg");
+    background-size: 100%;
+}
+
+/* hover state "highlight" for mouseing over the light buttons */
+#uncheckedHoverBox {
+    background-color: white;
+    opacity: 0.1;
+    position: absolute;
+    z-index: 0;
+    top: 9.5%;
+    height: 88%;
+    width: 18.44%;
+    left: -500%;
+}
+
+/* the class of the light buttons at the bottom */
+.buttonLight {
+    background-size: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 9.5%;
+    height: 88%;
+    width: 18.40%
+}
+
+/* the back button */
+#back {
+    background-size: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 10.1%;
+    height: 88%;
+    width: 4.3%;
+    left: 0.4%;
+    background-image: url("images/back_btn.jpg");
+    opacity: 0;
+}
+
+/* ------------- Specific buttons -----------*/
+#infl {
+    left: 5%;
+    background-image: url("images/inflation.png")
+}
+
+#small {
+    left: 81.61%;
+    background-image: url("images/sm_cap.png")
+}
+
+#large {
+    left: 62.45%;
+    background-image: url("images/lrg_cap.png")
+}
+
+#bonds {
+    left: 43.27%;
+    background-image: url("images/govt_bonds.png")
+}
+
+#tbills {
+    left: 24.14%;
+    background-image: url("images/t_bills.png")
+}
+/* ------------- END  -----------*/
+
+/* The primary needle, which is in the vertical view */
+#needle {
+    background-size: 100%;
+    position: absolute;
+    z-index: 5;
+    left: -50%;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    width: 10.12%;
+    height: 100%;
+    vertical-align: top;
+    opacity: 1;
+    background-image: url("images/needle.png")
+}
+
+/* the secondary needle, which is smaller and does not have tick marks */
+#needle2 {
+    background-size: 100%;
+    position: absolute;
+    z-index: 6;
+    left: -50%;
+    top: -2%;
+    width: 7%;
+    height: 110%;
+    opacity: 1;
+    background-color: rgba(255,255,255,0.1);
+    border-left: solid white;
+    border-left-width: 4px;
+    border-right: solid white;
+    border-right-width: 4px;    
+}
+
+/* There are two of these, one on either side of needle2, and they create the illusion of a highlighted date underneath the needle */
+.blackBar {
+    position: absolute;
+    z-index: 5;
+    width: 200%;
+    height: 6%;
+    bottom: 0px;
+    background-color: black;
+    opacity: 0.9;
+}
+
+/* this is the container for all the stuff that the user sees after they click on a picture */
+#historyViewer {
+    display: block;
+    position: absolute;
+    z-index: 1005;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    text-align: center;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* This container is like a picture frame for the big pictures */
+#slideContainer {
+    background-color: black;
+    top: 10%;
+    display: inline-block;
+    min-width: 73%;
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    height: 80%;
+    border: solid white;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* this is like the background curtain but it covers the top mid and bottom divs */
+#shade {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    opacity: 0.8;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* This is the actual img where the big pictures are displayed */
+#bigSlide {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    height: 90%;
+    border: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#fade_big {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 30%;
+    left: 0%;
+    bottom: 0%;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#information  {
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: left;
+    //line-height: 0;
+    position: absolute;
+    z-index: 4;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.4em;
+    color: white;
+    bottom: 1.5%;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+/* "x" close button */
+#x {
+    position: absolute;
+    z-index: 60;
+    top: -3%;
+    right: -2.1%;
+    width: 4%;
+    height: 8%;
+    background-image: url("images/x.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+#x:hover {
+    width: 4.5%;
+}
+
+/* previous arrow */
+#prev {
+    position: absolute;
+    z-index: 6;
+    top: 44%;
+    left: -10%;
+    width: 4%;
+    height: 18%;
+    background-image: url("images/back_pics.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#prev:hover {
+    top: 43.2%;
+    width: 4.5%;
+    opacity: 1;
+}
+
+/* next arrow */
+#next {
+    opacity: 0.7;
+    position: absolute;
+    z-index: 6;
+    top: 44%;
+    right: -10%;
+    width: 4%;
+    height: 18%;
+    background-image: url("images/back_pics.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+#next:hover {
+    top: 43.2%;
+    width: 4.5%;
+    opacity: 1;
+}
+
+
+#vignette {
+    position: absolute;
+    width: 100%;
+    height: 100%; 
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+    background: -webkit-radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)); /* Standard syntax (must be last) */
+}
+
+/* "turtorial" text */
+#tut {
+    pointer-events:none;
+    position: absolute;
+    z-index: 1002;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image: url("images/tut.png");
+    background-size: 100%;
+}
+
+#topFade {
+    position: absolute;
+    z-index: 7;
+    left: 25%;
+    width: 75%;
+    top: 0%;
+    height: 30%;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,1)), color-stop(25%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 25%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 25%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 25%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 25%,rgba(0,0,0,0) 100%); /* W3C */
+}
+
+#mapBG {
+    position: absolute;
+    z-index: 8;
+    background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.5)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0) 100%); /* W3C */
+    height: 0.25%;
+    width: 73%;
+    left: 25%;
+    top: 4.125%;
+}
+
+#mapLocator {
+    position: absolute;
+    z-index: 9;
+    background: white;
+    height: 0.5%;
+    width: 4%;
+    left: 50%;
+    top: 4%;
+}
+

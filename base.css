@@ -1,0 +1,77 @@
+/*
+This is the base file which keeps the formats consistent across pages
+*/
+
+html, * {
+    font-family: 'Open Sans', sans-serif;
+    color: #3B3738;
+}
+
+body {
+    font-family: 'Open Sans', 'Helvetica Nue', sans-serif;
+    /*background-color: #C63D0F;*/
+    background-color: #19263a;
+    margin: 0px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    margin-top: 45px;
+    font-weight: 600;
+    font-size: 3.2em;
+}
+
+a {
+    /*color: #3B3738;*/
+    /*text-decoration: none;*/
+    /*font-weight: bold;*/
+}
+
+
+.navLink {
+    display: inline;
+}
+
+.navBox {
+    display: inline-block;
+    margin: 2px;
+    width: 190px;
+    height: 35px;
+    color: #FDF3E7;
+    background-color: #3B3738;
+    border: solid #FDF3E7;
+    text-align: center;
+}
+
+.navBox:hover {
+    background-color: #C63D0F;
+    /*border: solid #3B3738;*/
+}
+
+.centered {
+    display: block;
+    margin: 0 auto;
+}
+
+#bounds {
+    z-index: 0;
+    background-color: #FDF3E7;
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    padding: 60px;
+    //box-shadow: 0px 0px 10px black;
+    overflow-x: hidden;
+}
+
+#nav {
+    padding: 8px;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin: 0px;
+    font-size: 16pt;
+    background-color: #3B3738;
+    text-align: center;
+}

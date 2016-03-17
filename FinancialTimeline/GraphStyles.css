@@ -1,0 +1,161 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 17, 2014, 12:12:23 PM
+    Author     : bconnick
+*/
+
+#graphArea {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    display: block;
+    opacity: 0.9;
+    z-index: 3;
+}
+
+svg.graph {
+    left: 6.25%;
+    top: 13.5%;
+    height:85%;
+    width: 88%;
+    position: absolute;
+    margin: 0 auto;
+    z-index: 2;
+    pointer-events:none;   
+    opacity: 1;
+    /* debug -> background-color: green;*/
+}
+
+.axis text {
+    /*position: absolute;
+    left: 50px;*/
+    font: 24pt JosefinSans-Light;
+    fill: #fff;
+}
+
+.y.axis text {
+    /*position: absolute;
+    left: 50px;*/
+    font: 16pt JosefinSans-Light;
+    fill: #fff;
+}
+
+.axis path {
+    fill: none;
+    stroke: rgba(0001);
+}
+ .axis line {
+    fill: none;
+    stroke: rgba(255,255,255,0.05);
+    stroke-width: 3;
+    shape-rendering: speed;
+}
+/* Large Cap */
+path.line1 {
+    fill: none;
+    stroke: #00cc2d;
+    stroke-width: 2;
+}
+path.area1 {
+    stroke: none;
+    fill: #00cc2d;
+    opacity: 0.2;
+}
+/* Small Cap */
+path.line2 {
+    fill: none;
+    stroke: #00a0e5;
+    stroke-width: 2;
+}
+path.area2 {
+    stroke: none;
+    fill: #00a0e5;
+    opacity: 0.2;
+}
+/* Gvt Bonds */
+path.line3 {
+    fill: none;
+    stroke: #dddddd;
+    stroke-width: 2;
+}
+path.area3 {
+    stroke: none;
+    fill: #dddddd;
+    opacity: 0.2;
+}
+/* Inflation */
+path.line4 {
+    fill: none;
+    stroke: #ff0000;
+    stroke-width: 2;
+}
+path.area4 {
+    stroke: none;
+    fill: #ff0000;
+    opacity: 0.2;
+}
+/* Treasury Bills */
+path.line5 {
+    fill: none;
+    stroke: #ffd82f;
+    stroke-width: 2;
+}
+path.area5 {
+    stroke: none;
+    fill: #ffd82f;
+    opacity: 0.2;
+}
+
+#myClip {
+    fill: blue;
+}
+.grid .tick {
+    stroke: rgba(255,255,255,0.0);
+}
+.grid path {
+    stroke-width: 0;
+    opacity: 0;
+}
+
+.lineLabel {
+    position: absolute;
+    z-index: 1000;
+    font: 14pt JosefinSans-Light;
+}
+
+#largeCapLabel {
+    fill: #00cc2d;
+}
+
+#smallCapLabel {
+    fill: #00a0e5;
+}
+
+#bondsLabel {
+    fill: #dddddd;
+}
+
+#inflationLabel {
+    fill: #ff0000;
+}
+
+#tbillsLabel {
+    fill: #ffd82f;
+}
+
+.lineLabel {
+    position: absolute;
+    z-index: 10;
+    font: 14pt JosefinSans-Light;
+}
+
+svgText {
+    opacity: 1;
+    font: 14pt JosefinSans-Light;
+}

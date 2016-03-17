@@ -1,0 +1,101 @@
+
+/* 
+    Created on : Jul 17, 2014, 12:12:55 PM
+    Author     : bconnick
+*/
+
+@font-face {
+    font-family: JosefinSans-Light;
+    src: url("JosefinSans-Light.ttf")
+} 
+
+#carouselPane {
+    font-family: JosefinSans-Light, helvetica, sans-serif;
+    position: absolute;
+    z-index: -2;
+    opacity: 0;
+    height:100%;
+    width: 25%;
+    /*max-height: 900px;*/
+}
+
+#scrollbar_hider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+    border-right: solid rgba(255,255,255,0.05);
+}
+
+#pictures {
+    background-color: black;
+    position: absolute;
+    width: calc(100% + 17px);
+    height: 100%;
+    overflow-y: scroll;
+    line-height: 0;
+    opacity: 1;
+}
+
+#placeholder { 
+    opacity: 0.0; 
+}
+
+.pic {
+    display: block;
+    position: relative;
+    //width: 70%;
+    height: 30%;
+    border: solid white;
+    margin: 0 auto;
+    padding: 0px;
+    opacity: 0.9;
+}
+
+.pic:hover {
+    opacity: 1;
+    top: -0.5%;
+    height: 31%; 
+}
+
+.picText {
+    font-size: 1.5em;
+    position: relative;
+    color: white;
+    margin-top: 5%;
+    margin-bottom: 15%;
+    text-align: center;
+}
+
+#arrow {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    width: 90%;
+}
+#fade_upper {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 30%;
+    left: 0%;
+    top: 0%;
+    pointer-events:none
+}
+
+#fade_lower {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 30%;
+    left: 0%;
+    bottom: 0%;
+    pointer-events:none
+}

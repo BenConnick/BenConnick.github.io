@@ -1,0 +1,36 @@
+/* Styles for the various canvases */
+
+#bigCanvas {
+    border: solid white; 
+    /*display: block; */
+    display: none;
+    margin: auto;
+    margin-top: 30px; 
+    margin-bottom: 30px;
+}
+
+.miniCanvas {
+    position: absolute;
+    right: calc(50% - 390px);
+    z-index: 1;
+    
+    /*border: solid white;*/
+}
+#miniCanvas {
+	top: -1000px;
+}
+#ProCanvas {
+    top: 5400px;
+}
+#CatCanvas {
+    top: 4800px;
+}
+#FinCanvas {
+    top: 4000px;
+} 
+#MusCanvas {
+    top: 3300px;
+}
+#GooCanvas {
+    top: 2500px;
+}
