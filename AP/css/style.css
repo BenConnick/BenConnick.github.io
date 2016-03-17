@@ -1,0 +1,866 @@
+
+body {
+	margin: 0 auto;
+	background-color: #000020/*#BBDDFF*/;
+	background-image: url("../images/yellow-canvas-tiling.png");
+	background-repeat: repeat-both;
+	max-width: 400px;
+	font-size: 12pt;
+	font-family: "Slabo 27px";
+}
+h1 {
+	text-align: center;
+	line-height: 0.9em;
+	font-size: 2.8em;
+	font-family: "IM Fell English SC";
+	margin-left: 0.2em;
+	color: white;
+	text-shadow: 0.0em 0.0em 0.1em black; 
+}
+h2 {
+	color: #000020;
+	font-size: 1.2em;
+	font-family: "IM Fell English SC";
+	background-color: rgba(255,255,255,0.5);
+	padding-left: 0.5em;
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
+}
+h4 {
+	border-top: 2px solid;
+	font-family: "IM Fell English SC";
+	font-size: 1.2em;
+	margin-bottom: 0.5em;
+}
+h5 {
+	font-family: "IM Fell English SC";
+	font-size: 1.7em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+button {
+	font-size: 1em;
+}
+button:hover {
+	cursor: pointer;
+}
+#intro {
+	position: absolute;
+	margin-top: 1em;
+	width: 100%;
+	max-width: 400px;
+	height: 90%;
+	max-height: 800px;
+	/*border: solid black;*/
+	box-shadow: 0px 0px 10px black;
+	background-color: #fcfcfc;
+	overflow: hidden;
+}
+#closeBar {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	bottom: 0px;
+	height: 3em;
+	left: 0px;
+	box-shadow: 0px 0px 10px black;
+	background-color: #fcfcfc;
+}
+#closeBar button {
+	border: solid #aad;
+	border-radius: 0.5em;
+	
+	position: absolute;
+	width: 5em;
+	left: calc(50% - 2.5em);
+	height: 2em;
+	top: calc(50% - 1em);
+	background-color: #fff;
+}
+#innerIntroBox {
+	position: absolute;
+	padding: 2em;
+	width: calc(100% - 4em);
+	max-width: calc(400px - 4em);
+	height: calc(100% - 8em);
+	max-height: 800px;
+	overflow-y: scroll;
+	font-family: "Slabo 27px";
+}
+#whyList div {
+	font-size: 0.9em;
+	color: #555;
+	margin-bottom: 0.5em;
+}
+.topSpacer {
+	width: 100%;
+	height: 1em;
+	display: block;
+}
+.topBar {
+	display: block;
+	border-radius: 0pt 0pt 5pt 5pt;
+	border: solid 1pt grey;
+	background-color: rgba(0,0,0,0.8);
+	color: #ddd;
+	width: 98%;
+	height: 50em;
+	position: fixed;
+	top: -51em;
+	left: 0px;
+	margin-left: 1%;
+	font-size: 12pt;
+	transition: top 0.2s;
+	z-index: 100;
+}
+.bottomBar {
+	padding: 1em;
+	display: block;
+	border-radius: 5pt 5pt 0pt 0pt;
+	border: solid 1pt grey;
+	background-color: rgba(0,0,0,0.8);
+	color: #ddd;
+	width: 88%;
+	height: 6em;
+	position: fixed;
+	bottom: -11em;
+	left: 0px;
+	margin-left: 1%;
+	font-size: 12pt;
+	transition: bottom 0.1s;
+}
+#rollCalculation {
+	margin: 0pt;
+}
+.closeBottomBarButton {
+	font-family: sans-serif;
+	/*border-radius: 2pt;
+	border: solid 1px;
+	border-color: #888;*/
+	color: #888;
+	width: 1em;
+	height: 0.8em;
+	padding-bottom: 0.2em;
+	position: absolute;
+	right: 0.5em;
+	top: 0.5em;
+	text-align: center;
+}
+.closeBottomBarButton:after{
+  content: "\00d7"; /* This will render the 'X' */
+}
+.closeBottomBarButton:hover {
+	background-color: #888;
+	border-color: white;
+	color: white;
+}
+.classTab {
+	border-radius: 0pt 0pt 5pt 0pt;
+	border: solid 1pt grey;
+	background-color: rgba(0,0,0,0.9);
+	color: #ddd;
+	width: 88%;
+	height: 3.2em;
+	position: fixed;
+	top: -0.04em;
+	left: 10%;
+	margin-left: 1%;
+	font-size: 12pt;
+	display: none;
+}
+.topBtn:hover { 
+	background-color: white;
+}
+.moveBox {
+	background-color: rgba(255,255,255,0.6);
+	border-radius: 0pt;
+	border: solid 1px black;
+	height: contents;
+	width: calc(100%-40pt);
+	margin: 2pt auto;
+	padding: 0em;
+}
+.innerMoveBox {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background-color: rgba(255,255,255,0.6);
+	/*border-radius: 1pt;*/
+	/*border: solid 1px black;*/
+	height: 0;
+	overflow: hidden;
+	width: calc(100%-40pt);
+	transition: height 0.5s;
+}
+.moveName {
+	font-size: 125%;
+	font-weight: 600;
+	text-align: left;
+	margin: 1pt;
+	margin-left: 4pt;
+	font-family: "IM Fell English SC";
+	display: inline;
+}
+.roll {
+	text-align: left;
+}
+.roll-attacker {
+	color: green;
+}
+.roll-defender {
+	color: blue;
+}
+.damage {
+	color: #CC0000;
+}
+.effect {
+	text-align: left;
+/**/
+}
+.AP {
+	border: solid darkblue;
+	border-width: 1pt;
+	border-radius: 50000pt;
+	/* Hide this element in this version */
+	position: absolute;
+	display: none;
+	width: 100%;
+	text-align: center;
+	margin-top: 0.25em;
+	font-weight: bold;
+	color: darkblue;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "IM Fell English SC";
+	font-size: 1.5em;
+}
+.circle {
+	width: 2em;
+	height: 2em;
+	/*border: solid 2pt darkblue;
+	border-radius: 10000pt;*/
+	display: inline-block;
+	margin-right: 10%;
+}
+.APbox {
+	/*padding-bottom: 10%;*/
+	float: right;
+}
+.flavor {
+	text-align: left;
+	font-style: italic;
+}
+.headerBar {
+	text-align: center;
+}
+.headerBar > span {
+	padding-left: 10pt;
+	padding-right: 10pt;
+}
+.addBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: #009;
+	padding: 0.4em;
+	margin-top: 0.5em;
+	margin-bottom: 0.3em;
+	font-family: "IM Fell English SC";
+	font-size: 1em;
+}
+.useBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: #009;
+	margin: 0.1em;
+	margin-top: 0.3em;
+	font-size: 1em;
+	display: inline-block;
+}
+.categoryLabel {
+	margin-top: 0.4em;
+	font-size: 1.1em;
+	color: rgba(0,0,0,0.5);
+	text-decoration: underline;
+}
+.navBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.9);
+	color: #009;
+	padding: 0.4em;
+	float: right;
+	margin-right: 6pt;
+	margin-top: 10pt;
+	font-family: "Slabo 27px";
+	position: absolute;
+}
+.optionBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.9);
+	color: #009;
+	padding: 0.4em;
+	float: right;
+	font-family: "Slabo 27px";
+	position: absolute;
+	font-size: 200%;
+	width: 90%;
+	left: 5%;
+	font-family: "IM Fell English SC";
+}
+.optionsBtn {
+	right: 0.3em;
+	bottom: 0.4em;
+	display: none;
+}
+.hideBtn {
+	right: 0.3em;
+	bottom: 0.4em;
+}
+.resetBtn { 
+	right: 5.1em;
+	bottom: 0.4em;
+}
+.plusOneBtn { 
+	right: 9em;
+	bottom: 0.4em;
+}
+.minusOneBtn { 
+	right: 11.8em;
+	bottom: 0.4em;
+}
+.myMovesBtn {
+	background-color: rgba(100,255,100,0.9);
+	top: 11.8em;
+}
+.allMovesBtn {
+	top: 14.1em;
+}
+.mainMenuBtn {
+	top: 16.4em;
+}
+#mainMenu {
+	margin-top: 3em;
+}
+.helpBtn {
+	top: 18.7em;
+}
+.characterBtn {
+	top: 21em;
+	background-color: rgba(210,210,255,0.9);
+}
+.APCounter {
+	display: inline-block;
+	font-size: 150%;
+	font-family: "Slabo 27px";
+	position: absolute;
+	bottom: -0.6em;
+	left: 0.6em;
+}
+.topRow {
+	display: inline-block;
+	margin-bottom: 0.4em;
+	width: calc(100% - 6.5em);
+}
+.choice {
+	font-size: 90%;
+	width: 5em;
+	height: 3em;
+	margin: 0.5em;
+	border-radius: 0.3em;
+	border: none;
+	box-shadow: 0 0 3px;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "Slabo 27px";
+	color: black;
+}
+.skill {
+	width: 10.5em;
+	height: 2em;
+	padding-top: 1em;
+	padding-left: 1em;
+	margin: 0.1em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: black;
+	float: left;
+}
+.score {
+	width: 1.5em;
+	height: 2em;
+	padding-top: 1em;
+	padding-left: 1em;
+	margin: 0.1em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: black;
+	float: right;
+}
+.decrementSkillBtn {
+	width: 2em;
+	height: 3em;
+	margin: 0.1em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: black;
+	float: right;
+}
+.incrementSkillBtn {
+	width: 2em;
+	height: 3em;
+	margin: 0.1em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: black;
+	float: right;
+}
+.superChoice {
+	width: 8.5em;
+	height: 6.2em;
+}
+.checked {
+	color: #AAFFAA;
+}
+.characterCreationBox {
+	display: none;
+	padding: 1.5em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: black;
+	max-width: 20em;
+	/*border-width: 0.15em;
+	border: solid rgba(0,0,143,1);*/
+	box-shadow: 0px 0px 5px black;
+	margin-bottom: 1em;
+}
+.ccTitle {
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.7);
+	padding: 0.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-radius: 0.4em;
+	font-weight: bold;
+	font-size: 100%;
+	width: 90%;
+	text-align: center;
+	font-family: "IM Fell English SC";
+}
+#done {
+	width: 4em;
+	padding: 0.5em;
+	margin-left: calc(50% - 2em);
+	margin-top: 0.5em;
+	margin-bottom: 0.2em;
+	border-radius: 0.3em;
+	border: none;
+	font-family: "IM Fell English SC";
+}
+.bigButton {
+	width: 100%;
+	margin: 2pt auto;
+	border-radius: 0.3em;
+	/*border-width: 0.15em;
+	border: solid rgba(0,0,143,1);*/
+	border: none;
+	background-color: rgba(255,255,255,0.8);
+	color: rgba(0,0,143,1);
+	font-size: 1.2em;
+	font-family: "IM Fell English SC";
+	font-weight: bold;
+	box-shadow: 0px 0px 5px black
+}
+#ccStartBtn {
+	padding: 1.5em;
+}
+#loadBtn {
+	padding: 1em;
+}
+#saveBtn {
+	padding: 1em;
+}
+#aboutBtn {
+	padding: 1em;
+}
+.highlight {
+	background-color: rgba(0,255,0,0.5);
+	color: rgba(0,0,143,1);
+}
+.incomplete {
+	/*border: solid rgba(0,0,143,0.5);*/
+	background-color: rgba(0,0,0,0.2);
+	color: rgba(0,0,143,0.5);
+}
+.complete {
+	/*border: solid rgba(0,0,143,1);*/
+	background-color: rgba(255,255,255,0.5);
+	color: rgba(0,0,143,1);
+}
+.bar {
+	height: 1em;
+	background-color: green;
+	float: left;
+	margin-right: 0.2em;
+}
+.d4 {
+	width: 4em;
+}
+.d6 {
+	width: 6em;
+}
+.d8 {
+	width: 8em;
+}
+.d10 {
+	width: 10em;
+}
+.myCharacterBox {
+	display: none;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.5);
+	color: #009;
+	max-width: 23em;
+}
+.FourEmSquare {
+	width: 4em;
+	height: 4em;
+}
+.centerAligned { 
+	text-align: center;
+}
+.doubleFontSize {
+	font-size: 200%;
+}
+.oneAndAHalfFontSize { font-size: 150%; }
+#characterPicture {
+	width: 14em;
+	border-radius: 10000px;
+	border: solid black;
+	border-width: 1px;
+	background-color: rgba(255,255,255,0.3);
+	position: absolute;
+	left: calc(50% - 6.5em);
+	top: 1em;
+	z-index: 0;
+}
+#characterPictureContainer {
+	position: relative;
+}
+.innerCentered {
+	position: relative;
+	margin: 0 auto;
+	max-width: 15.6em;
+}
+.weaponImg {
+	height: 8em;
+}
+#bigFourTable td {
+	width: 50%;
+	font-size: 50%;
+}
+#skillTable {
+	max-width: 100%;
+	margin: 0 auto;
+	margin-top: 2em;
+	border-collapse: collapse;
+	display: none;
+}
+#skillTable td {
+	padding: 1em;
+	border: 1px solid #000080;
+}
+.helpBox {
+	display: none;
+	padding: 1em;
+	margin: 0 auto;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.8);
+	max-width: 23em;
+}
+.statusName {
+	width: 2em;
+}
+.statusTable {
+	border-collapse: collapse;
+}
+.statusTable td, .statusTable tr {
+	border-bottom: 1px solid #000081;
+	margin: 0px;
+	padding: 0.2em;
+}
+.classPanel {
+	width: calc(100%-1em);
+	background-color: rgba(0,0,255,0.1);
+	/*border: solid rgba(0,0,143,1);*/
+	margin: 1em;
+}
+.classButton {
+	font-size: 0.8em;
+}
+.classImg {
+	display: block;
+	width: 100%;
+	margin: 0px;
+}
+.classPanel .choice {
+	float: left;
+	position: static;
+	font-family: "IM Fell English SC";
+	font-size: 60%;
+	padding: 0px;
+	width: 30%;
+	height: 7.5em;
+	overflow: hidden;
+}
+.Passive { 
+	background-color: rgba(255,255,100,0.8);
+}
+.Instant {
+	background-color: rgba(255,100,100,0.8);
+}
+#loadButtons {
+	display: none;
+}
+textarea {
+	width: 100%;
+	height: 10em;
+}
+#saveArea {
+	display: none;
+}
+#saveText {
+	word-wrap: break-word; 
+	background-color: rgba(255,255,255,0.6);
+	padding: 0.5em;
+}
+.halfEmPad {
+	padding: 0.5em;
+}
+#mobileDebug {
+	display: none;
+	max-height: 20em;
+	overflow-y: scroll;
+}
+#aboutSection {
+	max-width:100%;
+	padding:1em;
+	display:none;
+	background-color: rgba(255,255,255,0.6);
+}
+.Q {
+	font-weight: bold;
+}
+.A {
+
+}
+.backButton { 
+	font-family: Times;	
+	font-size: 2em;
+	color: white;
+	position: fixed;
+	left: 0.5em;
+	top: 0.15em;
+	text-shadow: 0.05em 0.05em 0.2em black;
+	z-index: 10;
+	cursor: pointer;
+}
+.backButton:hover {
+	color: #CCC;
+}
+.backDisabled {
+	color: rgba(255,255,255,0.2);
+	text-shadow: 0.05em 0.05em 0.2em rgb(0,0,0,0.2);
+}
+.threeBars {
+	position: fixed;
+	width: 2em;
+	right: 1em;
+	top: 1em;
+	z-index: 10;
+	cursor: pointer;
+}
+.threeBars .bar {
+	width: 1.8em;
+	height: 0.2em;
+	margin-bottom: 0.3em;
+	background-color: white;
+	box-shadow: 0.05em 0.05em 0.2em black;
+}
+.threeBars:hover .bar {
+	background-color: #CCC;
+}
+#attributeTable {
+	text-align: center;
+	width: 18em;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+#attributeTable td {
+}
+.middleRowSpacer {
+	height: 12em;
+}
+.middleColSpacer {
+	width: 8em;
+}
+#choiceDescriptionText {
+	margin-top: 1em;
+}
+.classPic {
+	width: 100%;
+}
+.tableSectionHeader {
+	text-align: center;
+	height: 1em; 
+	padding-top: 1.5em; 
+	padding-bottom: 1em;"
+}
+.tableSectionHeader span {
+	font-size: 150%;
+	font-family: "IM Fell English SC";
+	color: #0d5d0d;
+}
+.characterName {
+	font-size: 2em;
+	text-align: center;
+	margin-top: 0.6em;
+	margin-bottom: 0.1em;
+	font-family: "IM Fell English SC";
+	color: #0d5d0d;
+}
+.characterClass { 
+	font-size: 1em;
+	text-align: center;
+	margin-bottom: 0.8em;
+	font-family: "IM Fell English SC";
+}
+.wepDamage {
+	color: red;
+	font-size: 120%;
+}
+.notes {
+	height: 1.5em; 
+	display: block; 
+	margin: 0 auto; 
+	background-color: rgba(255,255,255,0.5);
+}
+.q {
+	overflow: hidden;
+	text-align: center;
+}
+.link {
+	color: blue;
+	cursor: pointer;
+}
+#helpLink {
+	color: blue;
+	cursor: pointer;
+}
+.quickstart {
+	background-color: #B8CCCC;
+	padding: 0.5em;
+	margin-top: 5em;
+}
+.helpTitleBackground {
+	/*background-color: #FF0000;
+	box-shadow: 0pt 0pt 3pt 3pt #FF0000;*/
+}
+.helpfulHint {
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 0.5em;
+	padding: 0.5em;
+	display: none;
+}
+.definitionBox {
+	border-radius: 0.25em;
+	border: 1pt solid #000;
+	position: fixed;
+	width: 24em;
+	bottom: -30em;
+	left: calc(50% - 12em);
+	margin: 0px;
+	padding: 1em;
+	background-color: #FFF;
+	text-align: justify;
+	max-width: calc(100% - 2em);
+	-webkit-transition: bottom 0.2s; /* Safari */
+	transition: bottom 0.2s;
+}
+.defNavBar {
+	position: absolute;
+	border-radius: 0.25em 0.25em 0em 0em;
+	left: 0;
+	top: 0;
+	background-color: lightgray;
+	width: calc(100% - 1em);
+	padding: 0.5em;
+}
+.definitionHeader {
+	position: absolute;
+	left: 15%;
+	z-index: 0;
+	text-align: center;
+	width: 70%;
+}
+.defBody {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.defNavBtn {
+	display: inline;
+	padding-right: 1em;
+	cursor: pointer;
+	float: left;
+	z-index: 3;
+}
+.dieSize1 { 
+padding-top: 0.25em; 
+height: 2.5em;
+vertical-align: text-bottom;
+}
+.keyword {
+	color: #00B;
+	cursor: pointer;
+	text-decoration: underline;
+}
+#nameField { font-size: 1em; }
+#primaryWeaponDamage { display: inline; }
+#secondaryWeaponDamage { display: inline; }
+.battleBox {
+	margin: 1em;
+	border: solid 1pt;
+}
+.battleHUD {
+	display: none;
+}
+.HPButton {}
+.leftBox { 
+	display: inline-block; 
+	border: solid 1pt; 
+}
+.rightBox {
+	display: inline-block; 
+	border: solid 1pt;
+}
+.initiativeButtons {
+	border: solid 1pt;
+}
+#HPplus {}
+#HPminus {}
+.HPCounter { width: 5em; }
+.BBAPCounter { display: inline; width: 5em; }
+#nextTurn {}
+#movesContainer {}
+
+@media (max-width: 410px) {
+  #intro {
+	margin-top: 0px;
+	height: 100%;
+  }
+  .definitionBox {
+	left: 0;
+  }
+  .topSpacer {
+  	display: none;
+  }
+}
