@@ -1,51 +1,6 @@
-
-body {
-	margin: 0 auto;
-	background-color: #000020/*#BBDDFF*/;
-	background-image: url("../images/yellow-canvas-tiling.png");
-	background-repeat: repeat-both;
-	max-width: 400px;
-	font-size: 12pt;
-	font-family: "Slabo 27px";
-}
-h1 {
-	text-align: center;
-	line-height: 0.9em;
-	font-size: 2.8em;
-	font-family: "IM Fell English SC";
-	margin-left: 0.2em;
-	color: white;
-	text-shadow: 0.0em 0.0em 0.1em black; 
-}
-h2 {
-	color: #000020;
-	font-size: 1.2em;
-	font-family: "IM Fell English SC";
-	background-color: rgba(255,255,255,0.5);
-	padding-left: 0.5em;
-	margin-top: 0.5em;
-	padding-top: 0.5em;
-	margin-bottom: 0.5em;
-	padding-bottom: 0.5em;
-}
-h4 {
-	border-top: 2px solid;
-	font-family: "IM Fell English SC";
-	font-size: 1.2em;
-	margin-bottom: 0.5em;
-}
-h5 {
-	font-family: "IM Fell English SC";
-	font-size: 1.7em;
-	margin-top: 1em;
-	margin-bottom: 1em;
-}
-button {
-	font-size: 1em;
-}
-button:hover {
-	cursor: pointer;
-}
+/****************************************
+			about me popup 
+*****************************************/
 #intro {
 	position: absolute;
 	margin-top: 1em;
@@ -94,6 +49,10 @@ button:hover {
 	color: #555;
 	margin-bottom: 0.5em;
 }
+
+/****************************************
+			start screen 
+*****************************************/
 .topSpacer {
 	width: 100%;
 	height: 1em;
@@ -462,7 +421,7 @@ button:hover {
 	border: solid rgba(0,0,143,1);*/
 	border: none;
 	background-color: rgba(255,255,255,0.8);
-	color: rgba(0,0,143,1);
+	color: black;/*rgba(0,0,143,1);*/
 	font-size: 1.2em;
 	font-family: "IM Fell English SC";
 	font-weight: bold;
@@ -487,12 +446,12 @@ button:hover {
 .incomplete {
 	/*border: solid rgba(0,0,143,0.5);*/
 	background-color: rgba(0,0,0,0.2);
-	color: rgba(0,0,143,0.5);
+	color: black
 }
 .complete {
 	/*border: solid rgba(0,0,143,1);*/
 	background-color: rgba(255,255,255,0.5);
-	color: rgba(0,0,143,1);
+	color: black
 }
 .bar {
 	height: 1em;
@@ -862,5 +821,11 @@ vertical-align: text-bottom;
   }
   .topSpacer {
   	display: none;
+  }
+  h1 {
+  	margin-top: 0;
+  }
+  #mainMenu {
+  	margin-top: 0;
   }
 }
