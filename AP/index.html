@@ -2606,6 +2606,8 @@ Author: Ben Connick
 				cookieList.push(document.cookie.substring(startInagl,document.cookie.length));
 			}
 		}
+		// hide intro if cookie found
+		if (cookieList.length > 0) getById("intro").style.display = "none";
 	}
 	
 	function mobileDebug(enabled) {
@@ -3121,7 +3123,8 @@ Author: Ben Connick
 		clearMoves();
 		populateKeywords();
 	}
-	init();
+	
+	window.onload = init();
 	
 	</script>
 </html>
