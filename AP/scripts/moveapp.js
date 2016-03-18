@@ -1498,8 +1498,8 @@ function Collapser(container, clickElem, innerElem) {
 
 function DieImgElem(typeStr) {
 	var dieImg = document.createElement("img");
-	dieImg.style.width = "1.5em";
-	dieImg.style.height = "1.5em";
+	dieImg.style.width = "1.2em";
+	dieImg.style.height = "1.2em";
 	dieImg.style.verticalAlign = "bottom";
 	// display black if no type
 	if (typeStr == null) {
