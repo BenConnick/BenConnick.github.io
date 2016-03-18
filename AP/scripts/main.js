@@ -1,4 +1,17 @@
+// MAIN FUNCTIONALITY OF THE APP
 
+// runs once on start - sets up program
+function init() {
+	mobileDebug(true);
+	loadJSON();
+	loadCookies();
+	setCookieButtonText();
+	activateButtons();
+	clearMoves();
+	populateKeywords();
+}
+
+// returns weapon object from name string
 function getWeapon(name) {
 	for (var i=0; i<weapons.length; i++) {
 		if (weapons[i].name == name) {
@@ -9,6 +22,7 @@ function getWeapon(name) {
 	return weapons[0];
 }
 
+// creates a button for a move object
 function createUseButton(moveObject) {
 	var useBtn = document.createElement("button");
 	useBtn.setAttribute("class","useBtn");
@@ -19,6 +33,7 @@ function createUseButton(moveObject) {
 	return useBtn;
 }
 
+// removes use button in a container
 function removeUseButtons(containerElem) {
 	var UseButtons = containerElem.querySelectorAll(".useBtn");
 	for (var j=0; j<UseButtons.length; j++) {
@@ -26,22 +41,21 @@ function removeUseButtons(containerElem) {
 	}
 }
 
+// special text values for use with the displayMove function
 var addText = 'Add to <span style="font-weight: bold">My Moves</span>';
 var removeText = 'Added';
 var useText = 'Use';
 var buttonText = addText;
-
-function displayMove(move) {
-	displayMove(move,true,document.body);
-}
-
-function displayMove(move, hideButton) {
-	displayMove(move, hideButton, document.body);
-}
-
 var abilityBoxUniqueId = 0;
+
+// create a move ui elem within specified container
 function displayMove(move, hideButton, containerElem) {
-	if (containerElem == null) { containerElem = document.body; }
+	
+	// hideButton default to hide
+	if (hideButton == null) hideButton = true;
+	// container default to body
+	if (!containerElem) containerElem = document.body;
+	
 	var rollStr = "";
 	if (move.roll != "") {
 		rollStr = '<div class="categoryLabel">Roll</div>'+
@@ -90,14 +104,14 @@ function displayMove(move, hideButton, containerElem) {
 	move.AP+'</span></div><span class=buttonHolder></span><br>'+
 	*/
 	// Roll
-	parseKeywords(rollStr) + diffStr +
+	parseKeywords(parsePlaceholders(rollStr)) + diffStr +
 	// Reaction Trigger
-	parseKeywords(triggerStr) +
+	parseKeywords(parsePlaceholders(triggerStr)) +
 	// Effect
 	'<div class="categoryLabel">'+special+'</div>'+
-	'<div>'+/*parseKeywords*/(parsePlaceholders(move.effect))+'</div>'+
+	'<div>'+parseKeywords(parsePlaceholders(move.effect))+'</div>'+
 	// Range
-	parseKeywords(rangeStr);
+	parseKeywords(parsePlaceholders(rangeStr));
 
 	// display the box on the page
 	if (myMoves.indexOf(move) > -1) {
@@ -189,16 +203,43 @@ function useAbility(moveObject) {
 	// offer "simulate roll" button
 }
 
+function parseMath(mathStr) {
+	// output string
+	var newString = mathStr;
+	// array of strings
+	var parts = mathStr.split(" ");
+	// array of equation 
+	var numbersAndOperators = [];
+	// loop through the equation
+	parts.foreach(function (piece) {
+		var pieceNum = replacePlaceholder(piece);
+		if (pieceNum != undefined) {
+			if (parseInt(pieceNum) != undefined) {
+				parts.push(parseInt(pieceNum));
+			}
+		}
+	});
+}
+
 function replacePlaceHolder(ph) {
+	// set to lower case for comparisons
 	var placeholderLowerCase = ph.toLowerCase();
+	// if ph is an equation
+	if (ph.indexOf("+") >= 0 || ph.indexOf("-") >= 0) {
+		return parseMath(ph);
+	}
+	// if ph is a single word, then replace it with its value
 	switch(placeholderLowerCase) {
-		case "|d|" : return DieImgElem(); break;
-		case "|strength|" : return character.attributes["Strength"]; break;
-		case "|agility|" : return character.attributes["Agility"]; break;
-		case "|intelligence|" : return character.attributes["Intelligence"]; break;
-		case "|spirit|" : return character.attributes["Spirit"]; break;
-		case "|weapon|" : return getWeapon(character.primaryWeaponName).damage; break;
-		case "|defense|" : return archetypes[character.charClass].Defense; break;
+		case "d" : return DieImgElem(); break;
+		case "ad" : return DieImgElem("attack"); break;
+		case "dd" : return DieImgElem("defense"); break;
+		case "strength" : return character.attributes["Strength"]; break;
+		case "agility" : return character.attributes["Agility"]; break;
+		case "intelligence" : return character.attributes["Intelligence"]; break;
+		case "spirit" : return character.attributes["Spirit"]; break;
+		case "weapon" : return getWeapon(character.primaryWeaponName).damage; break;
+		case "defense" : return archetypes[character.charClass].Defense; break;
+		default: return undefined
 	}
 }
 
@@ -217,7 +258,7 @@ function parsePlaceholders(str) {
 			// if the last character of the placeholder is now found
 			if (str[i] == "|") {
 				// create the placeholder string
-				var phStr = str.substring(beginIdx,i+1);
+				var phStr = str.substring(beginIdx+1,i);
 				// add to list
 				placeholders.push(phStr);
 				// wait for next placeholder
@@ -235,7 +276,7 @@ function parsePlaceholders(str) {
 	// replace placeholders
 	for (var i=0; i<placeholders.length; i++) {
 		// for each placeholder in the list
-		str = str.replace(placeholders[i],replacePlaceHolder(placeholders[i]));
+		str = str.replace("|"+placeholders[i]+"|",replacePlaceHolder(placeholders[i]));
 	}
 	return str;
 }
@@ -352,39 +393,6 @@ function setAP(value) {
 }
 function addToAP(arg) {
 	setAP(AP + arg);
-}
-function extendMenu() {
-	getByClass("topBar").style.top = "-28em";
-	getByClass("optionsBtn").style.display = "none";
-	getByClass("hideBtn").style.display = "block";
-}
-function retractMenu() {
-	getByClass("topBar").style.top = "-51em";
-	/*getByClass("hideBtn").style.display = "none";
-	getByClass("optionsBtn").style.display = "block";*/
-}
-function extendUseBox() {
-	getByClass("bottomBar").style.bottom = "-4em";
-	clearTimeout(bottomTimeout);    	
-	bottomTimeout = setTimeout(function() {
-		retractUseBox();
-	},9000);
-}
-function retractUseBox() {
-	getByClass("bottomBar").style.bottom = "-11em";
-}
-
-function hasClass(ele,cls) {
-  return !!ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
-}
-function addClass(ele,cls) {
-  if (!hasClass(ele,cls)) ele.className += " "+cls;
-}
-function removeClass(ele,cls) {
-  if (hasClass(ele,cls)) {
-	var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-	ele.className=ele.className.replace(reg,' ');
-  }
 }
 
 function choiceBtnGroup(buttonIdList, questionNum) {
@@ -571,10 +579,6 @@ function deleteDuplicateButtons() {
 	}
 }
 
-function closeCreator() {
-	getByClass("characterCreationBox").style.display = "none";
-}
-
 function setMyCharacterBox() {
 	getByClass("characterName").innerHTML = character.name;
 	getByClass("characterClass").innerHTML = character.charClass;
@@ -681,18 +685,6 @@ function createMoveFromJSON(m) {
 	} else {
 	console.log(m.Class + " class could not be identified");
 	}
-}
-
-function hideStartingButtons() {
-	getById("mainMenu").style.display = "none";
-}
-
-function showLoadingButtons() {
-	getById("loadButtons").style.display = "block";
-}
-
-function hideLoadingButtons() {
-	getById("loadButtons").style.display = "none";
 }
 
 function resetCharacter() {
@@ -997,6 +989,7 @@ function d(term) {
 
 // returns keyword elements in strings containing keywords
 function parseKeywords(htmlString) {
+	// create a string to hold the result
 	var newString = htmlString;
 	// loop through keywords and variants
 	glossary.forEach(function(defObj) {
@@ -1017,28 +1010,30 @@ function parseKeywordsHelper(htmlString,defObj) {
 	
 	var lowerString = htmlString.toLowerCase();
 	
-	// check
+	// create a string to return the value 
+	var newString = htmlString;
+	
 	var cont = true;
 	var j = 0;
 	if (j>=defObj.Tags.length) { cont=false; }
 	while (cont) {
-		// kill loop if out of range
+		// kill loop if next index is out of range
 		if (j>=defObj.Tags.length-1) { cont=false; }
+		// run once per tag
 		var tag = defObj.Tags[j];
 		//console.log("j: " + j);
 		//console.log(defObj.Tags[j]);
 		var keyIndex = lowerString.indexOf(tag.toLowerCase());
-		if (tag == "Marked") console.log('"Marked" found? '+keyIndex);
+		if (tag == "Marked" && keyIndex > -1) console.log('"Marked" found at '+keyIndex);
 		// if the term is found
 		if (keyIndex >= 0) {
-			cont = false;
-			return parseKeywordRec(htmlString,tag);
+			newString = parseKeywordRec(newString,tag);
 		}
 		j++;
 	}
 	
-	// default case
-	return htmlString;
+	// return parsed string with keywords linked
+	return newString;
 }
 
 // recurses and returns parsed string
@@ -1053,49 +1048,48 @@ function parseKeywordRec(htmlString, tag) {
 	var keyIndex = lowerString.indexOf(tag.toLowerCase());
 	// if the term is found
 	if (keyIndex >= 0) {
-	
+		// check to see if the keyword is valid
 		if (validKeyword(htmlString, tag, keyIndex)) {
+			// parse before keyword
+			var firstPart = 
+			parseKeywordRec(
+				htmlString.substring(
+					0,
+					keyIndex),tag
+			);
 	
-		// parse before keyword
-		var firstPart = 
-		parseKeywordRec(
-			htmlString.substring(
-				0,
-				keyIndex),tag
-		);
+			// add keyword class
+			var keyword = "<span class='keyword' onclick='d(\""+tag+"\")'>" 
+			+ htmlString.substring(keyIndex,keyIndex+tag.length) 
+			+ "</span>";
 	
-		// add keyword class
-		var keyword = "<span class='keyword' onclick='d(\""+tag+"\")'>" 
-		+ htmlString.substring(keyIndex,keyIndex+tag.length) 
-		+ "</span>";
+			// onclick links to glossary
+			// --- todo ---
 	
-		// onclick links to glossary
-		// --- todo ---
+			// parse after keyword
+			var lastPart = 
+			parseKeywordRec(
+				htmlString.substring(
+					keyIndex+tag.length,
+					htmlString.length),tag
+			);
 	
-		// parse after keyword
-		var lastPart = 
-		parseKeywordRec(
-			htmlString.substring(
-				keyIndex+tag.length,
-				htmlString.length),tag
-		);
-	
-		// since the keyword was found, 
-		return firstPart + keyword + lastPart;
-		
+			// since the keyword was found, 
+			return firstPart + keyword + lastPart;
 		}
 	}
 	return htmlString;
 }
 
+// helper for parsing keywords
 function validKeyword(str, kWord, idx) {
 	if (idx > 0) {
-		// check if the prev char is in the alphabet
+		// check if the prev char is allowed
 		var prevChar = str.substring(idx-1,idx);
-		// if it is, return false
-		if ("A" < prevChar && prevChar < "z") {
-			return false;
-		}
+		// if it is in the alphabet, return false
+		if ("A" < prevChar && prevChar < "z") return false;
+		// if it is a hyphen, return false
+		if (prevChar == "-") return false;
 	}
 	var end = idx + kWord.length;
 	if (end < str.length-2) {
@@ -1104,29 +1098,16 @@ function validKeyword(str, kWord, idx) {
 		// if it is, perform more tests (plurals)
 		if ("A" < nextChar && nextChar < "z") {
 			// simple plural
-			if (nextChar == "s") {
-				return true;
-			}
+			if (nextChar == "s") return true;
 			// "es" plural
 			if (nextChar == "e" && end < str.length-3) {
-				if (str.substring(end,end+2) == "es") {
-					return true;
-				}
+				if (str.substring(end,end+2) == "es") return true;
 			}
 			// otherwise return false
 			return false;
 		}
 	}
 	return true;
-}
-
-function showDefinitionBox() {
-	defBox.style.bottom = "-2em";
-}
-
-function hideDefinitionBox() {
-	defBox.querySelector("p").innerHTML = "";
-	defBox.style.bottom = "-150%";
 }
 
 // uses the glossary to fill the data structure
@@ -1209,143 +1190,7 @@ function DieImgElem(typeStr) {
 	return '<img src="'+src+'" style="width: 1.2em; height: 1.2em; vertical-align: bottom;">';
 }
 
-// on clicks
-getById("intro").onclick = function() {
-	getById("intro").style.display = "none";
-}
-
-getByClass("characterBtn").onclick = function() {
-	retractMenu();
-	showScreen("Character");
-};
-getByClass("helpBtn").onclick = function() {
-	retractMenu();
-	showScreen("Help");
-};
-getByClass("mainMenuBtn").onclick = function() {
-	retractMenu();
-	showScreen("Main Menu");
-};
-getByClass("allMovesBtn").onclick = function() {
-	retractMenu();
-	showScreen("All Moves");
-};
-getByClass("resetBtn").onclick = function () {
-	resetAP();
-};
-getByClass("plusOneBtn").onclick = function () {
-	addToAP(1);
-};
-getByClass("minusOneBtn").onclick = function () {
-	addToAP(-1);
-};
-getByClass("bottomBar").onclick = function () {
-	retractUseBox();
-};
-getByClass("optionsBtn").onclick = function() {
-	extendMenu();
-};
-getByClass("threeBars").onclick = function() {
-	extendMenu();
-};
-getByClass("hideBtn").onclick = function() {
-	retractMenu();
-};
-getByClass("backButton").onclick = function() {
-	goBackToPrevScreen();
-}
-getById("aboutBtn").onclick = function() {
-	clearScreens();
-	showScreen("About");
-};
-getById("loadBtn").onclick = function() {
-	showScreen("Import");
-};
-getById("textLoadBtn").onclick = function() {
-	hideLoadingButtons();
-	//console.log(document.querySelector("textarea").value);
-	loadCharacterFromString(document.querySelector("textarea").value);
-};
-getById("cookieLoadBtn").onclick = function() {
-	hideLoadingButtons();
-	loadCharacterFromCookie();
-};
-getById("done").onclick = function() {
-	deleteDuplicateButtons();
-	addToCharacter();
-	if (choiceNumber >= lastChoice) {
-		closeCreator();
-		clearMoves();
-		showCharacter();
-		listMyMoves();
-		return;
-	}
-	advanceQuestion();	
-};
-getById("ccStartBtn").onclick = function() {
-	startCharacterCreation();
-};
-getById("saveBtn").onclick = function() {
-	showScreen("Export");
-};
-getById("clipboardBtn").onclick = function() {
-	clipboardCopyCharacterText();
-};
-getById("helpLink").onclick = function() {
-	clearScreens();
-	getByClass("helpBox").style.display = "block";
-	window.scroll(0,0);
-	setScreenString("Help");
-};
-getById("combatExampleLink").onclick = function() {
-	showScreen("Combat Example");
-};
-getById("quickReferenceLink").onclick = function() {
-	showScreen("Quick Reference");
-};
-getById("closeDefBox").onclick = function() {
-	hideDefinitionBox();
-}
-getById("defBack").onclick = function() {
-	// if there are entries
-	if (glossaryHistory.length > 1) {
-		glossaryForward.push(glossaryHistory.pop()); // move from back to forward
-		d(glossaryHistory.pop()); // this adds to history
-	}
-}
-getById("defFwd").onclick = function() {
-	// if there are entries
-	if (glossaryForward.length > 0) {
-		d(glossaryForward.pop()); // this adds to history
-	}
-}
-getById("IAttack").onclick = function() {
-	enterBattleMode(true);
-}
-getById("GotAttacked").onclick = function() {
-	enterBattleMode(false);
-}
-getById("HPplus").onclick = function() {
-	setHP(HP+1);
-}
-getById("HPminus").onclick = function() {
-	setHP(HP-1);
-}
-getById("NextTurn").onclick = function() {
-	var newAP = AP + 5;
-	if (newAP > maxAP) { newAP = maxAP; }
-	setAP(newAP);
-}
 
 window.onbeforeunload = function() { return "Are you sure you want to leave? All unsaved progress will be lost."; }
-
-function init() {
-	mobileDebug(true);
-	loadJSON();
-	loadCookies();
-	setCookieButtonText();
-	clearMoves();
-	populateKeywords();
-}
 
 window.onload = init();
