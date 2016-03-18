@@ -211,17 +211,39 @@ function parseMath(mathStr) {
 	// array of equation 
 	var numbersAndOperators = [];
 	// loop through the equation
-	parts.foreach(function (piece) {
-		var pieceNum = replacePlaceholder(piece);
-		if (pieceNum != undefined) {
-			if (parseInt(pieceNum) != undefined) {
-				parts.push(parseInt(pieceNum));
+	parts.forEach(function (piece) {
+		if (piece == "+" || piece == "-") {
+			numbersAndOperators.push(piece);
+		} else {
+			var piecePH = replacePlaceholder(piece);
+			if (piecePH != undefined) {
+				if (parseInt(piecePH) != NaN) {
+					numbersAndOperators.push(parseInt(piecePH));
+					
+				}
+			} else {
+				if (parseInt(piece) != NaN) {
+					numbersAndOperators.push(parseInt(piece));
+				}
 			}
 		}
 	});
+	var total = 0;
+	for (var i=0; i<numbersAndOperators.length; i++) {
+		console.log("num/op " + numbersAndOperators[i]);
+		if (numbersAndOperators[i] == "+") {
+			total += (numbersAndOperators[i-1] + numbersAndOperators[i+1]);
+			i = i+1; // already added second arg
+		}
+		if (numbersAndOperators[i] == "-") {
+			total += (numbersAndOperators[i-1] + numbersAndOperators[i+1]);
+			i = i+1; // already added second arg
+		}
+	}
+	return total
 }
 
-function replacePlaceHolder(ph) {
+function replacePlaceholder(ph) {
 	// set to lower case for comparisons
 	var placeholderLowerCase = ph.toLowerCase();
 	// if ph is an equation
@@ -276,7 +298,7 @@ function parsePlaceholders(str) {
 	// replace placeholders
 	for (var i=0; i<placeholders.length; i++) {
 		// for each placeholder in the list
-		str = str.replace("|"+placeholders[i]+"|",replacePlaceHolder(placeholders[i]));
+		str = str.replace("|"+placeholders[i]+"|",replacePlaceholder(placeholders[i]));
 	}
 	return str;
 }
@@ -1024,7 +1046,7 @@ function parseKeywordsHelper(htmlString,defObj) {
 		//console.log("j: " + j);
 		//console.log(defObj.Tags[j]);
 		var keyIndex = lowerString.indexOf(tag.toLowerCase());
-		if (tag == "Marked" && keyIndex > -1) console.log('"Marked" found at '+keyIndex);
+		
 		// if the term is found
 		if (keyIndex >= 0) {
 			newString = parseKeywordRec(newString,tag);
