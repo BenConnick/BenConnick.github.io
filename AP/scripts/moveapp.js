@@ -18,7 +18,7 @@ function Move(name, roll, AP, effect, range, special, trigger, difficulty) {
 var dbg = getById("mobileDebug");
 var allMoves = [];
 var myMoves = [];
-var basicMoves = [];
+var basicMoves = []; 
 var slayerMoves = [];
 var defenderMoves = [];
 var scholarMoves = [];
@@ -249,7 +249,7 @@ basicMoves.push(new Move(
 	"Basic Melee Attack",
 	"Agility",
 	4,
-	"Inflict Melee Weapon Damage.",
+	"|Weapon||d|",
 	"Touch",
 	""
 	)
@@ -258,18 +258,18 @@ basicMoves.push(new Move(
 	"Basic Ranged Attack",
 	"Agility",
 	5,
-	"Inflict Ranged Weapon damage",
+	"|Weapon||d|",
 	"Long",
 	"",
 	"",
-	"Short-range: 12 + target Defense, Medium-range: 16 + target Defense, Long-range: 20 + target Defense."
+	"Short-range: 3|d|, Medium-range: 2|d|, Long-range: 1|d|"
 	)
 );
 basicMoves.push(new Move(
 	"Full Melee Attack",
 	"Agility",
 	6,
-	"Inflict Melee Weapon + 4 Damage",
+	"",
 	"Touch",
 	""
 	)
@@ -278,17 +278,8 @@ basicMoves.push(new Move(
 	"Trip",
 	"Agility",
 	5,
-	"Target makes an Agility roll with a Difficulty equal to the value of your roll, or gains the Prone status",
+	"Target tests agility against you. If they lose, they gain the Prone status",
 	"Touch",
-	""
-	)
-);
-basicMoves.push(new Move(
-	"Full Defense",
-	"",
-	6,
-	"Defense +4 until the start of your next turn",
-	"",
 	""
 	)
 );
@@ -296,59 +287,29 @@ basicMoves.push(new Move(
 	"Mark",
 	"",
 	2,
-	"Target gains the Marked status",
+	"You sign a marked sigil in the air. One target gains the Marked status",
 	"Sight",
 	""
 	)
 );
 basicMoves.push(new Move(
-	"Defend",
-	"d20 + Defense",
-	2,
-	"Attacker's ability roll must exceed your roll in order to apply its effect.",
+	"Evade",
+	"",
+	0,
+	"Roll |Defense||d|",
 	"",
 	"Reaction",
 	"You are attacked at touch range"
 	)
 );
 basicMoves.push(new Move(
-	"Quick Defend",
-	"d20 + Defense - 2",
+	"Parry",
+	"",
 	1,
-	"Attacker must make an Attack Roll exceeding your roll",
+	"Roll |Defense + 2||d|",
 	"",
 	"Reaction",
 	"You are attacked at touch range"
-	)
-);
-basicMoves.push(new Move(
-	"Improved Defend",
-	"d20 + Defense + 2",
-	3,
-	"Attacker must make an Attack Roll exceeding your roll",
-	"",
-	"Reaction",
-	"You are attacked at touch range"
-	)
-);
-basicMoves.push(new Move(
-	"Great Defend",
-	"d20 + Defense + 4",
-	4,
-	"Attacker must make an Attack Roll exceeding your roll",
-	"",
-	"Reaction",
-	"You are attacked"
-	)
-);
-basicMoves.push(new Move(
-	"Dodge",
-	"d20 + Defense + Agility",
-	5,
-	"Attacker must make an Attack Roll exceeding your roll",
-	"",
-	"Reaction",
-	"You are attacked"
 	)
 );
 
@@ -455,7 +416,7 @@ function displayMove(move, hideButton, containerElem) {
 	parseKeywords(triggerStr) +
 	// Effect
 	'<div class="categoryLabel">'+special+'</div>'+
-	'<div>'+parseKeywords(move.effect)+'</div>'+
+	'<div>'+parseKeywords(parsePlaceholders(move.effect))+'</div>'+
 	// Range
 	parseKeywords(rangeStr);
 
@@ -549,6 +510,41 @@ function useAbility(moveObject) {
 	// offer "simulate roll" button
 }
 
+function replacePlaceHolder(ph) {
+	var placeholderLowerCase = ph.toLowerCase();
+	switch(placeholderLowerCase) {
+		case "|d|" : return new DieImgElem().outerHTML; break;
+		case "|strength|" : return character.attributes["Strength"]; break;
+		case "|agility|" : return character.attributes["Agility"]; break;
+		case "|intelligence|" : return character.attributes["Intelligence"]; break;
+		case "|spirit|" : return character.attributes["Spirit"]; break;
+		case "|weapon|" : return getWeapon(character.primaryWeaponName).damage; break;
+		case "|defense|" : return archetypes[character.charClass].Defense; break;
+	}
+}
+
+function parsePlaceholders(str) {
+	var beginIdx = -1;
+	var foundPlaceholder = false;
+	for (var i=0; i<str.length; i++) {
+		if (foundPlaceholder) {
+			if (str[i] == "|") {
+				var phStr = str.substring(beginIdx,i+1);
+				str = str.replace(phStr,replacePlaceHolder(phStr));
+				console.log("replaced " + phStr + " with " + replacePlaceHolder(phStr));
+				foundPlaceholder = false;
+			}
+		}
+		else {
+			if (str[i] == "|") {
+				beginIdx = i;
+				foundPlaceholder = true;
+			}
+		}
+	}
+	return str;
+}
+
 function tryParseRoll(rollStr) {
 	var newStr = "";
 	var rollStrArr = rollStr.split(" ");
@@ -626,7 +622,7 @@ function listMovesCC(moveListName) {
 }
 
 function listMyMoves() {
-	console.log("listMoves " + myMoves + " " + myMoves.length);
+	//console.log("listMoves " + myMoves + " " + myMoves.length);
 	for (var i=0; i<myMoves.length; i++) {
 		displayMove(myMoves[i]);
 	} 
@@ -957,7 +953,7 @@ function completeCharacter() {
 function checkSufficientMoves() {
 	if (choiceNumber > 2) {
 		console.log(myMoves.length);
-		if (myMoves.length == 4 + basicMoves.length) {
+		if (myMoves.length == 2 + basicMoves.length) {
 			console.log("complete");
 			window.scroll(0,0);
 			addClass(getById("done"),"complete");
@@ -1498,6 +1494,26 @@ function Collapser(container, clickElem, innerElem) {
 		console.log(event.currentTarget.id);
 		collapserObjects[event.currentTarget.id].toggle();
 	}
+}
+
+function DieImgElem(typeStr) {
+	var dieImg = document.createElement("img");
+	dieImg.style.width = "1.5em";
+	dieImg.style.height = "1.5em";
+	dieImg.style.verticalAlign = "bottom";
+	// display black if no type
+	if (typeStr == null) {
+		dieImg.src = "images/perspective-dice-six-faces-six.png"
+	}
+	// red if attack
+	if (typeStr == "attack") {
+		dieImg.src = "images/attackdie.png";
+	}
+	// blue if defense
+	if (typeStr == "defense") {
+		dieImg.src = "images/defensedie.png";
+	}
+	return dieImg;
 }
 
 // on clicks
