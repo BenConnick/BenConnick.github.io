@@ -13,6 +13,7 @@ var prevTime = 0;
 var deltaTime = 0;
 var timeOut = 0;
 var allVisited = false;
+var isEdge;
 var isIE;
 var isFirefox = typeof InstallTrigger !== 'undefined';
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -38,7 +39,7 @@ var squaregemImg = document.createElement("img");
 var diamondgemImg = document.createElement("img");
 var hexgemImg = document.createElement("img");
 var particleImg = document.createElement("img");
-var digitsImg = document.createElement("img");
+//var digitsImg = document.createElement("img");
 
 walkImg.src = "images/walk.png";
 turnImg.src = "images/turn.png";
@@ -52,7 +53,6 @@ squaregemImg.src="images/squaregem.png";
 diamondgemImg.src="images/diamondgem.png";
 particleImg.src="images/particle.png";
 hexgemImg.src="images/hexgem.png";
-digitsImg.src="images/numbers.png";
 doors[0] = new Door("h12");
 doors[1] = new Door("h13");
 doors[2] = new Door("h14");
@@ -65,7 +65,9 @@ doors[3].x = 600;
 doors[4].x = 800;
 for (var i=0; i<doors.length; i++) {
     doors[i].img = document.createElement("img");
-    doors[i].img.src = "images/metaldoor.png";
+    doors[i].img.src = "images/transpdoor.png";
+    doors[i].dateImg = document.createElement("img");
+    doors[i].dateImg.src = "images/dates/"+(i+2012)+".png";
     doors[i].openImg = document.createElement("img");
     doors[i].openImg.src = "images/metaldoor_open.png";
 }
@@ -187,21 +189,21 @@ function update() {
         character.x += character.velocity*deltaTime/20;
      }
      // wrap around if the character goes too far to the left
-    if (character.x < 2000) { 
-        character.x = 3200; 
+    if (character.x < doors.length*400) { 
+        character.x = doors.length*400*3; 
     }
-    if (!allVisited) {
-        if (doors[0].visited && doors[1].visited && doors[2].visited && doors[3].visited && doors[5].visited) {
+    /*if (!allVisited) {
+        if (doors[0].visited && doors[1].visited && doors[2].visited && doors[3].visited && doors[4].visited) {
             allVisited = true;
         }
-    }
+    }*/
 }
 
 // scroll towards a target: 1 call = 1 frame
 function smoothScrollTo(target) {
     var tolerance = 6;
     var currentTop;
-    if (!isWebkit) {
+    if (!isWebkit && !isEdge) {
         currentTop = document.documentElement.scrollTop;
     }
     else {
@@ -213,7 +215,7 @@ function smoothScrollTo(target) {
     if (currentTop >= (target+tolerance)) {
         currentTop = currentTop + Math.min(-1*tolerance,(deltaTime/200)*(target - currentTop));
     }
-    if (!isWebkit) {
+    if (!isWebkit  && !isEdge) {
         document.documentElement.scrollTop = currentTop;
     }
     else {
@@ -308,7 +310,7 @@ function drawBig() {
     }
     
     // wall color   
-    ctx.fillStyle="#42706c";
+    ctx.fillStyle="#19263a"/*"#42706c"*/;
     ctx.fillRect(0,0,700,418);
     
     
@@ -330,8 +332,11 @@ function drawBig() {
 		if (i == door) {
 			ctx.drawImage(doors[i].openImg,-62,0);
 		} else {
+			ctx.fillStyle = "rgb("+(190+15*i)+","+(190+15*i)+","+(190+15*i)+")";
+			ctx.fillRect(2,0,58,128);
 			ctx.drawImage(doors[i].img,0,0);
-			drawNumber(2012+i,(12+doors[i].x-cameraPos+arbitraryOffset)%roomWidth+roomWidth-arbitraryOffset-doorWidth/2,290+30);
+			//drawNumber(2012+i,(12+doors[i].x-cameraPos+arbitraryOffset)%roomWidth+roomWidth-arbitraryOffset-doorWidth/2,290+30);
+			ctx.drawImage(doors[i].dateImg,13,35);
 			ctx.translate((doors[i].x-cameraPos+arbitraryOffset)%roomWidth+roomWidth-arbitraryOffset-doorWidth/2,290);
 		}
 
@@ -868,6 +873,9 @@ function msieversion() {
         var ua = navigator.userAgent;
         var msie = ua.indexOf("MSIE ");
         var edge = ua.indexOf("Edge");
+        if (edge > 0) {
+        	isEdge = true;
+        }
         if (edge > 0 || msie > 0 || navigator.userAgent.match(/Trident.*rv\:11\./))  {    // If Internet Explorer, return version number
             alert("Some features on this page are not compatible with Internet Explorer or Microsoft Edge. For the full experience, use a different browser."); //parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
             return true;
@@ -881,7 +889,6 @@ function start() {
     rightPressed=true;
     prevTime = Date.now();
     gameLoop();
-    // else { startButtonElem.style.display = "none"; }
 }
 
 var dbg;

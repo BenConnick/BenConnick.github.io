@@ -65,7 +65,7 @@ function init() {
 			}
 		});
 	});
-	console.log("asdf");
+	console.log("thumbnails successfully linked");
 
 	// clicking
 	document.getElementById("emoney").onclick = function() { console.log("click"); window.location = 'FinancialTimeline/index.html'; };
