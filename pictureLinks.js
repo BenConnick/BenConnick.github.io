@@ -72,4 +72,5 @@ function init() {
 	document.getElementById("CvRscreenshot").onclick = function() { console.log("click"); window.location = 'https://bitbucket.org/theHooloovoo/amalgamation'; };
 	document.getElementById("PHscreenshot").onclick = function() { console.log("click"); window.location = 'http://people.rit.edu/bxc3201/ProcrastinatorHero'; };
 	document.getElementById("googlyScreenshot").onclick = function() { console.log("click"); window.location = 'http://bengames.x10host.com/GooglyEyes/UnityWorldProject.html'; };
+	document.getElementById("dreamsOfUsSreenshot").onclick = function() { console.log("click"); window.location = 'DreamsOfUs/index.html'; };
 }

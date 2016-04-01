@@ -149,7 +149,7 @@
 #dreamsOfUsScreenshot {
 	background-image: url("images/DreamsOfUsScreenshot.png");
 	margin-top: 25px;
-	
+	cursor: pointer;
     background-size: 100%;
     background-repeat: no-repeat;
 }
