@@ -211,7 +211,7 @@ function parseMath(mathStr) {
 	// array of equation 
 	var numbersAndOperators = [];
 	// loop through the equation
-	parts.forEach(function (piece) {
+		(function (piece) {
 		if (piece == "+" || piece == "-") {
 			numbersAndOperators.push(piece);
 		} else {
@@ -422,6 +422,24 @@ function choiceBtnGroup(buttonIdList, questionNum) {
 	groupObject.selected = "none";
 	buttonIdList.forEach(function(buttonName) {
 		var cbtn = getById(buttonName);
+		if (questionNum == 1) {
+			cbtn.onclick = function() {
+				buttonIdList.forEach(function(buttonName) {
+					var btn = getById(buttonName);
+					removeClass(btn,"highlight");
+				});
+				addClass(cbtn,"highlight");
+				getById("done").setAttribute("class","complete");
+				getById("done").removeAttribute("disabled");
+				groupObject.selected = buttonName;
+				console.log(buttonName+" button pressed");
+				characterClasses.forEach(function(archetypeName) {
+					getById(archetypeName+"Preview").style.display = "none";
+				});
+				getById(buttonName+"Preview").style.display = "block";
+			}
+		}
+		else {
 		cbtn.onclick = function() {
 			buttonIdList.forEach(function(buttonName) {
 				var btn = getById(buttonName);
@@ -432,13 +450,14 @@ function choiceBtnGroup(buttonIdList, questionNum) {
 			getById("done").removeAttribute("disabled");
 			groupObject.selected = buttonName;
 			if (choiceDescriptions[buttonName] != "" && choiceDescriptions[buttonName] != null) {
-				choiceTextElem.innerHTML = choiceDescriptions[buttonName];
+				//choiceTextElem.innerHTML = choiceDescriptions[buttonName];
 				choiceTextElem.style.display = "block";
 			} 
 			else {
-				choiceTextElem.innerHTML = "";
+				//choiceTextElem.innerHTML = "";
 				choiceTextElem.style.display = "none";
 			}
+		}
 		}
 	});
 	return groupObject;
@@ -465,16 +484,23 @@ function addToCharacter() {
 		character.primaryWeaponName = archetypes[character.charClass].Weapon1;
 		character.secondaryWeaponName = archetypes[character.charClass].Weapon2;
 		
+		// set special abilities
+		myMoves = myMoves.concat(moveLists[character.charClass]);
+		moveLists[character.charClass].forEach(function (specialMove) {
+			character.moves.push(specialMove.name);
+		});
+		//console.log(myMoves[myMoves.length-1]);	
+		 
 		break;
 	case 2:
-		break;
-	case 3:
-		document.body.removeEventListener("click", checkSufficientMoves);
-		break;
-	case 4:
 		character.name = getById("nameField").value;
 		completeCharacter();
 		console.log("done");
+		break;
+	case 3:
+		//document.body.removeEventListener("click", checkSufficientMoves);
+		break;
+	case 4:
 		break;
 	default:
 		break;
@@ -496,11 +522,11 @@ function presentChoice(choiceN) {
 	
 	// 1 - Class
 	if (choiceN == 1) {
-		characterClass = createAndDisplayButtonGroup(characterClasses, getById("q1"));
+		characterClass = createAndDisplayButtonGroup(characterClasses, getById("q1ButtonHolder"), 1);
 		promoteToClassChoiceGroup(characterClasses, getById("q1"));
 	}
 	
-	// 2 - Skills
+	// 2 - Skills - DEACTIVATED
 	if (choiceN == 2) {
 	/*
 	//set primarySkillChoice.selected = result from class selection
@@ -518,7 +544,7 @@ function presentChoice(choiceN) {
 	*/
 	}
 	
-	// 3 Moves
+	// 3 Moves - DEACTIVATED
 	if (choiceN == 3) {
 		// Reset to basic moves
 		myMoves = [];
@@ -527,9 +553,9 @@ function presentChoice(choiceN) {
 			m.basic = true;
 			myMoves.push(m);
 		});
-		document.body.addEventListener("click", checkSufficientMoves);
-		listMovesCC(character.charClass);
-		window.scroll(0,0);
+		//document.body.addEventListener("click", checkSufficientMoves);
+		/*listMovesCC(character.charClass);
+		window.scroll(0,0);*/
 	}
 	
 	// All choices
@@ -548,21 +574,16 @@ function presentChoice(choiceN) {
 	getById("done").setAttribute("disabled", "true");
 	
 	// Name
-	if (choiceN == 4) {
+	if (choiceN == 2) {
 		clearMoves();
 		getById("done").setAttribute("class","complete");
 		getById("done").removeAttribute("disabled");
 	}
-	if (choiceN == 2) {
-		//getById("done").setAttribute("class","complete");
-		//getById("done").removeAttribute("disabled");
-		advanceQuestion();
-	}
 }
 
-function createAndDisplayButtonGroup(listIds, container) {
+function createAndDisplayButtonGroup(listIds, container, questionNum) {
 		// clear container element
-		container.innerHTML = "";
+		//container.innerHTML = "";
 		// loop through choices and append the buttons
 		listIds.forEach(function(id) {
 			var choiceBtn = document.createElement("button");
@@ -572,7 +593,7 @@ function createAndDisplayButtonGroup(listIds, container) {
 			container.appendChild(choiceBtn);
 		});	
 		// add the buttons to a button group
-		return choiceBtnGroup(listIds); // return the group object
+		return choiceBtnGroup(listIds, questionNum); // return the group object
 }
 
 function promoteToClassChoiceGroup(listIds, container) {
@@ -595,9 +616,9 @@ function promoteToClassChoiceGroup(listIds, container) {
 }
 
 function deleteDuplicateButtons() {
-	if (choiceNumber > 1 && choiceNumber < 4) {
+	if (choiceNumber != 2) {
 		// special case for deleting buttons with the same id
-		getById("q"+ (choiceNumber) ).innerHTML = "";
+		//getById("q"+ (choiceNumber) ).innerHTML = "";
 	}
 }
 
@@ -756,6 +777,7 @@ function loadCharacterFromString(str) {
 	character.moves.forEach(function(moveName) {
 		for (var i=0; i<allMoves.length; i++) {
 			if (allMoves[i].name == moveName) {
+				console.log("move loaded: "+moveName);
 				myMoves.push(allMoves[i]);
 				break;
 			}
@@ -1209,7 +1231,7 @@ function DieImgElem(typeStr) {
 		src = "images/defensedie.png";
 	}
 	/*console.log(""+dieImg.outerHTML);*/
-	return '<img src="'+src+'" style="width: 1.2em; height: 1.2em; vertical-align: bottom;">';
+	return '<img src="'+src+'" class="dieSize2">';
 }
 
 

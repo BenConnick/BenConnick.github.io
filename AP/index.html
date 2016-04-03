@@ -85,7 +85,7 @@ Author: Ben Connick
     		<p class="APCounter">10AP</p>
     	</div>
     	<div id="mainMenu">
-    		<h1>Smartphones <br>& Dragons</h1>
+    		<h1>Smartphones <br>& <br>Dragons</h1>
     		<button id="ccStartBtn" class="bigButton complete">Create a Character</button>
     		<button id="saveBtn" class="bigButton incomplete">Export Character</button>
     		<button id="loadBtn" class="bigButton complete">Import Character</button>
@@ -140,15 +140,221 @@ Author: Ben Connick
 			<p class="ccTitle">Create a Character</p>
 			<div class="innerCentered">
 				<!-- Character Class -->
-				<div id="q1" class="q" style="display: none;"></div>
-				<!-- Skills -->
-				<div id="q2" class="q" style="display: none;"></div>
+				<div id="q1" class="q" style="display: none;">
+				<div id="q1ButtonHolder"></div>
+					<div class="ccArchetypePreview" id="SlayerPreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Slayer.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>15<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ccArchetypePreview" id="DefenderPreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Defender.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>0<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>16<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ccArchetypePreview" id="BattlemagePreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Battlemage.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ccArchetypePreview" id="ScholarPreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Scholar.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ccArchetypePreview" id="HunterPreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Hunter.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+					<div class="ccArchetypePreview" id="AssassinPreview" style="display: none;">
+						<table>
+							<tr>
+								<td>
+								<!--picture-->
+								<img src='images/Assassin.png' class='classPic'/>
+								</td>
+								<!--description-->
+								<td>The Slayer is a monster specialist. Tough and damage-focused. </td>
+							</tr>
+							<tr>
+								<!--primary weapon-->
+								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Battleaxe.png' class='ccWeaponPic'/></p></td>
+								<!--secondary weapon-->
+								<td><p class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
+							</tr>
+							<tr>
+								<!--defenses-->
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/shield.png' class='ccWeaponPic'/></p></td>	
+								<td><p class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<img src='images/armour.png' class='ccWeaponPic'/></p></td>	
+							</tr>
+							<tr>
+								<!-- special moves -->
+								<td colspan="2"><ul>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+								</ul></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<!-- Name -->
+				<div id="q2" class="q" style="display: none;">
+					<input type="text" style="width:100%;" id="nameField" value="Name">	
+				</div>
 				<!-- Moves (empty) -->
 				<div id="q3" class="q" style="display: none;"></div>
-				<!-- Name -->
-				<div id="q4" class="q" style="display: none;">
-					<input type="text" style="width:100%;" id="nameField" value="Name">
-				</div>
+				<!-- Skills (empty) -->
+				<div id="q4" class="q" style="display: none;"></div>
 				<div id="choiceDescriptionContainer">
 					<p id="choiceDescriptionText"></p>	
 				</div>
