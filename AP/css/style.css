@@ -1,5 +1,5 @@
 /****************************************
-			about me popup 
+			  about popup 
 *****************************************/
 #intro {
 	position: absolute;
@@ -51,12 +51,137 @@
 }
 
 /****************************************
-			start screen 
+			  start screen 
 *****************************************/
 .topSpacer {
 	width: 100%;
 	height: 1em;
 	display: block;
+}
+.bigButton {
+	width: 100%;
+	margin: 2pt auto;
+	border-radius: 0.3em;
+	/*border-width: 0.15em;
+	border: solid rgba(0,0,143,1);*/
+	border: none;
+	background-color: rgba(255,255,255,0.8);
+	color: black;/*rgba(0,0,143,1);*/
+	font-size: 1.2em;
+	font-family: "IM Fell English SC";
+	font-weight: bold;
+	box-shadow: 0px 0px 5px black
+}
+#ccStartBtn {
+	padding: 1.5em;
+}
+#loadBtn {
+	padding: 1em;
+}
+#saveBtn {
+	padding: 1em;
+}
+#aboutBtn {
+	padding: 1em;
+}
+
+/****************************************
+		   help section
+*****************************************/
+#aboutSection {
+	display: none;
+}
+.helpBox {
+	display: none;
+	padding: 1em;
+	margin: 0 auto;
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.8);
+	max-width: 23em;
+}
+.statusName {
+	width: 2em;
+}
+.statusTable {
+	border-collapse: collapse;
+}
+.statusTable td, .statusTable tr {
+	border-bottom: 1px solid #000081;
+	margin: 0px;
+	padding: 0.2em;
+}
+
+/****************************************
+		   save and load
+*****************************************/
+textarea {
+	width: 100%;
+	height: 10em;
+}
+#saveArea {
+	display: none;
+}
+#saveText {
+	word-wrap: break-word; 
+	background-color: rgba(255,255,255,0.6);
+	padding: 0.5em;
+}
+#loadButtons {
+	display: none;
+}	
+
+/****************************************
+		   symbols + icons
+*****************************************/
+.dieSize1 { 
+	padding-top: 0.25em; 
+	height: 2.5em;
+	vertical-align: text-bottom;
+}
+.dieSize2 {
+	width: 1.2em; 
+	height: 1.2em; 
+	vertical-align: bottom;
+}
+
+/****************************************
+		   non-scrolling UI 
+*****************************************/
+.backButton { 
+	font-family: Times;	
+	font-size: 2em;
+	color: white;
+	position: fixed;
+	left: 0.5em;
+	top: 0.15em;
+	text-shadow: 0.05em 0.05em 0.2em black;
+	z-index: 10;
+	cursor: pointer;
+}
+.backButton:hover {
+	color: #CCC;
+}
+.backDisabled {
+	color: rgba(255,255,255,0.2);
+	text-shadow: 0.05em 0.05em 0.2em rgb(0,0,0,0.2);
+}
+.threeBars {
+	position: fixed;
+	width: 2em;
+	right: 1em;
+	top: 1em;
+	z-index: 10;
+	cursor: pointer;
+}
+.threeBars .bar {
+	width: 1.8em;
+	height: 0.2em;
+	margin-bottom: 0.3em;
+	background-color: white;
+	box-shadow: 0.05em 0.05em 0.2em black;
+}
+.threeBars:hover .bar {
+	background-color: #CCC;
 }
 .topBar {
 	display: block;
@@ -115,23 +240,92 @@
 	border-color: white;
 	color: white;
 }
-.classTab {
-	border-radius: 0pt 0pt 5pt 0pt;
-	border: solid 1pt grey;
-	background-color: rgba(0,0,0,0.9);
-	color: #ddd;
-	width: 88%;
-	height: 3.2em;
-	position: fixed;
-	top: -0.04em;
-	left: 10%;
-	margin-left: 1%;
-	font-size: 12pt;
-	display: none;
-}
 .topBtn:hover { 
 	background-color: white;
 }
+.navBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.9);
+	color: #009;
+	padding: 0.4em;
+	float: right;
+	margin-right: 6pt;
+	margin-top: 10pt;
+	font-family: "Slabo 27px";
+	position: absolute;
+}
+.optionBtn {
+	border-radius: 0.3em;
+	background-color: rgba(255,255,255,0.9);
+	color: #009;
+	padding: 0.4em;
+	float: right;
+	font-family: "Slabo 27px";
+	position: absolute;
+	font-size: 200%;
+	width: 90%;
+	left: 5%;
+	font-family: "IM Fell English SC";
+}
+.optionsBtn {
+	right: 0.3em;
+	bottom: 0.4em;
+	display: none;
+}
+.hideBtn {
+	right: 0.3em;
+	bottom: 0.4em;
+}
+.resetBtn { 
+	right: 5.1em;
+	bottom: 0.4em;
+}
+.plusOneBtn { 
+	right: 9em;
+	bottom: 0.4em;
+}
+.minusOneBtn { 
+	right: 11.8em;
+	bottom: 0.4em;
+}
+.myMovesBtn {
+	background-color: rgba(100,255,100,0.9);
+	top: 11.8em;
+}
+.allMovesBtn {
+	top: 14.1em;
+}
+.mainMenuBtn {
+	top: 16.4em;
+}
+#mainMenu {
+	margin-top: 3em;
+}
+.helpBtn {
+	top: 18.7em;
+}
+.characterBtn {
+	top: 21em;
+	background-color: rgba(210,210,255,0.9);
+}
+.APCounter {
+	display: inline-block;
+	font-size: 150%;
+	font-family: "Slabo 27px";
+	position: absolute;
+	bottom: -0.6em;
+	left: 0.6em;
+}
+.topRow {
+	display: inline-block;
+	margin-bottom: 0.4em;
+	width: calc(100% - 6.5em);
+	cursor: pointer;
+}
+
+/****************************************
+		ability box styles
+*****************************************/
 .moveBox {
 	background-color: rgba(255,255,255,0.6);
 	border-radius: 0pt;
@@ -227,13 +421,16 @@
 	font-size: 1em;
 }
 .useBtn {
-	border-radius: 0.3em;
-	background-color: rgba(255,255,255,0.5);
-	color: #009;
+	border-radius: 0.1em;
+	/*background-color: rgba(255,255,255,0.5);*/
+	background-color: rgba(0,0,25,0.7);	
+	color: #fff;
 	margin: 0.1em;
 	margin-top: 0.3em;
 	font-size: 1em;
 	display: inline-block;
+	border: none;
+	box-shadow: 0 0 3px;
 }
 .categoryLabel {
 	margin-top: 0.4em;
@@ -241,87 +438,51 @@
 	color: rgba(0,0,0,0.5);
 	text-decoration: underline;
 }
-.navBtn {
-	border-radius: 0.3em;
-	background-color: rgba(255,255,255,0.9);
-	color: #009;
-	padding: 0.4em;
+.Passive { 
+	background-color: rgba(255,255,100,0.8);
+}
+.Instant {
+	background-color: rgba(255,100,100,0.8);
+}
+.keyword {
+	color: #00B;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+
+/****************************************
+			character creation 
+*****************************************/
+.ccWeaponPic {
+	width: 35%;
+	float: left;
+}
+.ccWeaponDesc {
+	font-size: 2.3em;
+}
+.ccArchetypePreview td:first-child {
+width: 50%;
+    padding-right: 1em;
+}
+.ccSpecialMove {
+	text-align: left;
+}
+.ccWeapon1Box {
+	width: 50%;
+	float: left;
+}
+.ccWeapon2Box {
+	width: 50%;
 	float: right;
-	margin-right: 6pt;
-	margin-top: 10pt;
-	font-family: "Slabo 27px";
-	position: absolute;
 }
-.optionBtn {
-	border-radius: 0.3em;
-	background-color: rgba(255,255,255,0.9);
-	color: #009;
-	padding: 0.4em;
-	float: right;
-	font-family: "Slabo 27px";
-	position: absolute;
-	font-size: 200%;
-	width: 90%;
-	left: 5%;
-	font-family: "IM Fell English SC";
-}
-.optionsBtn {
-	right: 0.3em;
-	bottom: 0.4em;
-	display: none;
-}
-.hideBtn {
-	right: 0.3em;
-	bottom: 0.4em;
-}
-.resetBtn { 
-	right: 5.1em;
-	bottom: 0.4em;
-}
-.plusOneBtn { 
-	right: 9em;
-	bottom: 0.4em;
-}
-.minusOneBtn { 
-	right: 11.8em;
-	bottom: 0.4em;
-}
-.myMovesBtn {
-	background-color: rgba(100,255,100,0.9);
-	top: 11.8em;
-}
-.allMovesBtn {
-	top: 14.1em;
-}
-.mainMenuBtn {
-	top: 16.4em;
-}
-#mainMenu {
-	margin-top: 3em;
-}
-.helpBtn {
-	top: 18.7em;
-}
-.characterBtn {
-	top: 21em;
-	background-color: rgba(210,210,255,0.9);
-}
-.APCounter {
-	display: inline-block;
-	font-size: 150%;
-	font-family: "Slabo 27px";
-	position: absolute;
-	bottom: -0.6em;
-	left: 0.6em;
-}
-.topRow {
-	display: inline-block;
-	margin-bottom: 0.4em;
-	width: calc(100% - 6.5em);
+.ccWeaponDescription {
+	width: 60%;
+	display: inline;
 }
 .choice {
 	font-size: 90%;
-	width: 5em;
+	width: 6em;
 	height: 3em;
 	margin: 0.5em;
 	border-radius: 0.3em;
@@ -391,7 +552,7 @@
 	margin-bottom: 1em;
 }
 .ccTitle {
-	margin: 0 auto;
+	margin: 2em auto;
 	background-color: rgba(255,255,255,0.7);
 	padding: 0.5em;
 	padding-top: 1em;
@@ -412,32 +573,7 @@
 	border-radius: 0.3em;
 	border: none;
 	font-family: "IM Fell English SC";
-}
-.bigButton {
-	width: 100%;
-	margin: 2pt auto;
-	border-radius: 0.3em;
-	/*border-width: 0.15em;
-	border: solid rgba(0,0,143,1);*/
-	border: none;
-	background-color: rgba(255,255,255,0.8);
-	color: black;/*rgba(0,0,143,1);*/
-	font-size: 1.2em;
-	font-family: "IM Fell English SC";
-	font-weight: bold;
-	box-shadow: 0px 0px 5px black
-}
-#ccStartBtn {
-	padding: 1.5em;
-}
-#loadBtn {
-	padding: 1em;
-}
-#saveBtn {
-	padding: 1em;
-}
-#aboutBtn {
-	padding: 1em;
+	box-shadow: 0 0 5px;
 }
 .highlight {
 	background-color: rgba(0,255,0,0.5);
@@ -458,18 +594,6 @@
 	background-color: green;
 	float: left;
 	margin-right: 0.2em;
-}
-.d4 {
-	width: 4em;
-}
-.d6 {
-	width: 6em;
-}
-.d8 {
-	width: 8em;
-}
-.d10 {
-	width: 10em;
 }
 .myCharacterBox {
 	display: none;
@@ -508,7 +632,7 @@
 .innerCentered {
 	position: relative;
 	margin: 0 auto;
-	max-width: 15.6em;
+	max-width: 20.6em;
 }
 .weaponImg {
 	height: 8em;
@@ -528,25 +652,6 @@
 	padding: 1em;
 	border: 1px solid #000080;
 }
-.helpBox {
-	display: none;
-	padding: 1em;
-	margin: 0 auto;
-	border-radius: 0.3em;
-	background-color: rgba(255,255,255,0.8);
-	max-width: 23em;
-}
-.statusName {
-	width: 2em;
-}
-.statusTable {
-	border-collapse: collapse;
-}
-.statusTable td, .statusTable tr {
-	border-bottom: 1px solid #000081;
-	margin: 0px;
-	padding: 0.2em;
-}
 .classPanel {
 	width: calc(100%-1em);
 	background-color: rgba(0,0,255,0.1);
@@ -555,6 +660,7 @@
 }
 .classButton {
 	font-size: 0.8em;
+	width: 7em;x
 }
 .classImg {
 	display: block;
@@ -571,83 +677,65 @@
 	height: 7.5em;
 	overflow: hidden;
 }
-.Passive { 
-	background-color: rgba(255,255,100,0.8);
-}
-.Instant {
-	background-color: rgba(255,100,100,0.8);
-}
-#loadButtons {
-	display: none;
-}
-textarea {
-	width: 100%;
-	height: 10em;
-}
-#saveArea {
-	display: none;
-}
-#saveText {
-	word-wrap: break-word; 
-	background-color: rgba(255,255,255,0.6);
-	padding: 0.5em;
-}
-.halfEmPad {
-	padding: 0.5em;
-}
-#mobileDebug {
-	display: none;
-	max-height: 20em;
-	overflow-y: scroll;
-}
-#aboutSection {
-	max-width:100%;
-	padding:1em;
-	display:none;
-	background-color: rgba(255,255,255,0.6);
-}
-.Q {
-	font-weight: bold;
-}
-.A {
 
+
+.quickstart {
+	background-color: #B8CCCC;
+	padding: 0.5em;
+	margin-top: 5em;
 }
-.backButton { 
-	font-family: Times;	
-	font-size: 2em;
-	color: white;
+
+/****************************************
+		   		glossary 
+*****************************************/
+
+.definitionBox {
+	border-radius: 0.25em;
+	border: 1pt solid #000;
 	position: fixed;
-	left: 0.5em;
-	top: 0.15em;
-	text-shadow: 0.05em 0.05em 0.2em black;
-	z-index: 10;
+	width: 24em;
+	bottom: -30em;
+	left: calc(50% - 12em);
+	margin: 0px;
+	padding: 1em;
+	background-color: #FFF;
+	text-align: justify;
+	max-width: calc(100% - 2em);
+	-webkit-transition: bottom 0.2s; /* Safari */
+	transition: bottom 0.2s;
+}
+.defNavBar {
+	position: absolute;
+	border-radius: 0.25em 0.25em 0em 0em;
+	left: 0;
+	top: 0;
+	background-color: lightgray;
+	width: calc(100% - 1em);
+	padding: 0.5em;
+}
+.definitionHeader {
+	position: absolute;
+	left: 15%;
+	z-index: 0;
+	text-align: center;
+	width: 70%;
+}
+.defBody {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.defNavBtn {
+	display: inline;
+	padding-right: 1em;
 	cursor: pointer;
+	float: left;
+	z-index: 3;
 }
-.backButton:hover {
-	color: #CCC;
-}
-.backDisabled {
-	color: rgba(255,255,255,0.2);
-	text-shadow: 0.05em 0.05em 0.2em rgb(0,0,0,0.2);
-}
-.threeBars {
-	position: fixed;
-	width: 2em;
-	right: 1em;
-	top: 1em;
-	z-index: 10;
-	cursor: pointer;
-}
-.threeBars .bar {
-	width: 1.8em;
-	height: 0.2em;
-	margin-bottom: 0.3em;
-	background-color: white;
-	box-shadow: 0.05em 0.05em 0.2em black;
-}
-.threeBars:hover .bar {
-	background-color: #CCC;
-}
+
+
+/****************************************
+   character overview / character sheet
+*****************************************/
 #attributeTable {
 	text-align: center;
 	width: 18em;
@@ -699,6 +787,7 @@ textarea {
 }
 .notes {
 	height: 1.5em; 
+	width: 90%;
 	display: block; 
 	margin: 0 auto; 
 	background-color: rgba(255,255,255,0.5);
@@ -707,84 +796,14 @@ textarea {
 	overflow: hidden;
 	text-align: center;
 }
-.link {
-	color: blue;
-	cursor: pointer;
-}
-#helpLink {
-	color: blue;
-	cursor: pointer;
-}
-.quickstart {
-	background-color: #B8CCCC;
-	padding: 0.5em;
-	margin-top: 5em;
-}
-.helpTitleBackground {
-	/*background-color: #FF0000;
-	box-shadow: 0pt 0pt 3pt 3pt #FF0000;*/
-}
-.helpfulHint {
-	background-color: rgba(255,255,255,0.5);
-	border-radius: 0.5em;
-	padding: 0.5em;
-	display: none;
-}
-.definitionBox {
-	border-radius: 0.25em;
-	border: 1pt solid #000;
-	position: fixed;
-	width: 24em;
-	bottom: -30em;
-	left: calc(50% - 12em);
-	margin: 0px;
-	padding: 1em;
-	background-color: #FFF;
-	text-align: justify;
-	max-width: calc(100% - 2em);
-	-webkit-transition: bottom 0.2s; /* Safari */
-	transition: bottom 0.2s;
-}
-.defNavBar {
-	position: absolute;
-	border-radius: 0.25em 0.25em 0em 0em;
-	left: 0;
-	top: 0;
-	background-color: lightgray;
-	width: calc(100% - 1em);
-	padding: 0.5em;
-}
-.definitionHeader {
-	position: absolute;
-	left: 15%;
-	z-index: 0;
-	text-align: center;
-	width: 70%;
-}
-.defBody {
-	margin-top: 2em;
-	margin-bottom: 2em;
-}
-.defNavBtn {
-	display: inline;
-	padding-right: 1em;
-	cursor: pointer;
-	float: left;
-	z-index: 3;
-}
-.dieSize1 { 
-padding-top: 0.25em; 
-height: 2.5em;
-vertical-align: text-bottom;
-}
-.keyword {
-	color: #00B;
-	cursor: pointer;
-	text-decoration: underline;
-}
 #nameField { font-size: 1em; }
 #primaryWeaponDamage { display: inline; }
 #secondaryWeaponDamage { display: inline; }
+
+
+/****************************************
+			battle screen 
+*****************************************/
 .battleBox {
 	margin: 1em;
 	border: solid 1pt;
@@ -811,6 +830,10 @@ vertical-align: text-bottom;
 #nextTurn {}
 #movesContainer {}
 
+
+/****************************************
+			media query 
+*****************************************/
 @media (max-width: 410px) {
   #intro {
 	margin-top: 0px;
@@ -828,3 +851,16 @@ vertical-align: text-bottom;
   	margin-top: 0;
   }
 }
+
+/****************************************
+		   misc / utility
+*****************************************/
+.halfEmPad {
+	padding: 0.5em;
+}	
+.helpfulHint {
+	display: none;
+}
+#mobileDebug {
+	display: none;
+}	

@@ -115,8 +115,8 @@ var archetypes = {
 		"Weapon2" : "Longbow",
 		"Attributes" : [6,4,4,2],
 		"Attack" : 5,
-		"Defense" : 3,
-		"HP" : 15
+		"Defense" : 4,
+		"HP" : 8
 	},
 	"Defender" : 
 	{
@@ -124,8 +124,8 @@ var archetypes = {
 		"Weapon2" : "Buckler-Shield",
 		"Attributes" : [5,5,2,4],
 		"Attack" : 4,
-		"Defense" : 4,
-		"HP" : 16
+		"Defense" : 5,
+		"HP" : 9
 	},
 	"Scholar" : 
 	{
@@ -133,8 +133,8 @@ var archetypes = {
 		"Weapon2" : "Throwing-Knives",
 		"Attributes" : [2,4,7,6],
 		"Attack" : 3,
-		"Defense" : 2,
-		"HP" : 12
+		"Defense" : 3,
+		"HP" : 6
 	},
 	"Battlemage" : 
 	{
@@ -142,8 +142,8 @@ var archetypes = {
 		"Weapon2" : "Throwing-Knives",
 		"Attributes" : [2,4,6,4],
 		"Attack" : 3,
-		"Defense" : 2,
-		"HP" : 13
+		"Defense" : 3,
+		"HP" : 6
 	},
 	"Assassin" : 
 	{
@@ -151,8 +151,8 @@ var archetypes = {
 		"Weapon2" : "Throwing-Knives",
 		"Attributes" : [4,6,4,2],
 		"Attack" : 6,
-		"Defense" : 2,
-		"HP" : 14
+		"Defense" : 3,
+		"HP" : 6
 	},
 	"Hunter": 
 	{
@@ -160,8 +160,8 @@ var archetypes = {
 		"Weapon2" : "Shortsword",
 		"Attributes" : [4,6,4,2],
 		"Attack" : 5,
-		"Defense" : 2,
-		"HP" : 13
+		"Defense" : 3,
+		"HP" : 6
 	}
 }
 
@@ -178,15 +178,15 @@ function Weapon(nameArg, damageArg, APArg, bonusArg, typeArg, specialArg) {
 }
 
 var weapons = [];
-weapons.push(new Weapon("Fists","1","-1",0,"melee",""));
-weapons.push(new Weapon("Shortsword","2","+0",1,"melee",""));
-weapons.push(new Weapon("Battleaxe","4","+1",0,"melee",""));
-weapons.push(new Weapon("Throwing-Knives","1","+0",0,"ranged",""));
-weapons.push(new Weapon("Longbow","2","+0",0,"ranged",""));
-weapons.push(new Weapon("Crossbow","3","+0",0,"ranged",""));
-weapons.push(new Weapon("Staff","1","+0",0,"melee","Magic +1"));
-weapons.push(new Weapon("Longsword","3","+0",0,"melee",""));
-weapons.push(new Weapon("Throwing-Spears","2","+0",0,"ranged",""));
+weapons.push(new Weapon("Fists","2","-1",0,"melee",""));
+weapons.push(new Weapon("Shortsword","5","+0",1,"melee",""));
+weapons.push(new Weapon("Battleaxe","7","+1",0,"melee",""));
+weapons.push(new Weapon("Throwing-Knives","3","+0",0,"ranged",""));
+weapons.push(new Weapon("Longbow","4","+0",0,"ranged",""));
+weapons.push(new Weapon("Crossbow","6","+0",0,"ranged",""));
+weapons.push(new Weapon("Staff","2","+0",0,"melee","Magic +1"));
+weapons.push(new Weapon("Longsword","6","+0",0,"melee",""));
+weapons.push(new Weapon("Throwing-Spears","4","+0",0,"ranged",""));
 weapons.push(new Weapon("Buckler-Shield","0","+0",0,"melee",""));
 
 var choiceDescriptions = {
@@ -327,7 +327,7 @@ basicMoves.push(new Move(
 	)
 );
 basicMoves.push(new Move(
-	"Evade",
+	"Defend",
 	"",
 	1,
 	"Roll |Defense||dd|",
@@ -337,13 +337,13 @@ basicMoves.push(new Move(
 	)
 );
 basicMoves.push(new Move(
-	"Parry",
+	"Focus Defend",
 	"",
-	2,
-	"Roll |Defense + 2||dd|",
+	4,
+	"Roll |Defense + 4||dd|",
 	"",
 	"Reaction",
-	"You are attacked at touch range"
+	"You are attacked"
 	)
 );
 
