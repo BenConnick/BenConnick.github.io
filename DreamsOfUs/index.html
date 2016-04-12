@@ -7,15 +7,17 @@ Author: Ben Connick
         <title>Dream</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
         <style>
         	h1 {
-        		font-family: "Lucida Console", Monaco, monospace;
+        		font-family: "Indie Flower", "Lucida Console", Monaco, monospace;
         		font-size: 60px;
         		margin: 0px;
         		text-align: center;
         	}
         	body {
         		background-color: black;
+        		font-family: "Indie Flower";
         	}
         	.menuBtn {
         		display: block;
@@ -27,8 +29,12 @@ Author: Ben Connick
         		opacity: 0;
         	}
         	#contents {
-        		width: 800px;
-        		height: 500px;
+        		width: 1120px;
+        		height: 630px;
+        		margin-left: calc(50% - 560px); 
+        		margin-top: 1em;
+        		position: relative;
+        		overflow: hidden;
         	}
         	#bigCanvas {
         		position: absolute;
@@ -65,36 +71,128 @@ Author: Ben Connick
         		bottom: 0; 
         		display: none;
         	}
+        	#showcaseModeBtn {
+        		position: fixed;
+        		font-size: 2em;
+        		width: 7em;
+        		height: 3em;
+        		left: 50%;
+        		top: 50%;
+        		display: none;
+        	}
+        	#borderFrame {
+        		position: absolute;
+        		left: calc(50% - 1060px);
+        		top: calc(50% - 815px);
+        		z-index: 100;
+        		width: 1120px;
+        		height: 630px;
+        		border: solid 500px black;
+        	}
+        	
+        	#m1 {
+        		width: 1160px;
+        		animation-duration: 3s;
+        		animation-iteration-count: infinite;
+				animation-name: slide1;
+				animation-direction: alternate;
+				animation-timing-function: linear;
+        	}
+        	
+        	#m3 {
+        		width: 1160px;
+        		animation-duration: 2s;
+        		animation-iteration-count: infinite;
+				animation-name: slide2;
+				animation-direction: alternate;
+				animation-timing-function: linear;
+        	}
+        	
+        	#pauseMenu {
+        		font-size: 3em;
+        		background-color: #ffe;
+        		padding: 1em;
+        		position: fixed;
+        		left: calc(50% - 1em);
+        		width: 3em;
+        		top: 1em;
+        		z-index: 1000;
+        		
+        		text-align: center;
+        		display: none;
+        	}
+        	
+        	
+        	.gameBtn {
+        		margin: 0 auto;
+        		font-size: 0.8em;
+        		font-family: "Indie Flower";
+        		border: none;
+        		
+        		background-color: #ff0;
+        	}
+        	
+        	@keyframes slide1 {
+				  from {
+					margin-left: 0px;
+				  }
+
+				  to {
+					margin-left: -5.01px;
+				  }
+			}
+				
+			@keyframes slide2 {
+				  from {
+					margin-left: -10.001px;
+				  }
+
+				  to {
+					margin-left: 0px;
+				  }
+			}
+        	
+        	
+        	
+        	
         </style>
     </head>
     <body style="margin: 0px; padding: 0px">
+    	
     	<div id="contents">
+    		<div id="pauseMenu">
+    			<p>Paused</p>
+    			<p style="font-size: 0.7em">Volume<p>
+    			<input type="range" id="volumeSlider" min="0.00" value="1.00" max="1.00" step="0.01"></input>
+    			<button id="resumeBtn" class="gameBtn">Resume</button>
+    		</div>
     		<div id="mainMenu">
-    			<img class="startmenuimg" src="images/startmenu/2.png"/>
-    			<img class="startmenuimg" src="images/startmenu/1.png"/>
-    			<img class="startmenuimg" src="images/startmenu/3.png"/>
-    			<img class="startmenuimg" src="images/startmenu/4.png"/>
-    			<img class="startmenuimg" src="images/startmenu/5.png"/>
-    			<div class="titleBar"><h1>Dreams of Us</h1></div>
+    			<img id="m2" class="startmenuimg" src="images/startmenu/2.png"/>
+    			<img id="m1" class="startmenuimg" src="images/startmenu/1.png"/>
+    			<img id="m3" class="startmenuimg" src="images/startmenu/3.png"/>
+    			<img id="m4" class="startmenuimg" src="images/startmenu/4.png"/>
+    			<img id="m5" class="startmenuimg" src="images/startmenu/5.png"/>
+    			<div id="m6" class="titleBar"><h1>Dreams of Us</h1></div>
     			<button class="menuBtn" id="start">Start</button>
     		</div>
     		<div id="gameOver">
     			<div class="titleBar"><h1>Game Over</h1></div>
     			<button class="menuBtn" id="retryBtn">Retry</button>
-    			<button class="menuBtn" id="menuBtn">Menu</button>
+    			
     		</div>
         	<canvas style="position: absolute; left: calc(50% - 560px); top: calc(50% - 315px); padding: 0px;" id="bigCanvas" width="1120" height="630" ></canvas>
-        	<input id="cheatInput" type="text"></input>
+        	<input id="cheatInput" type="text"><button id="showcaseModeBtn">DEMO</button></input>
         </div>
         <script src="lib/preloadjs-0.6.1.min.js"></script>
 		<script src="lib/soundjs-0.6.1.min.js"></script>
-        <script src="classes.js"></script>
-        <script src="utilities.js"></script>
-        <script src="keys.js"></script>
-        <script src="graphics.js"></script>
+        <script src="js/classes.js"></script>
+        <script src="js/utilities.js"></script>
+        <script src="js/keys.js"></script>
+        <script src="js/graphics.js"></script>
+        <script src="js/emitter.js"></script>
         <!-- to be implemented: <script src="sound.js"></script>-->
-        <script src="game.js"></script>
-        <script src="loader.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/loader.js"></script>
         
         <!--<script src="dreamGame.js"></script>-->
     </body>
