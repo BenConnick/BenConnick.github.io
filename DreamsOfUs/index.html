@@ -109,6 +109,20 @@ Author: Ben Connick
 				animation-timing-function: linear;
         	}
         	
+        	#m5 {
+        		display: none;
+        	}
+        	
+        	.loadingText {
+        		font-size: 3em;
+        		color: white;
+        		position: fixed;
+        		text-align: center;
+        		width: 10em;
+        		left: calc(50vw - 5em);
+        		top: 55vh;
+        	}
+        	
         	#pauseMenu {
         		font-size: 3em;
         		background-color: #ffe;
@@ -117,7 +131,7 @@ Author: Ben Connick
         		left: calc(50% - 1em);
         		width: 3em;
         		top: 1em;
-        		z-index: 1000;
+        		z-index: 5;
         		
         		text-align: center;
         		display: none;
@@ -173,6 +187,7 @@ Author: Ben Connick
     			<img id="m3" class="startmenuimg" src="images/startmenu/3.png"/>
     			<img id="m4" class="startmenuimg" src="images/startmenu/4.png"/>
     			<img id="m5" class="startmenuimg" src="images/startmenu/5.png"/>
+    			<div class="loadingText">Loading...</div>
     			<div id="m6" class="titleBar"><h1>Dreams of Us</h1></div>
     			<button class="menuBtn" id="start">Start</button>
     		</div>

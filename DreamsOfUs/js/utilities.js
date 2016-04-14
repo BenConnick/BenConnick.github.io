@@ -71,7 +71,9 @@ window.addEventListener("load",function() {
 	// set up pause menu this doesn't really belong in utilities but I have nowhere else to put it right now
 	x_pauseMenuElem_x = q("#pauseMenu");
 	q("#resumeBtn").onclick = function() { app.game.unpause(); togglePauseMenu(); };
-	q("#volumeSlider").onchange = function(e) { console.log(e.target.value); app.game.masterVolume = e.target.value; }
+	q("#volumeSlider").onchange = function(e) { app.game.masterVolume = e.target.value; console.log(app.game.masterVolume); }
+	// set initial value
+	app.game.masterVolume = q("#volumeSlider").value;
 	
 });
 function x_HandleCheats_x(elem) {

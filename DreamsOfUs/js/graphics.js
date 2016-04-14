@@ -21,9 +21,6 @@ app.graphics = (function() {
 		//spritesheets and sprites
 		this.emptyImage = new Image();
 		
-		this.backgroundImg = new Image();
-		this.backgroundImg.src = "images/citywide.png";
-		
 		this.leftControlsImg = new Image();
 		this.leftControlsImg.src = "images/LeftControls.png";
 		
@@ -37,7 +34,7 @@ app.graphics = (function() {
 		this.idleImg.src = "images/idle.png";
 		
 		this.boyImg = new Image();
-		this.boyImg.src = "images/boy.png";
+		this.boyImg.src = "images/boySpriteSheet.png";
 		
 		this.boyShadowImg = new Image();
 		this.boyShadowImg.src = "images/boy_shadow.png";
@@ -49,7 +46,7 @@ app.graphics = (function() {
 		this.boySquintImg.src = "images/boy_squint_face.png";
 		
 		this.girlImg = new Image();
-		this.girlImg.src = "images/girl.png";
+		this.girlImg.src = "images/girlSpriteSheet.png";
 		
 		this.girlShadowImg = new Image();
 		this.girlShadowImg.src = "images/girl_shadow.png";
@@ -107,7 +104,7 @@ app.graphics = (function() {
 		 // increase frame number if ready 
 		 if (object.percentToNextFrame >= 1) {
 			 object.animFrame+=1;
-			 object.percentToNextFrame-=1;
+			 object.percentToNextFrame = object.percentToNextFrame - Math.floor(object.percentToNextFrame);
 		 }
 		 // animation complete, what next?
 		 if(object.animFrame >= object.anims[object.anim].numFrames) {
@@ -118,8 +115,9 @@ app.graphics = (function() {
 				  object.animFrame =  0;
 			  }
 		 }
-			// use deltatime and xvelocity to make sure that the legs move with the ground
-			object.percentToNextFrame += Math.abs(object.xvelocity)*app.game.deltaTime/300; // 300 is arbitrary constant
+		 
+		// use deltatime
+		object.percentToNextFrame += deltaTime/240; // 240 is an arbitrary constant
 	 }	
 	 
 	 

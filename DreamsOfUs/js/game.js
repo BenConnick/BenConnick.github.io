@@ -22,7 +22,7 @@ app.game = (function() {
 		this.player1.name = "boy";
 		this.player1.x = app.graphics.canvasWidth/2;
 		this.player1.y = app.graphics.canvasHeight/2;
-		this.player1.anims["idle"] = new Animation("idle", 106, 155, 1, app.graphics.boyImg);
+		this.player1.anims["idle"] = new Animation("idle", 106, 200, 3, app.graphics.boyImg);
 		//player1.anims["hurt"] = new Animation("hurt", 106, 155, 1, boySquintImg);
 		this.player1.anim = "idle";
 		this.player1.rotateWithXVel = true;
@@ -40,7 +40,7 @@ app.game = (function() {
 		this.player2.name = "girl";
 		this.player2.x = app.graphics.canvasWidth/2;
 		this.player2.y = app.graphics.canvasHeight/2;
-		this.player2.anims["idle"] = new Animation("idle", 113, 170, 1, app.graphics.girlImg);
+		this.player2.anims["idle"] = new Animation("idle", 113, 200, 3, app.graphics.girlImg);
 		//player2.anims["hurt"] = new Animation("hurt", 113, 150, 1, girlSquintImg);
 		this.player2.anim = "idle";
 		this.player2.rotateWithXVel = true;
@@ -394,7 +394,8 @@ app.game = (function() {
 					this.player1.flashingTime = 3000;
 					this.p1face.anim = "hurt";
 					this.lives-=1;
-					createjs.Sound.play("clothes_hit");
+					var hit = createjs.Sound.play("clothes_hit");
+					hit.volume = this.masterVolume;
 				}
 			}
 			// only check if the this.players are vulnerable
@@ -406,7 +407,8 @@ app.game = (function() {
 					this.player2.flashingTime = 3000;
 					this.p2face.anim = "hurt";
 					this.lives-=1;
-					createjs.Sound.play("clothes_hit");
+					var hit = createjs.Sound.play("clothes_hit");
+					hit.volume = this.masterVolume;
 				}
 			}
 			
