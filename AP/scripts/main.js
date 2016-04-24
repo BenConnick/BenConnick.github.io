@@ -166,6 +166,16 @@ function displayMove(move, hideButton, containerElem) {
 	 collapserObjects["AB"+abilityBoxUniqueId] = new Collapser(outerContainer,outerContainer.querySelector(".topRow"),container);
 }
 
+// check if the move exists (this is a slow method)
+function moveExistsInList(name,list) {
+	for (var i=0; i<list.length; i++) {
+		if (list[i].name == name) {
+			return true;		
+		}
+	}
+	return false;
+}
+
 function useAbility(moveObject) {
 	//console.log(moveObject.roll);
 	// subtract AP
@@ -379,10 +389,10 @@ function listMovesCC(moveListName) {
 	} 
 }
 
-function listMyMoves() {
+function listMyMoves(container) {
 	//console.log("listMoves " + myMoves + " " + myMoves.length);
 	for (var i=0; i<myMoves.length; i++) {
-		displayMove(myMoves[i]);
+		displayMove(myMoves[i],true,container);
 	} 
 }
 
@@ -411,7 +421,7 @@ function resetAP() {
 function setAP(value) {
 	AP = value;
 	getByClass("APCounter").innerHTML = "" + AP + "AP";
-	getByClass("BBAPCounter").innerHTML = "" + AP + " AP";
+	getByClass("APBattleCounter").innerHTML = "&nbsp&nbsp" + AP + "&nbsp&nbsp";
 }
 function addToAP(arg) {
 	setAP(AP + arg);
@@ -777,7 +787,7 @@ function loadCharacterFromString(str) {
 	character.moves.forEach(function(moveName) {
 		for (var i=0; i<allMoves.length; i++) {
 			if (allMoves[i].name == moveName) {
-				console.log("move loaded: "+moveName);
+				//console.log("move loaded: "+moveName);
 				myMoves.push(allMoves[i]);
 				break;
 			}
@@ -825,7 +835,7 @@ function setCookieButtonText() {
 
 function loadCookies() {
 	cookieList = [];
-	console.log("COOKIE TEXT\n********************\n" + document.cookie);
+	//console.log("COOKIE TEXT\n********************\n" + document.cookie);
 	if (document.cookie != "" && document.cookie != null) {
 		var startInagl = 0;
 		// load cookies
@@ -971,6 +981,12 @@ function showScreen(screenString) {
 			window.scroll(0,0);
 			getById("quickReference").scrollIntoView(true);
 			setScreenString("Quick Reference");
+			break;
+		case "Battle":
+			clearScreens();
+			getByClass("battleContainer").style.display = "block";
+			window.scroll(0,0);
+			setScreenString("Battle");
 			break;
 	}
 }
@@ -1166,47 +1182,11 @@ function populateKeywords() {
 	});
 }
 
-var turn;
-// activates the battle mode
-function enterBattleMode(myTurn) {
-	if (myTurn) {
-		setAP(5);
-	} else {
-		setAP(10);
-	}
-	setHP(archetypes[character.charClass].HP);
-	turn = myTurn;
-	getByClass("battleHUD").style.display = "block";
-	getByClass("initiativeButtons").style.display = "none";
-}
+// enterBattleMode moved to battle.js
 
 function setHP(val) {
 	HP = val;
-	getByClass("HPCounter").innerHTML = HP + " HP";
-}
-
-function Collapser(container, clickElem, innerElem) {
-	this.uniqueId = container.id;
-	this.container = container;
-	this.clickElem = clickElem;
-	this.innerElem = innerElem;
-	this.expanded = false;
-	this.toggle = function() {
-		if (this.expanded) {
-			window.scrollBy(0,-1*innerElem.clientHeight);
-			this.expanded = false;
-			this.innerElem.style.height = '0'
-			this.innerElem.style.overflow = "hidden";
-		} else {
-			this.innerElem.style.height = 'auto'
-			this.expanded = true;
-			window.scrollBy(0,innerElem.clientHeight);
-		}
-	}
-	this.clickElem.onclick = function(event) {
-		console.log(event.currentTarget.id);
-		collapserObjects[event.currentTarget.id].toggle();
-	}
+	//getByClass("HPCounter").innerHTML = HP + " HP";
 }
 
 function DieImgElem(typeStr) {

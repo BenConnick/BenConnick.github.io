@@ -165,12 +165,12 @@ var archetypes = {
 	}
 }
 
-function Weapon(nameArg, damageArg, APArg, bonusArg, typeArg, specialArg) {
+function Weapon(nameArg, damageArg, APArg, bonusArg, rangeArg, specialArg) {
 	this.name = nameArg;
 	this.AP = APArg;
 	this.bonus = bonusArg;
 	this.damage = damageArg;
-	this.type = typeArg;
+	this.range = rangeArg;
 	this.special = specialArg;
 	this.print = function() {
 		return this.name + ": " + this.damage + " " + this.type + " damage, " + this.AP + " AP drain, " + this.bonus + " bonus attack, special:" + this.special;
@@ -178,16 +178,16 @@ function Weapon(nameArg, damageArg, APArg, bonusArg, typeArg, specialArg) {
 }
 
 var weapons = [];
-weapons.push(new Weapon("Fists","2","-1",0,"melee",""));
-weapons.push(new Weapon("Shortsword","5","+0",1,"melee",""));
-weapons.push(new Weapon("Battleaxe","7","+1",0,"melee",""));
-weapons.push(new Weapon("Throwing-Knives","3","+0",0,"ranged",""));
-weapons.push(new Weapon("Longbow","4","+0",0,"ranged",""));
-weapons.push(new Weapon("Crossbow","6","+0",0,"ranged",""));
-weapons.push(new Weapon("Staff","2","+0",0,"melee","Magic +1"));
-weapons.push(new Weapon("Longsword","6","+0",0,"melee",""));
-weapons.push(new Weapon("Throwing-Spears","4","+0",0,"ranged",""));
-weapons.push(new Weapon("Buckler-Shield","0","+0",0,"melee",""));
+weapons.push(new Weapon("Fists","2","-1",0,"touch",""));
+weapons.push(new Weapon("Shortsword","5","+0",1,"touch",""));
+weapons.push(new Weapon("Battleaxe","7","+1",0,"touch",""));
+weapons.push(new Weapon("Throwing-Knives","3","+0",0,"3/6/9",""));
+weapons.push(new Weapon("Longbow","5","+0",0,"4/8/16",""));
+weapons.push(new Weapon("Crossbow","6","+0",0,"4/8/16",""));
+weapons.push(new Weapon("Staff","2","+0",0,"touch","Magic +1"));
+weapons.push(new Weapon("Longsword","6","+0",0,"touch",""));
+weapons.push(new Weapon("Throwing-Spears","4","+0",0,"3/6/9",""));
+weapons.push(new Weapon("Buckler-Shield","0","+0",0,"touch",""));
 
 var choiceDescriptions = {
 
@@ -284,7 +284,7 @@ basicMoves.push(new Move(
 	"",
 	5,
 	"|Weapon||ad|",
-	"4 spaces: 3|d|, 8 spaces: 2|d|, 12 spaces: 1|d|",
+	"4/8/12",
 	"",
 	"",
 	""
@@ -353,3 +353,29 @@ basicMoves.forEach(function(m) {
 	myMoves.push(m);
 	allMoves.push(m);
 });
+
+function Collapser(container, clickElem, innerElem, callback, expanded) {
+	this.uniqueId = container.id || "no id assigned";
+	this.container = container;
+	this.clickElem = clickElem;
+	this.innerElem = innerElem;
+	this.expanded = expanded || false;
+	this.toggle = function() {
+		if (this.expanded) {
+			window.scrollBy(0,-1*innerElem.clientHeight);
+			this.expanded = false;
+			this.innerElem.style.height = '0'
+			this.innerElem.style.overflow = "hidden";
+		} else {
+			this.innerElem.style.height = 'auto';
+			this.expanded = true;
+			window.scrollBy(0,innerElem.clientHeight);
+		}
+		if (callback) callback(this.expanded);
+	}
+	this.clickElem.onclick = (function(event) {
+		//console.log(event.currentTarget.id);
+		//collapserObjects[event.currentTarget.id].toggle();
+		this.toggle();
+	}).bind(this);
+}

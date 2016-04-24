@@ -28,3 +28,8 @@ function removeClass(ele,cls) {
 	ele.className=ele.className.replace(reg,' ');
   }
 }
+
+// shorthand for querySelector
+function q(str) {
+	return document.querySelector(str);
+}

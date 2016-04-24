@@ -15,6 +15,49 @@ Author: Ben Connick
         
     </head>
     <body>
+    	<div class="battleContainer testContainer" style="display: none;">
+    		<div class="battleHUD testContainer">
+    			<div class="battleName">Name goes here</div>
+    			<span class="HPLabel">HP</span>
+    			<div class="HPContainer">
+    				<div class="HPBar">
+    					<div class="HPText">22/22</div>
+    				</div>
+    			</div>
+    			
+    			
+    		</div>
+    		<div class="battleImages testContainer">
+    			<div class="selectedWeaponImg"></div>
+    			<div class="battleCharacterImg"></div>
+    		</div>
+    		<select class="weaponSelector" style="width: 100%">
+			  <option value="primary">Sword_</option>
+			  <option value="secondary">Bow_</option>
+			</select>
+			
+			<div class="battleUtilityBar testContainer">
+				<button>undo</button>
+				<button>AP+</button>
+				<div class="APBattleCounter" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
+				<button>AP-</button>
+				<button>end</button>
+			</div>
+			
+			<h7>ABILITIES</h7>
+			<div class="super">
+				<div class="attackAndMove battleMoveContainer">
+				</div>
+				<div class="advancedMoves battleMoveContainer">
+					<div class="title"> - Advanced</div>
+					<div class="inner"></div>
+				</div>
+				<div class="specialMoves battleMoveContainer">
+					<div class="title"> - Special</div>
+					<div class="inner"></div>
+				</div>
+			</div>
+    	</div>
     	<div id="intro">
     		<div id="closeBar">
     			<button>Close</button>
@@ -290,7 +333,7 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><p class='ccWeaponDesc'>4<img src='images/attackdie.png' class='dieSize2'> 
+								<td><p class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
 								<img src='images/Longbow.png' class='ccWeaponPic'/></p></td>
 								<!--secondary weapon-->
 								<td><p class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
@@ -467,7 +510,7 @@ Author: Ben Connick
     		</table>
     		<div style="text-align: center; margin-top: 1em;">Notes (does not save)</div>
     		<textarea class="notes"></textarea>
-    		<div class="battleBox">
+    		<!--<div class="battleBox">
 				<p class="tableSectionHeader">Battle</p>
 				<div class="initiativeButtons">
 					<button id="IAttack">I Attack</button>
@@ -486,7 +529,8 @@ Author: Ben Connick
 				</div>
 				
 				<div id="movesContainer"></div>
-    		</div>
+    		</div>-->
+    		<div><button class="battleButton">Battle!</button></div>
     	</div>
     	<div class="helpBox">
 			<h1 style="text-align: center; color: rgb(80, 80, 128); text-shadow: none;">Rules and Help</h1>
@@ -838,5 +882,6 @@ Author: Ben Connick
     <script src="scripts/utilities.js"></script>
     <script src="scripts/setup.js"></script>
     <script src="scripts/uicontrols.js"></script>
+    <script src="scripts/battle.js"></script>
     <script src="scripts/main.js"></script>
 </html>

@@ -161,10 +161,29 @@ function activateButtons() {
 			d(glossaryForward.pop()); // this adds to history
 		}
 	}
-	getById("IAttack").onclick = function() {
+
+	getByClass("battleButton").onclick = function() {
 		enterBattleMode(true);
 	}
-	getById("GotAttacked").onclick = function() {
+	
+	getByClass("weaponSelector").onchange = function() {
+		// change weapon picture
+		if (this.value == character.primaryWeaponName) {
+			getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.primaryWeaponName+'.png")';
+		} else {
+			getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.secondaryWeaponName+'.png")';
+		}
+		// change whether basic attack is melee or range
+		if (getWeapon(this.value).range == "touch") {
+			// display standard attack
+			
+		} else {
+			// display ranged attack
+			
+		}
+	}
+	
+	/*getById("GotAttacked").onclick = function() {
 		enterBattleMode(false);
 	}
 	getById("HPplus").onclick = function() {
@@ -177,5 +196,5 @@ function activateButtons() {
 		var newAP = AP + 5;
 		if (newAP > maxAP) { newAP = maxAP; }
 		setAP(newAP);
-	}
+	}*/
 }
