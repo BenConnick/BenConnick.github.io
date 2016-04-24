@@ -115,7 +115,7 @@
 		   save and load
 *****************************************/
 textarea {
-	width: 100%;
+	width: 98%;
 	height: 10em;
 }
 #saveArea {
@@ -804,12 +804,80 @@ width: 50%;
 /****************************************
 			battle screen 
 *****************************************/
+.battleButton {
+	font-size: 5em;
+}
+.battleName {
+	font-family: "IM Fell English SC";
+	font-size: 2em;
+}
 .battleBox {
 	margin: 1em;
 	border: solid 1pt;
 }
+.battleContainer {
+	text-align: center; 
+}
+
+.battleMoveContainer {
+	text-align: left;
+	width: 100%;
+	border: solid 1pt black;
+	margin: 0.1em;
+}
+.battleMoveContainer .title {
+	text-align: left;
+	width: calc(100% - 1em);
+	height: 1em;
+	background-color: #fff;
+	font-size: 150%;
+	font-weight: 600;
+	text-align: left;
+	padding: 0.5em;
+	font-family: "IM Fell English SC";
+	display: block;
+	cursor: pointer;
+}
+
+.battleMoveContainer .inner {
+	border-left: solid black;
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+}
 .battleHUD {
-	display: none;
+
+}
+.APBattleCounter {
+	border: solid darkblue;
+	border-width: 1pt;
+	border-radius: 500000px;
+	display: inline;
+	width: 2.5em;
+	text-align: center;
+	margin-top: 0.25em;
+	font-weight: bold;
+	color: darkblue;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "IM Fell English SC";
+	font-size: 1.5em;
+}
+.
+.HPLabel {
+	height: 1em;
+	display: inline-block;
+}
+.HPContainer {
+	display: inline-block;
+	width: 15em;
+	padding: 0.2em;
+	background-color: blue;
+}
+.HPBar {
+	width: 100%;
+	background-color: skyblue;
+}
+.HPText {
+	height: 1.2em;
 }
 .HPButton {}
 .leftBox { 
@@ -829,7 +897,22 @@ width: 50%;
 .BBAPCounter { display: inline; width: 5em; }
 #nextTurn {}
 #movesContainer {}
-
+.battleCharacterImg {
+	display: inline-block;
+	width: 55%;
+	height: 15em;
+	background-image: url("../images/Slayer.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.selectedWeaponImg {
+	display: inline-block;
+	width: 40%;
+	height: 15em;
+	background-image: url("../images/Shortsword.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 
 /****************************************
 			media query 
@@ -864,3 +947,7 @@ width: 50%;
 #mobileDebug {
 	display: none;
 }	
+.testContainer {
+	border: solid gray;
+	width: 100%
+}
