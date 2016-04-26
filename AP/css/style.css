@@ -26,10 +26,9 @@
 #closeBar button {
 	border: solid #aad;
 	border-radius: 0.5em;
-	
 	position: absolute;
-	width: 5em;
-	left: calc(50% - 2.5em);
+	width: 8em;
+	left: calc(50% - 4em);
 	height: 2em;
 	top: calc(50% - 1em);
 	background-color: #fff;
@@ -678,7 +677,6 @@ width: 50%;
 	overflow: hidden;
 }
 
-
 .quickstart {
 	background-color: #B8CCCC;
 	padding: 0.5em;
@@ -810,19 +808,38 @@ width: 50%;
 .battleName {
 	font-family: "IM Fell English SC";
 	font-size: 2em;
+	margin: 0.5em 0;
+	color:  white;
+	text-shadow: 0 0 0.3em rgba(0,0,0,1);
+	border-top: 2pt solid white;
+	border-bottom: 2pt solid white;
+	padding:  0.5em 0em;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 0.1em rgba(0,0,0,0.5);
 }
 .battleBox {
 	margin: 1em;
 	border: solid 1pt;
 }
 .battleContainer {
+	padding-top: 2em;
 	text-align: center; 
+	background-color:  #DDD;
+}
+
+.battleUtilityBar button {
+	border: solid 2pt white;
+	border-radius: 0.5em;
+	width: 4em;
+	height: 2em;
+	background-color: #fff;
+	font-family: "Slabo 27px";
+	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
 }
 
 .battleMoveContainer {
 	text-align: left;
-	width: 100%;
-	border: solid 1pt black;
+	width: calc(100% - 0.2em);
 	margin: 0.1em;
 }
 .battleMoveContainer .title {
@@ -840,9 +857,14 @@ width: 50%;
 }
 
 .battleMoveContainer .inner {
-	border-left: solid black;
-	margin-left: 0.5em;
-	padding-left: 0.5em;
+	margin-left: 0.1em;
+	padding: 0 0.4em;
+}
+.weaponSelector {
+	
+}
+.weaponSelectorContainer {
+	padding: 2em 1em;
 }
 .battleHUD {
 
@@ -860,6 +882,7 @@ width: 50%;
 	background-color: rgba(255,255,255,0.5);
 	font-family: "IM Fell English SC";
 	font-size: 1.5em;
+	box-shadow:  0 0 0.2em rgba(0,0,0,0.5);
 }
 .
 .HPLabel {
@@ -868,16 +891,24 @@ width: 50%;
 }
 .HPContainer {
 	display: inline-block;
-	width: 15em;
-	padding: 0.2em;
-	background-color: blue;
+	width: 60%;
+	padding: 0em;
+	background-color: grey;
+	border-radius: 0.2em;
+	box-shadow: 0.2em 0.2em 0.5em rgba(0,0,0,0.2);
 }
 .HPBar {
 	width: 100%;
-	background-color: skyblue;
+	background-color: red;
+	background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	border: 0.2em solid grey;
+	border-radius: 0.2em;
 }
 .HPText {
 	height: 1.2em;
+	box-shadow: 0 0 1em rgba(255,255,255,0.5);
 }
 .HPButton {}
 .leftBox { 
@@ -897,21 +928,123 @@ width: 50%;
 .BBAPCounter { display: inline; width: 5em; }
 #nextTurn {}
 #movesContainer {}
-.battleCharacterImg {
-	display: inline-block;
-	width: 55%;
-	height: 15em;
-	background-image: url("../images/Slayer.png");
-	background-size: cover;
-	background-repeat: no-repeat;
+.battleImages {
+	position: relative;
+	height: 17em;
 }
-.selectedWeaponImg {
-	display: inline-block;
-	width: 40%;
+.battleCharacterContainer {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 13em;
 	height: 15em;
-	background-image: url("../images/Shortsword.png");
-	background-size: cover;
+	vertical-align: bottom;
+	border-radius: 1em;
+	padding-top: 1em;
+	background-color: rgba(228, 228, 255, 0.5);
+	overflow: hidden;
+	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
+	border: 2pt solid white;
+}
+.battleCharacterImg {
+	width: 100%;
+	height: 90%;
+	background-image: url("../images/Slayer.png");
+	background-size: contain;
 	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+.selectedWeaponContainer {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 8em;
+	height: 10em;
+	vertical-align: bottom;
+	border-radius: 1em;
+	background-color: rgba(255, 217, 217, 0.5);
+	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
+	border: 2pt solid white;
+}
+
+.walkContainer {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 11em;
+	width: 8em;
+	height: 5em;
+	vertical-align: bottom;
+	border-radius: 1em;
+	background-color: rgba(239, 255, 225, 0.5);
+	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
+	border: 2pt solid white;
+}
+
+.walkContainer .cost {
+	position: absolute;
+	right: 0.8em;
+	top: 0.8em;
+	border: solid darkblue;
+	border-width: 1pt;
+	border-radius: 500000px;
+	display: inline;
+	width: 2.5em;
+	text-align: center;
+	margin-top: 0.25em;
+	font-weight: bold;
+	color: darkblue;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "IM Fell English SC";
+	font-size: 1.5em;
+}
+
+.walkContainer .footIcon {
+	position: absolute;
+	left: 1.2em;
+	top: 1.2em;
+	width: 2.5em;
+	height: 2.5em;
+	background-image: url("../images/boot-prints.png");
+	background-size: 100%;
+}
+
+.selectedWeaponContainer .ccWeaponDesc {
+	position: absolute;
+	right: 0.3em;
+	top: 0.7em;
+}
+
+.selectedWeaponContainer .cost {
+	position: absolute;
+	right: 0.8em;
+	top: 3.6em;
+	border: solid darkblue;
+	border-width: 1pt;
+	border-radius: 500000px;
+	display: inline;
+	width: 2.5em;
+	text-align: center;
+	margin-top: 0.25em;
+	font-weight: bold;
+	color: darkblue;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "IM Fell English SC";
+	font-size: 1.5em;
+}
+
+.selectedWeaponImg {
+	position: absolute;
+	left: 0.5em;
+	top: 1em;
+	width: 40%;
+	height: 80%;
+	background-image: url("../images/Shortsword.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 /****************************************

@@ -16,35 +16,45 @@ Author: Ben Connick
     </head>
     <body>
     	<div class="battleContainer" style="display: none;">
-    		<div class="battleHUD">
-    			<div class="battleName">Name goes here</div>
-    			<span class="HPLabel">HP</span>
-    			<div class="HPContainer">
-    				<div class="HPBar">
-    					<div class="HPText">22/22</div>
-    				</div>
-    			</div>
-    			
-    			
-    		</div>
+    		<div class="battleName">Name goes here</div>	
+    		
     		<div class="battleImages">
-    			<div class="selectedWeaponImg"></div>
-    			<div class="battleCharacterImg"></div>
+    		
+    			<div class="selectedWeaponContainer">
+    				<div class="selectedWeaponImg"></div>
+    				<span class='ccWeaponDesc'>7<img src='images/attackdie.png' class='dieSize2'> </span>
+    				<div class="cost" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
+    			</div>
+    			<div class="walkContainer">
+    				<div class="footIcon"></div>
+    				<div class="cost" style="width: 1.5em; display: inline;">&nbsp&nbsp1&nbsp&nbsp</div>
+    			</div>
+    			<div class="battleCharacterContainer">
+    				<span class="HPLabel">HP</span>
+					<div class="HPContainer">
+						<div class="HPBar">
+							<div class="HPText">22/22</div>
+						</div>
+					</div>
+    				<div class="battleCharacterImg"></div>
+    			</div>
     		</div>
+    		<div class="weaponSelectorContainer">
     		<select class="weaponSelector" style="width: 100%">
 			  <option value="primary">Sword_</option>
 			  <option value="secondary">Bow_</option>
 			</select>
-			
-			<div class="battleUtilityBar">
-				<button>undo</button>
-				<button>AP+</button>
-				<div class="APBattleCounter" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
-				<button>AP-</button>
-				<button>end</button>
 			</div>
 			
-			<h7>ABILITIES</h7>
+			<div class="battleUtilityBar">
+				<button>UNDO</button>
+				<button id="bbAPminus">AP-</button>
+				<div class="APBattleCounter" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
+				<button id="bbAPplus">AP+</button>
+				<button>NEXT</button>
+			</div>
+			
+			<br>
 			<div class="super">
 				<div class="attackAndMove battleMoveContainer">
 				</div>
@@ -53,14 +63,14 @@ Author: Ben Connick
 					<div class="inner"></div>
 				</div>
 				<div class="specialMoves battleMoveContainer">
-					<div class="title"> - Special</div>
+					<div class="title"> - Archetype</div>
 					<div class="inner"></div>
 				</div>
 			</div>
     	</div>
     	<div id="intro">
     		<div id="closeBar">
-    			<button>Close</button>
+    			<button>Let's Go</button>
     		</div>
     		<div id="innerIntroBox">
 				<h5 style="text-align: center">Prepare Your Phone For Adventure!</h5>

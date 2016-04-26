@@ -687,7 +687,7 @@ function completeCharacter() {
 	console.log(d.toISOString());
 	//document.cookie = 'time=' + d.toISOString() + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
 	character.meta.lastModified = d.toISOString();
-	document.cookie = 'character=' + JSON.stringify(character) + '; expires=Thu, 18 Dec 2020 12:00:00 UTC'; 
+	document.cookie = 'character=' + JSON.stringify(character) + '; expires=Thu, 18 Dec 2222 12:00:00 UTC'; 
 	var saveMoveNames = [];
 	console.log("character save complete");
 	character.meta.complete = true;
@@ -794,8 +794,10 @@ function loadCharacterFromString(str) {
 		}
 	});
 	dbg.innerHTML = "loadCharacterFromString run";
-	showCharacter();
-	listMyMoves();
+	//showCharacter();
+	enterBattleMode(true);
+	window.scroll(0,0);
+	//listMyMoves();
 }
 
 function setCookieButtonText() {

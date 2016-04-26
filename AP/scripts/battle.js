@@ -27,13 +27,13 @@ function enterBattleMode(myTurn) {
 	// set basic attack based on first weapon
 	if (getWeapon(character.primaryWeaponName).range == "touch") {
 		// melee
-		displayMove(basicMoves[1],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
+		//displayMove(basicMoves[1],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	} else {
 		// ranged
-		displayMove(basicMoves[2],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
+		//displayMove(basicMoves[2],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	}
 	// add move ability
-	displayMove(basicMoves[0],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
+	//displayMove(basicMoves[0],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	// set character portrait
 	getByClass("battleCharacterImg").style.backgroundImage = 'url("images/'+character.charClass+'.png")';
 	// set weapon selector text (only supports two currently)
@@ -58,11 +58,11 @@ function enterBattleMode(myTurn) {
 		special.getElementsByClassName("title")[0], 
 		special.getElementsByClassName("inner")[0], 
 		function(expanded) { 
-			expanded ? special.getElementsByClassName("title")[0].innerHTML = " - Special" : special.getElementsByClassName("title")[0].innerHTML = " + Special"
+			expanded ? special.getElementsByClassName("title")[0].innerHTML = " - Archetype" : special.getElementsByClassName("title")[0].innerHTML = " + Archetype"
 		}, 
 		true
 	);
-	// toggle
+	// collapse on start
 	specialCollapser.toggle();
 	for (var i=0; i<myMoves.length; i++) {
 		//console.log("move name in battle.js: " + myMoves[i].name);
@@ -76,4 +76,9 @@ function enterBattleMode(myTurn) {
 			}
 		}
 	} 
+}
+
+// synonym function
+function startBattleMode(myTurn) {
+	enterBattleMode(myTurn);
 }

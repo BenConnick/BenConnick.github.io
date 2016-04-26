@@ -118,8 +118,9 @@ function activateButtons() {
 		if (choiceNumber >= lastChoice) {
 			closeCreator();
 			clearMoves();
-			showCharacter();
-			listMyMoves();
+			//showCharacter();
+			//listMyMoves();
+			enterBattleMode();
 			return;
 		}
 		advanceQuestion();	
