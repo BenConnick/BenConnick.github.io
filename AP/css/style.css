@@ -453,11 +453,19 @@ textarea {
 			character creation 
 *****************************************/
 .ccWeaponPic {
-	width: 35%;
 	float: left;
+	display: inline-block;
+	max-height: 1.5em;
+	max-width: 1.5em;
+}
+.ccWepPicContainer {
+	display: inline-block;
+	width: 2em;
+	height 2em;
 }
 .ccWeaponDesc {
 	font-size: 2.3em;
+	margin-bottom: 1em;
 }
 .ccArchetypePreview td:first-child {
 width: 50%;
@@ -801,6 +809,9 @@ width: 50%;
 /****************************************
 			battle screen 
 *****************************************/
+.clickable:active {
+	box-shadow: 0px 0px 1em white;
+}
 .battleButton {
 	font-size: 5em;
 }
@@ -843,7 +854,9 @@ width: 50%;
 	position: relative;
 	margin: 0em 0.5em;
 }
-
+.battleUtilityBar button:active {
+	box-shadow: 0px 0px 1em white;
+}
 /*#bbAPplus {
 	margin-right: 2em;
 }
@@ -956,6 +969,7 @@ width: 50%;
 }
 .HPBar {
 	width: calc(100% - 0.4em);
+	max-width: calc(100% - 0.4em);
 	background-color: red;
 	background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
@@ -984,11 +998,11 @@ width: 50%;
 }
 #bbBigDefend {
 	display: none;
-	background-color: rgba(0,0,255,0.2);
+	background-color: rgba(200,200,255,0.2);
 }
 #bbDefend {
 	display: none;
-	background-color: rgba(0,0,255,0.2);
+	background-color: rgba(200,200,255,0.2);
 }
 #HPplus {}
 #HPminus {}
@@ -1012,7 +1026,7 @@ width: 50%;
 	vertical-align: bottom;
 	border-radius: 1em;
 	padding-top: 1em;
-	background-color: rgba(228, 228, 255, 0.5);
+	background-color: rgba(228, 228, 255, 0.2);
 	overflow: hidden;
 	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
 	border: 2pt solid white;
@@ -1115,6 +1129,12 @@ width: 50%;
 	height: 2.5em;
 	background-image: url("../images/boot-prints.png");
 	background-size: 100%;
+}
+
+.walkContainer .singleDie {
+	position: absolute;
+	left: 1.2em;
+	top: 1.2em;
 }
 
 /****************************************

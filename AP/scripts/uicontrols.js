@@ -181,6 +181,12 @@ function activateButtons() {
 	getById("bbCharacter").onclick = function() {
 		turn ? setHP(HP+1) : setHP(HP-1);
 	}
+	getById("bbDefend").onclick = function() {
+		useAbility(basicMoves[7]);
+	}
+	getById("bbBigDefend").onclick = function() {
+		useAbility(basicMoves[8]);
+	}
 
 	getByClass("battleButton").onclick = function() {
 		enterBattleMode(true);

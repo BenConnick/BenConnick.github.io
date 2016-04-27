@@ -429,6 +429,7 @@ function clearScreens() {
 	getByClass("helpBox").style.display = "none";
 	getById("aboutSection").style.display = "none";
 	getByClass("helpfulHint").style.display = "none";
+	getByClass("battleContainer").style.display = "none";
 }
 
 function resetAP() {
