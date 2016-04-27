@@ -163,7 +163,7 @@ function displayMove(move, hideButton, containerElem) {
 		}
 	}
 	
-	 collapserObjects["AB"+abilityBoxUniqueId] = new Collapser(outerContainer,outerContainer.querySelector(".topRow"),container);
+	 collapserObjects["AB"+abilityBoxUniqueId] = new Collapser(outerContainer,outerContainer.querySelector(".topRow"),container, null, false, outerContainer.querySelector(".topRow p"));
 }
 
 // check if the move exists (this is a slow method)
@@ -180,6 +180,7 @@ function useAbility(moveObject) {
 	//console.log(moveObject.roll);
 	// subtract AP
 	addToAP(-1 * moveObject.AP)
+	APHistory.push(moveObject.AP);
 	
 	// move up info box
 	extendUseBox();
@@ -211,6 +212,21 @@ function useAbility(moveObject) {
 	}*/
 	
 	// offer "simulate roll" button
+}
+
+function undoAbility() {
+	if (APHistory.length < 1) {
+		getById("rollCalculation").innerHTML = "No more actions to undo";
+		// move up info box
+		extendUseBox();
+		return;
+	}
+	var apReturns = APHistory.pop();
+	addToAP(apReturns);
+	getById("rollCalculation").innerHTML = "Undoing Use Ability" 
+	+ "<br>AP returned: " + apReturns + "  Current AP: " + AP;
+	// move up info box
+	extendUseBox();
 }
 
 function parseMath(mathStr) {
@@ -1188,6 +1204,9 @@ function populateKeywords() {
 
 function setHP(val) {
 	HP = val;
+	if (!hpBar) return;
+	hpBar.style.width = "calc(" + 100*HP/maxHP + "% - 0.4em)"
+	hpNum.innerHTML = ""+HP+"/"+maxHP+"";
 	//getByClass("HPCounter").innerHTML = HP + " HP";
 }
 

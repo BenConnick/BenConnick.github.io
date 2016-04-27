@@ -36,6 +36,7 @@ var keywords = {};
 var glossaryHistory = [];
 var glossaryForward = [];
 var collapserObjects = {};
+var APHistory = [];
 
 var character = {}; // character object, stores attributes and skills
 character.name = "Anonymous";
@@ -354,22 +355,29 @@ basicMoves.forEach(function(m) {
 	allMoves.push(m);
 });
 
-function Collapser(container, clickElem, innerElem, callback, expanded) {
+function Collapser(container, clickElem, innerElem, callback, expanded, titleElem) {
 	this.uniqueId = container.id || "no id assigned";
 	this.container = container;
 	this.clickElem = clickElem;
 	this.innerElem = innerElem;
+	this.titleElem = titleElem;
 	this.expanded = expanded || false;
+	if (titleElem) {
+		this.title = this.titleElem.innerHTML;
+		this.expanded ? this.titleElem.innerHTML = " - "+this.title : this.titleElem.innerHTML = " + "+this.title;
+	}
 	this.toggle = function() {
 		if (this.expanded) {
 			window.scrollBy(0,-1*innerElem.clientHeight);
 			this.expanded = false;
 			this.innerElem.style.height = '0'
 			this.innerElem.style.overflow = "hidden";
+			if (this.title) this.titleElem.innerHTML = " + "+this.title;
 		} else {
 			this.innerElem.style.height = 'auto';
 			this.expanded = true;
 			window.scrollBy(0,innerElem.clientHeight);
+			if (this.title) this.titleElem.innerHTML = " - "+this.title;
 		}
 		if (callback) callback(this.expanded);
 	}

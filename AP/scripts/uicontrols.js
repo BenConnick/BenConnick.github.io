@@ -12,7 +12,7 @@ function retractMenu() {
 	getByClass("optionsBtn").style.display = "block";*/
 }
 function extendUseBox() {
-	getByClass("bottomBar").style.bottom = "-4em";
+	getByClass("bottomBar").style.bottom = "-2em";
 	clearTimeout(bottomTimeout);    	
 	bottomTimeout = setTimeout(function() {
 		retractUseBox();
@@ -126,7 +126,7 @@ function activateButtons() {
 			clearMoves();
 			//showCharacter();
 			//listMyMoves();
-			enterBattleMode();
+			enterBattleMode(true);
 			return;
 		}
 		advanceQuestion();	
@@ -168,6 +168,19 @@ function activateButtons() {
 			d(glossaryForward.pop()); // this adds to history
 		}
 	}
+	getById("endTurn").onclick = function() {
+		endTurnPhase(); // battle.js
+	}
+	getById("undoAbility").onclick = function() { undoAbility(); }
+	getById("bbMove").onclick = function() {
+		useAbility(basicMoves[0]);
+	}
+	getById("bbAttack").onclick = function() {
+		useAbility(basicMoves[1]);
+	}
+	getById("bbCharacter").onclick = function() {
+		turn ? setHP(HP+1) : setHP(HP-1);
+	}
 
 	getByClass("battleButton").onclick = function() {
 		enterBattleMode(true);
@@ -177,8 +190,10 @@ function activateButtons() {
 		// change weapon picture
 		if (this.value == character.primaryWeaponName) {
 			getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.primaryWeaponName+'.png")';
+			attackValue.innerHTML = getWeapon(character.primaryWeaponName).damage;
 		} else {
 			getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.secondaryWeaponName+'.png")';
+			attackValue.innerHTML = getWeapon(character.secondaryWeaponName).damage;
 		}
 		// change whether basic attack is melee or range
 		if (getWeapon(this.value).range == "touch") {

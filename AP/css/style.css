@@ -203,15 +203,14 @@ textarea {
 	display: block;
 	border-radius: 5pt 5pt 0pt 0pt;
 	border: solid 1pt grey;
-	background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.9);
 	color: #ddd;
-	width: 88%;
+	width: calc(100% - 2pt - 2em);
 	height: 6em;
 	position: fixed;
 	bottom: -11em;
 	left: 0px;
-	margin-left: 1%;
-	font-size: 12pt;
+	font-size: 1.5em;
 	transition: bottom 0.1s;
 }
 #rollCalculation {
@@ -831,10 +830,6 @@ width: 50%;
 	opacity: 0.8;
 }
 
-.battleContainer .clickable:hover {
-	opacity: 0.7;
-}
-
 .battleUtilityBar button {
 	border: solid 2pt white;
 	border-radius: 0.5em;
@@ -941,7 +936,12 @@ width: 50%;
 	position: relative;
 	top: 0.2em;
 }
-.
+
+#attackValue {
+	position: relative;
+	left: 0.2em;
+}
+
 .HPLabel {
 	height: 1em;
 	display: inline-block;
@@ -955,7 +955,7 @@ width: 50%;
 	box-shadow: 0.2em 0.2em 0.5em rgba(0,0,0,0.2);
 }
 .HPBar {
-	width: 100%;
+	width: calc(100% - 0.4em);
 	background-color: red;
 	background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
@@ -965,7 +965,7 @@ width: 50%;
 }
 .HPText {
 	height: 1.2em;
-	box-shadow: 0 0 1em rgba(255,255,255,0.5);
+	box-shadow: 0 0 0.1em rgba(255,255,255,0.5);
 }
 .HPButton {}
 .leftBox { 
@@ -978,6 +978,17 @@ width: 50%;
 }
 .initiativeButtons {
 	border: solid 1pt;
+}
+.def {
+	z-index: 2;
+}
+#bbBigDefend {
+	display: none;
+	background-color: rgba(0,0,255,0.2);
+}
+#bbDefend {
+	display: none;
+	background-color: rgba(0,0,255,0.2);
 }
 #HPplus {}
 #HPminus {}

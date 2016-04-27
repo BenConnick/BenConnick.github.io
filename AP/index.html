@@ -17,23 +17,36 @@ Author: Ben Connick
     <body>
     	<div class="battleContainer" style="display: none;">
     		<div class="battleName">Name goes here</div>	
-    		
     		<div class="battleImages">
-    		
-    			<div class="selectedWeaponContainer clickable">
+    			<div id="bbAttack" class="selectedWeaponContainer clickable">
     				<div class="selectedWeaponImg"></div>
-    				<span class='ccWeaponDesc'>7<img src='images/attackdie.png' class='dieSize2'> </span>
-    				<div class="cost" style="width: 1.5em; display: inline;">8</div>
+					<span class='ccWeaponDesc'>
+						<span id="attackValue">7</span>
+						<img src='images/attackdie.png' class='dieSize2'> 
+					</span>
+    				<div class="cost" style="width: 1.5em; display: inline;">4</div>
 					<select class="weaponSelector">
 					  <option value="primary">Sword_</option>
 					  <option value="secondary">Bow_</option>
 					</select>
     			</div>
-    			<div class="walkContainer clickable">
+    			<div id="bbBigDefend" class="selectedWeaponContainer clickable def">
+    				<div class=""></div>
+					<span class='ccWeaponDesc'>
+						<span id="bigDefense">3</span>
+						<img src='images/defensedie.png' class='dieSize2'> 
+					</span>
+    				<div class="cost" style="width: 1.5em; display: inline;">4</div>
+    			</div>
+    			<div id="bbMove" class="walkContainer clickable">
     				<div class="footIcon"></div>
     				<div class="cost" style="width: 1.5em; display: inline;">1</div>
     			</div>
-    			<div class="battleCharacterContainer clickable">
+    			<div id="bbDefend" class="walkContainer clickable def">
+    				<div class="images/shield.png"></div>
+    				<div class="cost" style="width: 1.5em; display: inline;">1</div>
+    			</div>
+    			<div id="bbCharacter" class="battleCharacterContainer clickable">
     				<span class="HPLabel">HP</span>
 					<div class="HPContainer">
 						<div class="HPBar">
