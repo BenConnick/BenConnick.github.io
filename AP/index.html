@@ -20,20 +20,20 @@ Author: Ben Connick
     		
     		<div class="battleImages">
     		
-    			<div class="selectedWeaponContainer">
+    			<div class="selectedWeaponContainer clickable">
     				<div class="selectedWeaponImg"></div>
     				<span class='ccWeaponDesc'>7<img src='images/attackdie.png' class='dieSize2'> </span>
-    				<div class="cost" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
+    				<div class="cost" style="width: 1.5em; display: inline;">8</div>
 					<select class="weaponSelector">
 					  <option value="primary">Sword_</option>
 					  <option value="secondary">Bow_</option>
 					</select>
     			</div>
-    			<div class="walkContainer">
+    			<div class="walkContainer clickable">
     				<div class="footIcon"></div>
-    				<div class="cost" style="width: 1.5em; display: inline;">&nbsp&nbsp1&nbsp&nbsp</div>
+    				<div class="cost" style="width: 1.5em; display: inline;">1</div>
     			</div>
-    			<div class="battleCharacterContainer">
+    			<div class="battleCharacterContainer clickable">
     				<span class="HPLabel">HP</span>
 					<div class="HPContainer">
 						<div class="HPBar">
@@ -46,11 +46,11 @@ Author: Ben Connick
     		
 			
 			<div class="battleUtilityBar">
-				<button>UNDO</button>
-				<button id="bbAPminus">AP-</button>
-				<div class="APBattleCounter" style="width: 1.5em; display: inline;">&nbsp&nbsp8&nbsp&nbsp</div>
-				<button id="bbAPplus">AP+</button>
-				<button>NEXT</button>
+				<button id="undoAbility"></button>
+				<button id="bbAPminus"><span>-</span></button>
+				<div class="APBattleCounter">8</div>
+				<button id="bbAPplus"><span>+</span></button>
+				<button id="endTurn"></button>
 			</div>
 			
 			<br>

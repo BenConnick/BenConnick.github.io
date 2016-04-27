@@ -81,6 +81,12 @@ function activateButtons() {
 	getByClass("minusOneBtn").onclick = function () {
 		addToAP(-1);
 	};
+	getById("bbAPplus").onclick = function() {
+		addToAP(1);
+	}
+	getById("bbAPminus").onclick = function() {
+		addToAP(-1);
+	}
 	getByClass("bottomBar").onclick = function () {
 		retractUseBox();
 	};

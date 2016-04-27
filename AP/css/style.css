@@ -827,14 +827,66 @@ width: 50%;
 	background-color:  #DDD;
 }
 
+.battleContainer button:hover {
+	opacity: 0.8;
+}
+
+.battleContainer .clickable:hover {
+	opacity: 0.7;
+}
+
 .battleUtilityBar button {
 	border: solid 2pt white;
 	border-radius: 0.5em;
-	width: 4em;
-	height: 2em;
+	width: 3em;
+	height: 3em;
 	background-color: #fff;
 	font-family: "Slabo 27px";
 	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
+	overflow-y: auto;
+	display: inline-block;
+	position: relative;
+	margin: 0em 0.5em;
+}
+
+#bbAPplus {
+	margin-right: 2em;
+}
+
+#bbAPminus {
+	margin-left: 2em;
+}
+
+#bbAPplus span {
+	font-size: 300%;
+	display: block;
+	height: 2em;
+	position: absolute;
+	top: -0.2em;
+	left: 0.23em;
+}
+
+#bbAPminus span {
+	font-size: 300%;
+	display: block;
+	height: 2em;
+	position: absolute;
+	top: -0.2em;
+	left: 0.35em;
+}
+
+#undoAbility {
+	background-image: url("../images/anticlockwise-rotation.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#endTurn {
+	background-image: url("../images/time-trap.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .battleMoveContainer {
@@ -877,15 +929,17 @@ width: 50%;
 	border-width: 1pt;
 	border-radius: 500000px;
 	display: inline;
-	width: 2.5em;
+	width: 1.4em;
 	text-align: center;
 	margin-top: 0.25em;
 	font-weight: bold;
 	color: darkblue;
 	background-color: rgba(255,255,255,0.5);
 	font-family: "IM Fell English SC";
-	font-size: 1.5em;
-	box-shadow:  0 0 0.2em rgba(0,0,0,0.5);
+	box-shadow:  0 0 0.1em rgba(0,0,0,0.5);  
+	font-size: 2em;
+	position: relative;
+	top: 0.2em;
 }
 .
 .HPLabel {
@@ -928,7 +982,9 @@ width: 50%;
 #HPplus {}
 #HPminus {}
 .HPCounter { width: 5em; }
-.BBAPCounter { display: inline; width: 5em; }
+.BBAPCounter { 
+	
+}
 #nextTurn {}
 #movesContainer {}
 .battleImages {

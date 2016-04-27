@@ -354,13 +354,11 @@ basicMoves.forEach(function(m) {
 	allMoves.push(m);
 });
 
-function Collapser(container, clickElem, innerElem, callback, expanded, titleElem) {
+function Collapser(container, clickElem, innerElem, callback, expanded) {
 	this.uniqueId = container.id || "no id assigned";
 	this.container = container;
 	this.clickElem = clickElem;
 	this.innerElem = innerElem;
-	this.titleElem = titleElem;
-	this.text = this.titleElem.innerHTML;
 	this.expanded = expanded || false;
 	this.toggle = function() {
 		if (this.expanded) {
@@ -368,11 +366,6 @@ function Collapser(container, clickElem, innerElem, callback, expanded, titleEle
 			this.expanded = false;
 			this.innerElem.style.height = '0'
 			this.innerElem.style.overflow = "hidden";
-			if (this.textElem) {
-				if (this.text && this.text != "") {
-					this.textElem.innerHTML = 
-				}
-			}
 		} else {
 			this.innerElem.style.height = 'auto';
 			this.expanded = true;
