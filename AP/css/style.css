@@ -908,11 +908,10 @@ width: 50%;
 	padding: 0 0.4em;
 }
 .weaponSelector {
-	width: 12em;
+	width: 100%;
 	position: absolute;
-	top: 13em;
-	left: 0.1em;
-	z-index: 100;
+	bottom: -1.5em;
+	left: 0;
 }
 .weaponSelectorContainer {
 	padding: 2em 1em;
