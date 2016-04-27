@@ -861,7 +861,10 @@ width: 50%;
 	padding: 0 0.4em;
 }
 .weaponSelector {
-	
+	width: 100%;
+	position: absolute;
+	bottom: -2em;
+	left: 0;
 }
 .weaponSelectorContainer {
 	padding: 2em 1em;
@@ -961,12 +964,48 @@ width: 50%;
 	left: 0;
 	top: 0;
 	width: 8em;
-	height: 10em;
+	height: 9em;
 	vertical-align: bottom;
 	border-radius: 1em;
 	background-color: rgba(255, 217, 217, 0.5);
 	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
 	border: 2pt solid white;
+}
+
+.selectedWeaponContainer .ccWeaponDesc {
+	position: absolute;
+	right: 0.3em;
+	top: 0.7em;
+}
+
+.selectedWeaponContainer .cost {
+	position: absolute;
+	right: 0.8em;
+	top: 3.6em;
+	border: solid darkblue;
+	border-width: 1pt;
+	border-radius: 500000px;
+	display: inline;
+	width: 2.5em;
+	text-align: center;
+	margin-top: 0.25em;
+	font-weight: bold;
+	color: darkblue;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "IM Fell English SC";
+	font-size: 1.5em;
+}
+
+.selectedWeaponImg {
+	position: absolute;
+	left: 0.5em;
+	top: 1em;
+	width: 40%;
+	height: 80%;
+	background-image: url("../images/Shortsword.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .walkContainer {
@@ -1009,42 +1048,6 @@ width: 50%;
 	height: 2.5em;
 	background-image: url("../images/boot-prints.png");
 	background-size: 100%;
-}
-
-.selectedWeaponContainer .ccWeaponDesc {
-	position: absolute;
-	right: 0.3em;
-	top: 0.7em;
-}
-
-.selectedWeaponContainer .cost {
-	position: absolute;
-	right: 0.8em;
-	top: 3.6em;
-	border: solid darkblue;
-	border-width: 1pt;
-	border-radius: 500000px;
-	display: inline;
-	width: 2.5em;
-	text-align: center;
-	margin-top: 0.25em;
-	font-weight: bold;
-	color: darkblue;
-	background-color: rgba(255,255,255,0.5);
-	font-family: "IM Fell English SC";
-	font-size: 1.5em;
-}
-
-.selectedWeaponImg {
-	position: absolute;
-	left: 0.5em;
-	top: 1em;
-	width: 40%;
-	height: 80%;
-	background-image: url("../images/Shortsword.png");
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
 }
 
 /****************************************
