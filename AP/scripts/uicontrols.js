@@ -175,7 +175,7 @@ function activateButtons() {
 	getById("bbMove").onclick = function() {
 		useAbility(basicMoves[0]);
 	}
-	getById("bbAttack").onclick = function() {
+	getById("bbAttackClickCapture").onclick = function() {
 		useAbility(basicMoves[1]);
 	}
 	getById("bbCharacter").onclick = function() {
@@ -185,7 +185,9 @@ function activateButtons() {
 	getByClass("battleButton").onclick = function() {
 		enterBattleMode(true);
 	}
-	
+	getByClass("weaponSelector").onclick = function(event) {
+		event.stopPropagation();
+	}
 	getByClass("weaponSelector").onchange = function() {
 		// change weapon picture
 		if (this.value == character.primaryWeaponName) {
