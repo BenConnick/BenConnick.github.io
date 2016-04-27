@@ -843,19 +843,19 @@ width: 50%;
 	background-color: #fff;
 	font-family: "Slabo 27px";
 	box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
-	overflow-y: auto;
+	overflow-y: hidden;
 	display: inline-block;
 	position: relative;
 	margin: 0em 0.5em;
 }
 
-#bbAPplus {
+/*#bbAPplus {
 	margin-right: 2em;
 }
 
 #bbAPminus {
 	margin-left: 2em;
-}
+}*/
 
 #bbAPplus span {
 	font-size: 300%;
@@ -915,7 +915,7 @@ width: 50%;
 .weaponSelector {
 	width: 100%;
 	position: absolute;
-	bottom: -2em;
+	bottom: -1.5em;
 	left: 0;
 }
 .weaponSelectorContainer {
