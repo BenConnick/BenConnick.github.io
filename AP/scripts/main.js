@@ -195,7 +195,7 @@ function useAbility(moveObject) {
 	var rollStr = ""
 	if (moveObject.effect.indexOf("|") > -1) {
 	fx = parsePlaceholders(moveObject.effect);
-	rollStr = rollString(detectDigit(fx), detectRollType(fx));
+	rollStr = rollString(detectDigit(fx), detectRollType(fx), true);
 	}
 	// set menu text to AP
 	getById("rollCalculation").innerHTML = moveObject.name + " used."
@@ -1261,11 +1261,17 @@ function DieImgElem(typeStr) {
 	if (typeStr == "fail") {
 		src = "images/perspective-dice-six-faces-one.png";	
 	}
+	if (typeStr == "white") {
+		src = "images/perspective-dice-six-faces-six-white.png";	
+	}
 	/*console.log(""+dieImg.outerHTML);*/
 	return '<img src="'+src+'" class="dieSmall">';
 }
 
-function rollString(num, type) {
+function rollString(num, type, white) {
+	if (white && type == null) {
+		type = "white";
+	}
 	if (type) {
 		str = "";
 		for (var i=0; i<num; i++) {

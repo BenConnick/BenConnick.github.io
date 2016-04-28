@@ -306,7 +306,7 @@ basicMoves.push(new Move(
 	"Trip",
 	"",
 	5,
-	"Target tests agility against you. If they lose, they gain the Prone status. Target must be within 1 size category of you. Agility: |Agility||d|",
+	"Target tests agility against you. If they lose, they gain the Prone status. Target must be within one size category of you. Agility: |Agility||d|",
 	"Touch",
 	""
 	)
@@ -315,7 +315,7 @@ basicMoves.push(new Move(
 	"Grapple",
 	"",
 	5,
-	"Target tests agility against you. If they lose, they gain the Grappled status. Target must be within 1 size category of you.",
+	"Target tests agility against you. If they lose, they gain the Grappled status. Target must be within one size category of you.  Agility: |Agility||d|",
 	"Touch",
 	""
 	)
