@@ -191,10 +191,16 @@ function useAbility(moveObject) {
 	} else {
 		roll = "";
 	}
-	
+	var fx = "" 
+	var rollStr = ""
+	if (moveObject.effect.indexOf("|") > -1) {
+	fx = parsePlaceholders(moveObject.effect);
+	rollStr = rollString(detectDigit(fx), detectRollType(fx));
+	}
 	// set menu text to AP
 	getById("rollCalculation").innerHTML = moveObject.name + " used."
-	+ "<br>AP used: " + moveObject.AP + "  Current AP: " + AP;
+	+ "<br>AP used: " + moveObject.AP + "  Current AP: " + AP + "<br>"
+	+ rollStr;
 	//+ roll;
 	
 	/*if (moveObject.roll == "") {
@@ -214,6 +220,21 @@ function useAbility(moveObject) {
 	// offer "simulate roll" button
 }
 
+function detectDigit(string) {
+	console.log("fx " + string);
+	for (var i=0; i<10; i++) {
+		if (string.indexOf(""+i) > -1) {
+		console.log(string.indexOf(""+i)); return i;
+		}
+	}
+	return 0;
+}
+function detectRollType(string) {
+	if (string.indexOf("attackdie") > -1) return "attack";
+	if (string.indexOf("defensedie") > -1) return "defense";
+	return null;
+}
+
 function undoAbility() {
 	if (APHistory.length < 1) {
 		getById("rollCalculation").innerHTML = "No more actions to undo";
@@ -230,14 +251,17 @@ function undoAbility() {
 }
 
 function parseMath(mathStr) {
+	console.log("math string to parse: " + mathStr);
+	
 	// output string
 	var newString = mathStr;
 	// array of strings
 	var parts = mathStr.split(" ");
+	console.log("parts: " + parts);
 	// array of equation 
 	var numbersAndOperators = [];
 	// loop through the equation
-		(function (piece) {
+	parts.forEach(function (piece) {
 		if (piece == "+" || piece == "-") {
 			numbersAndOperators.push(piece);
 		} else {
@@ -285,11 +309,13 @@ function replacePlaceholder(ph) {
 		case "agility" : return character.attributes["Agility"]; break;
 		case "intelligence" : return character.attributes["Intelligence"]; break;
 		case "spirit" : return character.attributes["Spirit"]; break;
-		case "weapon" : return getWeapon(character.primaryWeaponName).damage; break;
+		case "weapon" : return getWeapon(equippedWeaponName).damage; break;
 		case "defense" : return archetypes[character.charClass].Defense; break;
 		default: return undefined
 	}
 }
+
+
 
 // find and replace known placeholders in a string
 function parsePlaceholders(str) {
@@ -1220,7 +1246,7 @@ function DieImgElem(typeStr) {
 	var src = "";
 	if (typeStr == null) {
 		//dieImg.src = "images/perspective-dice-six-faces-six.png"
-		src = "images/perspective-dice-six-faces-six.png"
+		src = "images/perspective-dice-six-faces-six.png";
 	}
 	// red if attack
 	if (typeStr == "attack") {
@@ -1232,8 +1258,37 @@ function DieImgElem(typeStr) {
 		//dieImg.src = "images/defensedie.png";
 		src = "images/defensedie.png";
 	}
+	if (typeStr == "fail") {
+		src = "images/perspective-dice-six-faces-one.png";	
+	}
 	/*console.log(""+dieImg.outerHTML);*/
-	return '<img src="'+src+'" class="dieSize2">';
+	return '<img src="'+src+'" class="dieSmall">';
+}
+
+function rollString(num, type) {
+	if (type) {
+		str = "";
+		for (var i=0; i<num; i++) {
+			if (Math.random() < 0.5) {
+				str += DieImgElem(type);
+			}
+			else {
+				str += DieImgElem("fail");
+			}
+		}
+		return str;
+	} else {
+		str = "";
+		for (var i=0; i<num; i++) {
+			if (Math.random() < 0.5) {
+				str += DieImgElem(); // black
+			}
+			else {
+				str += DieImgElem("fail");
+			}
+		}
+		return str;
+	}
 }
 
 

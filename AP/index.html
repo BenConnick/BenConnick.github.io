@@ -23,7 +23,7 @@ Author: Ben Connick
 						<div class="selectedWeaponImg"></div>
 						<span class='ccWeaponDesc'>
 							<span id="attackValue">7</span>
-							<img src='images/attackdie.png' class='dieSize2'> 
+							<img src='images/attackdie.png' class='dieSmall'> 
 						</span>
 						<div class="cost" style="width: 1.5em; display: inline;">4</div>
     				</div>
@@ -36,7 +36,7 @@ Author: Ben Connick
     				<div class=""></div>
 					<span class='ccWeaponDesc'>
 						<span id="bigDefense">3</span>
-						<img src='images/defensedie.png' class='dieSize2'> 
+						<img src='images/defensedie.png' class='dieSmall'> 
 					</span>
     				<div class="cost" style="width: 1.5em; display: inline;">4</div>
     			</div>
@@ -45,7 +45,7 @@ Author: Ben Connick
     				<div class="cost" style="width: 1.5em; display: inline;">1</div>
     			</div>
     			<div id="bbDefend" class="walkContainer clickable def">
-    				<div class="singleDie"><img src='images/defensedie.png' class='dieSize1'></div>
+    				<span id="defenseNum"></span><div id="defenseDieIcon"><img src='images/defensedie.png' class='dieLarge'></div>
     				<div class="cost" style="width: 1.5em; display: inline;">1</div>
     			</div>
     			<div id="bbCharacter" class="battleCharacterContainer clickable">
@@ -221,15 +221,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>7<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>7<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Battleaxe.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Longbow.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>8 
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -237,8 +237,8 @@ Author: Ben Connick
 							<tr>
 								<!-- special moves -->
 								<td colspan="2"><ul>
-									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSize2'/> melee attack that costs 8 AP</li>
-									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSize2'/> against large opponents</li>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Reckless Charge" a gap-closer 5<img src='images/attackdie.png' class='dieSmall'/> melee attack that costs 8 AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Giant Killer" a passive ability that gives you +2<img src='images/attackdie.png' class='dieSmall'/> against large opponents</li>
 								</ul></td>
 							</tr>
 						</table>
@@ -255,15 +255,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>6<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>6<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Longsword.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>0<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>0<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Buckler-Shield.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>5<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>5<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>9
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -272,7 +272,7 @@ Author: Ben Connick
 								<!-- special moves -->
 								<td colspan="2"><ul>
 									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Take the Blow" allows you to block attacks that are targeting your allies</li>
-									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Lock Down" spend 4AP on your turn to get +4<img src='images/defensedie.png' class='dieSize2'/> until the start of your next</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Lock Down" spend 4AP on your turn to get +4<img src='images/defensedie.png' class='dieSmall'/> until the start of your next</li>
 								</ul></td>
 							</tr>
 						</table>
@@ -289,15 +289,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>2<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>2<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Staff.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Throwing-Knives.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>6
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -305,8 +305,8 @@ Author: Ben Connick
 							<tr>
 								<!-- special moves -->
 								<td colspan="2"><ul>
-									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Fireball" an  8<img src='images/attackdie.png' class='dieSize2'/> explosion of flames in an area that can hurt allies as well as enemies</li>
-									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Lightning Sigil" shoots 10<img src='images/attackdie.png' class='dieSize2'/> lightning through a chain of nearby Marked enemies</li>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Fireball" an  8<img src='images/attackdie.png' class='dieSmall'/> explosion of flames in an area that can hurt allies as well as enemies</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Lightning Sigil" shoots 10<img src='images/attackdie.png' class='dieSmall'/> lightning through a chain of nearby Marked enemies</li>
 								</ul></td>
 							</tr>
 						</table>
@@ -323,15 +323,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>2<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>2<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Staff.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Throwing-Knives.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>6
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -340,7 +340,7 @@ Author: Ben Connick
 								<!-- special moves -->
 								<td colspan="2"><ul>
 									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Toadify" a 5AP magic spell that turns a your target into a toad.</li>
-									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Tiger Aura" give an ally a temporary +2<img src='images/attackdie.png' class='dieSize2'/> buff, costs 5AP</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Tiger Aura" give an ally a temporary +2<img src='images/attackdie.png' class='dieSmall'/> buff, costs 5AP</li>
 								</ul></td>
 							</tr>
 						</table>
@@ -357,15 +357,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Longbow.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Shortsword.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>4<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>6
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -391,15 +391,15 @@ Author: Ben Connick
 							</tr>
 							<tr>
 								<!--primary weapon-->
-								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>5<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Shortsword.png' class='ccWeaponPic'/></div></td>
 								<!--secondary weapon-->
-								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>3<img src='images/attackdie.png' class='dieSmall'> 
 								<img src='images/Throwing-Knives.png' class='ccWeaponPic'/></div></td>
 							</tr>
 							<tr>
 								<!--defenses-->
-								<td><div class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSize2'> 
+								<td><div class='ccWeaponDesc'>3<img src='images/defensedie.png' class='dieSmall'> 
 								<img src='images/shield.png' class='ccWeaponPic'/></div></td>	
 								<td><div class='ccWeaponDesc'>6
 								<img src='images/armour.png' class='ccWeaponPic'/></div></td>	
@@ -407,8 +407,8 @@ Author: Ben Connick
 							<tr>
 								<!-- special moves -->
 								<td colspan="2"><ul>
-									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Contract Killer" if you or an ally Marked a target, you gain +2<img src='images/attackdie.png' class='dieSize2'/> against the target</li>
-									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Back Stab" when an enemy is between you and an ally, you gain +2<img src='images/attackdie.png' class='dieSize2'/> against them</li>
+									<li  class="ccSpecialMove"><em>Special 1:</em> &nbsp"Contract Killer" if you or an ally Marked a target, you gain +2<img src='images/attackdie.png' class='dieSmall'/> against the target</li>
+									<li  class="ccSpecialMove"><em>Special 2:</em> &nbsp"Back Stab" when an enemy is between you and an ally, you gain +2<img src='images/attackdie.png' class='dieSmall'/> against them</li>
 								</ul></td>
 							</tr>
 						</table>
@@ -473,11 +473,11 @@ Author: Ben Connick
     			</tr>
     			<tr>
 					<td class="centerAligned">
-						<img id="weapon1Die" class="dieSize1" src="images/perspective-dice-six-faces-six.png">
+						<img id="weapon1Die" class="dieLarge" src="images/perspective-dice-six-faces-six.png">
 						<div id="primaryWeaponDamage" class="doubleFontSize">8</div>
 					</td>
 					<td class="centerAligned">
-						<img id="weapon2Die" class="dieSize1" src="images/perspective-dice-six-faces-six.png">
+						<img id="weapon2Die" class="dieLarge" src="images/perspective-dice-six-faces-six.png">
 						<div id="secondaryWeaponDamage" class="doubleFontSize">5</div>
 					</td>
     			</tr>

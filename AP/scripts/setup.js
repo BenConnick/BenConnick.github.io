@@ -15,6 +15,8 @@ function Move(name, roll, AP, effect, range, special, trigger, difficulty) {
 	}
 	this.trigger = trigger;
 	this.difficulty = difficulty;
+	this.rollNum = "";
+	this.rollType = "";
 }
 
 // GLOBAL VARS
@@ -295,7 +297,7 @@ basicMoves.push(new Move(
 	"Full Melee Attack",
 	"",
 	6,
-	"",
+	"|Weapon + 2||ad|",
 	"Touch",
 	""
 	)
@@ -304,7 +306,7 @@ basicMoves.push(new Move(
 	"Trip",
 	"",
 	5,
-	"Target tests agility against you. If they lose, they gain the Prone status. Target must be within 1 size category of you.",
+	"Target tests agility against you. If they lose, they gain the Prone status. Target must be within 1 size category of you. Agility: |Agility||d|",
 	"Touch",
 	""
 	)
@@ -331,7 +333,7 @@ basicMoves.push(new Move(
 	"Defend",
 	"",
 	1,
-	"Roll |Defense||dd|",
+	"|Defense||dd|",
 	"",
 	"Reaction",
 	"You are attacked"
@@ -341,7 +343,7 @@ basicMoves.push(new Move(
 	"Focus Defend",
 	"",
 	4,
-	"Roll |Defense + 4||dd|",
+	"|Defense + 4||dd|",
 	"",
 	"Reaction",
 	"You are attacked"

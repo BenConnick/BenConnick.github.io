@@ -15,6 +15,8 @@ var moveContainer;
 var basic;
 var advanced;
 var special;
+var equippedWeaponName = "";
+var ranged;
 
 // activates the battle mode
 function enterBattleMode(myTurn) {
@@ -43,7 +45,9 @@ function enterBattleMode(myTurn) {
 	// set name
 	getByClass("battleName").innerHTML = character.name;
 	// first weapon
-	getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.primaryWeaponName+'.png")';
+	equippedWeaponName = character.primaryWeaponName;
+	getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+equippedWeaponName+'.png")';
+
 	// first weapon damage value
 	attackValue.innerHTML = getWeapon(character.primaryWeaponName).damage;
 	// clear inner box this doesn't work because there are not the inner elements where moves are stored
@@ -51,9 +55,11 @@ function enterBattleMode(myTurn) {
 	// set basic attack based on first weapon
 	if (getWeapon(character.primaryWeaponName).range == "touch") {
 		// melee
+		ranged = false;
 		//displayMove(basicMoves[1],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	} else {
 		// ranged
+		ranged = true;
 		//displayMove(basicMoves[2],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	}
 	// add move ability
@@ -154,7 +160,8 @@ function defenseMode() {
 	
 	// change background
 	battleContainer.style.backgroundColor = "rgb(180,180,200)";
-
+	getById("bigDefense").innerHTML = 4 + archetypes[character.charClass].Defense;
+	getById("defenseNum").innerHTML = archetypes[character.charClass].Defense;
 	var aInner = advanced.getElementsByClassName("inner")[0];
 	var sInner = special.getElementsByClassName("inner")[0];
 	aInner.innerHTML = "";

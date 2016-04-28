@@ -176,7 +176,8 @@ function activateButtons() {
 		useAbility(basicMoves[0]);
 	}
 	getById("bbAttackClickCapture").onclick = function() {
-		useAbility(basicMoves[1]);
+		if (ranged) { useAbility(basicMoves[2]); }
+		else { useAbility(basicMoves[1]); }	
 	}
 	getById("bbCharacter").onclick = function() {
 		turn ? setHP(HP+1) : setHP(HP-1);
@@ -195,6 +196,7 @@ function activateButtons() {
 		event.stopPropagation();
 	}
 	getByClass("weaponSelector").onchange = function() {
+		equippedWeaponName = this.value;
 		// change weapon picture
 		if (this.value == character.primaryWeaponName) {
 			getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+character.primaryWeaponName+'.png")';
@@ -204,27 +206,12 @@ function activateButtons() {
 			attackValue.innerHTML = getWeapon(character.secondaryWeaponName).damage;
 		}
 		// change whether basic attack is melee or range
-		if (getWeapon(this.value).range == "touch") {
-			// display standard attack
-			
+		if (getWeapon(equippedWeaponName).range == "touch") {
+			// melee
+			ranged = false;
 		} else {
-			// display ranged attack
-			
+			// ranged
+			ranged = true;
 		}
 	}
-	
-	/*getById("GotAttacked").onclick = function() {
-		enterBattleMode(false);
-	}
-	getById("HPplus").onclick = function() {
-		setHP(HP+1);
-	}
-	getById("HPminus").onclick = function() {
-		setHP(HP-1);
-	}
-	getById("NextTurn").onclick = function() {
-		var newAP = AP + 5;
-		if (newAP > maxAP) { newAP = maxAP; }
-		setAP(newAP);
-	}*/
 }
