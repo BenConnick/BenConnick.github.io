@@ -209,8 +209,10 @@ function activateButtons() {
 		if (getWeapon(equippedWeaponName).range == "touch") {
 			// melee
 			ranged = false;
+			rangeDiv.innerHTML = "";
 		} else {
 			// ranged
+			rangeDiv.innerHTML = getWeapon(equippedWeaponName).range;
 			ranged = true;
 		}
 	}

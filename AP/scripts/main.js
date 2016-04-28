@@ -191,16 +191,20 @@ function useAbility(moveObject) {
 	} else {
 		roll = "";
 	}
-	var fx = "" 
-	var rollStr = ""
+	var fx = "";
+	var rollStr = "";
+	var rangeStr = "";
 	if (moveObject.effect.indexOf("|") > -1) {
-	fx = parsePlaceholders(moveObject.effect);
-	rollStr = rollString(detectDigit(fx), detectRollType(fx), true);
+		fx = parsePlaceholders(moveObject.effect);
+		rollStr = rollString(detectDigit(fx), detectRollType(fx), true);
+	}
+	if (moveObject.range.indexOf("/") > -1) {
+		rangeStr = rollString(3,null,true); 
 	}
 	// set menu text to AP
 	getById("rollCalculation").innerHTML = moveObject.name + " used."
 	+ "<br>AP used: " + moveObject.AP + "  Current AP: " + AP + "<br>"
-	+ rollStr;
+	+ rollStr + "<br>" + rangeStr;
 	//+ roll;
 	
 	/*if (moveObject.roll == "") {

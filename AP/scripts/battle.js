@@ -17,6 +17,7 @@ var advanced;
 var special;
 var equippedWeaponName = "";
 var ranged;
+var rangeDiv;
 
 // activates the battle mode
 function enterBattleMode(myTurn) {
@@ -32,34 +33,42 @@ function enterBattleMode(myTurn) {
 	attackBox = getById("bbAttack");
 	characterBox = getById("bbCharacter");
 	battleContainer = getByClass("battleContainer");
+	rangeDiv = getById("range");
 	
 	// show the battle screen
 	showScreen("Battle");
+	
 	// set ap to maxAP
 	setAP(maxAP);
+	
 	// set hp to character's current hp
 	maxHP = archetypes[character.charClass].HP;
 	setHP(maxHP);
+	
 	// start on the character's turn
 	turn = myTurn;
+	
 	// set name
 	getByClass("battleName").innerHTML = character.name;
+	
 	// first weapon
 	equippedWeaponName = character.primaryWeaponName;
 	getByClass("selectedWeaponImg").style.backgroundImage = 'url("images/'+equippedWeaponName+'.png")';
-
 	// first weapon damage value
-	attackValue.innerHTML = getWeapon(character.primaryWeaponName).damage;
+	attackValue.innerHTML = getWeapon(equippedWeaponName).damage;
+	
 	// clear inner box this doesn't work because there are not the inner elements where moves are stored
 	//basic.innerHTML = advanced.innerHTML = special.innerHTML = "";
 	// set basic attack based on first weapon
 	if (getWeapon(character.primaryWeaponName).range == "touch") {
 		// melee
 		ranged = false;
+		rangeDiv.innerHTML = "";
 		//displayMove(basicMoves[1],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	} else {
 		// ranged
 		ranged = true;
+		rangeDiv.innerHTML = getWeapon(equippedWeaponName).range;
 		//displayMove(basicMoves[2],true,moveContainer.getElementsByClassName("attackAndMove")[0]);
 	}
 	// add move ability
