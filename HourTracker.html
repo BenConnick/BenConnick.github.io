@@ -36,6 +36,10 @@
 			currentTimeElem = document.getElementById("current");
 			logElem = document.getElementById("log");
 			displayCurrentTime();
+			if (document.cookie) {
+				logString = document.cookie.replace("log=","");
+				displayLog();
+			}
 		}
 		function logTime() {
 			now = new Date();
