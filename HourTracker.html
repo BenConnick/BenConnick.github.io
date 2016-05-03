@@ -43,13 +43,13 @@
 		}
 		function logTime() {
 			now = new Date();
-			logString += "Punch: " + now.toString() + "\n";
+			logString += "Punch: " + now.toString() + "<br>";
 			displayLog();
 			displayResponse("Last Logged Time: " + now.toString());
 			saveToCookie();
 		}
 		function displayLog() {
-			logElem.innerHTML = replaceNewline(logString);
+			logElem.innerHTML = logString;
 		}
 		function displayResponse(arg) {
 			responseElem.innerHTML = arg;
