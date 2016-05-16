@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+	
 	<title>Dungeon Scavengers</title>
 	<style>
 		body {
@@ -73,7 +75,7 @@
 	</div>
 	<table id="controls">
 		<tr>
-			<td></td>
+			<td>debug</td>
 			<td><strong>UP</strong></td>
 			<td></td>
 		</tr>
@@ -94,15 +96,42 @@
 		</div>
 	</div>
 </body>
-
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
 	var output;
+	var socket = io();
+	
 	function init() {
+		setupSocketIO();
+		document.body.onclick = fullscreen;
 		output = document.getElementById("resultsInner");
 		print("Welcome, [name]");
+	}
+	function fullscreen() {
+		if (document.body.mozRequestFullScreen) {
+			document.body.mozRequestFullScreen();
+		  } else {
+			docuemnt.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+		  }
 	}
 	function print(str) {
 		output.innerHTML = str + "<br>" + output.innerHTML;
 	}
 	window.onload = init();
-</script>
+	function setupSocketIO() {
+      var buttons = document.querySelectorAll("td");
+      for (var i=0; i<buttons.length; i++) {
+		  var setClick = function(btn) {
+			  btn.onclick = function(){
+			  	console.log("button clicked");
+				socket.emit('chat message', btn.innerHTML);
+				return false;
+			  }
+		   }
+		   setClick(buttons[i]);
+      }
+      socket.on('chat message', function(msg){
+        print(msg);
+      });
+    }
+    </script>
