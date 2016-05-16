@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- This is the page for the player to see, where they control the game from -->
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Dungeon Scavengers</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: monospace;
+			font-size: 7vw;
+			width: 100vw;
+			height: 100vw;
+			overflow: hidden;
+			/* no highlight text */
+			  -webkit-touch-callout: none; /* iOS Safari */
+			  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+			  -khtml-user-select: none;    /* Konqueror */
+			  -moz-user-select: none;      /* Firefox */
+			  -ms-user-select: none;       /* Internet Explorer/Edge */
+			  user-select: none;           /* Non-prefixed version, currently
+											  not supported by any browser */
+			
+		}
+		#controls {
+			font-family: monospace;
+			width: 100vw;
+			height: 100vw;
+		}
+		#controls td {
+			width: 33vw;
+			height: 33vw;
+			text-align: center;
+			background-color: lightgray;
+		}
+		#controls td:active {
+			background-color: gray;
+		}
+		#healthContainer {
+			width: 98vw;
+			height: 10vw;
+			padding: 1vw;
+			background-color: lightgray;
+		}
+		#healthBar {
+			width: 100%;
+			height: calc(100% - 2vw);
+			background-color: red;
+			text-align: center;
+			padding-top: 2vw;
+		}
+		#resultsContainer {
+			background-color: black;
+			color: white;
+			height: calc(100vh - 112vw - 4px);
+		}
+		#resultsContainer header {
+			color: black;
+			padding-left: 2vw;
+			background-color: lightgray;
+		}
+		#resultsInner {
+			padding-left: 2vw;
+			height: calc(100% - 9vw);
+			overflow-y: scroll;
+		}
+	</style>
+</head>
+<body>
+	<div id="healthContainer">
+		<div id="healthBar">20/20</div>
+	</div>
+	<table id="controls">
+		<tr>
+			<td></td>
+			<td><strong>UP</strong></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><strong>LEFT</strong></td>
+			<td><span style="font-size: 75%">Inventory</span></td>
+			<td><strong>RIGHT</strong></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><strong>DOWN</strong></td>
+			<td></td>
+		</tr>
+	</table>
+	<div id="resultsContainer">
+		<header>Outcome:</header>
+		<div id="resultsInner">
+		</div>
+	</div>
+</body>
+
+<script>
+	var output;
+	function init() {
+		output = document.getElementById("resultsInner");
+		print("Welcome, [name]");
+	}
+	function print(str) {
+		output.innerHTML = str + "<br>" + output.innerHTML;
+	}
+	window.onload = init();
+</script>
