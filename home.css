@@ -198,9 +198,9 @@ html {
 #closeFloatingFrameBtn {
 	display: none;
 	position: fixed;
-	left: calc(50% + 400px + 4em - 25px);
+	left: calc(50% + 400px + 4em - 75px);
 	z-index: 6;
-	top: 5px;
+	top: 60px;
 	width: 50px;
 	height: 50px;
 	border-radius: 100%;

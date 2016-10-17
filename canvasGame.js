@@ -201,10 +201,12 @@ function update() {
 
 // scroll towards a target: 1 call = 1 frame
 function smoothScrollTo(target) {
+	var prevTop; // used to check for stuck
     var tolerance = 6;
     var currentTop;
     if (!isWebkit && !isEdge) {
         currentTop = document.documentElement.scrollTop;
+        prevTop = document.documentElement.scrollTop;
     }
     else {
         currentTop = document.body.scrollTop;
@@ -224,6 +226,11 @@ function smoothScrollTo(target) {
     if ((target-tolerance) < currentTop && currentTop < (target+tolerance)) {
         targetH = -1;
         return true;
+    }
+    // if stuck
+    if (prevTop == document.documentElement.scrollTop) {
+    	targetH = -1;
+    	return true;
     }
     return false;
 }

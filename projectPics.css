@@ -1,11 +1,19 @@
 
+#csBtn {
+	background-image: url("images/kawaii-cat-illustration.jpg");
+}
+
 #ddBtn {
-	background-image: url("images/DreamDiver.jpg");
+	background-image: url("images/buddies.png");
 	background-position: center;
 }
 
+#dbumsBtn {
+	background-image: url("images/DungeonBumsScreenshot.png");
+}
+
 #dtBtn {
-	background-image: url("images/comingsoon.png");
+	background-image: url("images/DragonThumbnail.jpg");
 	background-position: center;
 }
 
@@ -146,6 +154,13 @@
     background-size: 100%;
     background-repeat: no-repeat;
 }
+#dungeonBumsScreenshot {
+	background-image: url("images/DungeonBumsScreenshot.png");
+	margin-top: 25px;
+	cursor: pointer;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 #dreamsOfUsScreenshot {
 	background-image: url("images/DreamsOfUsScreenshot.png");
 	margin-top: 25px;
@@ -156,6 +171,21 @@
 #dreamDiverScreenshot {
 	background-image: url("images/DreamDiverScreenshot.jpg");
 	margin-top: 25px;
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#WoaLScreenshot {
+	background-image: url("images/WoaLScreenshot.png");
+	margin-top: 25px;
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#dontGrowUpScreenshot {
+	background-image: url("images/GGG_DesDoc.png");
+	margin-top: 25px;
+	height: 767px;
 
     background-size: 100%;
     background-repeat: no-repeat;
