@@ -44,6 +44,12 @@ a {
     text-align: center;
 }
 
+.rightAlignedNavBox {
+	position: absolute;
+	right: 47px;
+	top: 21px;
+}
+
 .navBox:hover {
     background-color: #C63D0F;
     /*border: solid #3B3738;*/
@@ -73,5 +79,7 @@ a {
     margin: 0px;
     font-size: 16pt;
     background-color: #3B3738;
+    background-image: url("images/nameBanner.png");
     text-align: center;
+    min-height: 70px;
 }

@@ -123,8 +123,14 @@ html {
 	padding: 1em;
 }
 
+.nameIcon {
+	width: 40vw;
+	height: 5vw;
+	display: inline-block	;
+}
+
 .nameTitleCrop {
-	height: 200px;
+	height: 100%;
 	width: 100%;
 	position: relative;
 	background-image: url("images/nametitle.svg");
@@ -221,10 +227,6 @@ html {
 	color: white;
 	top: -20px;
 	cursor: pointer;
-}
-
-#nametitle {
-    margin-top: -100px;
 }
 
 #gamename {
