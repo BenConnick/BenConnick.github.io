@@ -10,7 +10,7 @@ html, * {
 body {
     font-family: 'Open Sans', 'Helvetica Nue', sans-serif;
     /*background-color: #C63D0F;*/
-    background-color: #19263a;
+    background-color: #ddd;
     margin: 0px;
     width: 100%;
     overflow-x: hidden;
@@ -62,7 +62,7 @@ a {
 
 #bounds {
     z-index: 0;
-    background-color: #FDF3E7;
+    background-color: #ddd;
     position: relative;
     margin: 0 auto;
     width: 800px;
@@ -80,6 +80,7 @@ a {
     font-size: 16pt;
     background-color: #3B3738;
     background-image: url("images/nameBanner.png");
+    background-size: 50%;
     text-align: center;
-    min-height: 70px;
+    min-height: 20px;
 }

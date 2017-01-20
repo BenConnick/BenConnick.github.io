@@ -6,6 +6,63 @@ html {
     /*overflow-x: hidden;*/
 }
 
+.arcadeContainer {
+	max-height: 90vh;
+	max-width: 100vw;
+	position: relative;
+	display: block;
+	z-index: 4;
+	/*left: calc(0vw - 35vh);*/
+	margin 5vh auto;
+	width: 50vh;
+	height: 100vh;
+}
+
+.arcadeOverlay {
+	max-height: 90vh;
+	max-width: 100vw;
+	position: relative;
+	display: block;
+	z-index: 4;
+	/*left: calc(0vw - 35vh);*/
+	margin-top: 5vh;
+}
+
+.arcadeMiniInstructions {
+	display: block;
+	max-width: 100%;
+	width: 80%;
+	height: 10%;
+	max-height: 20%;
+	z-index: 4;
+	position: absolute;
+	margin-left: 25%;
+	margin-top: 30%;
+}
+
+.arcadeScreen {
+	max-width: 100vw;
+	display: block;
+	max-height: 100vh;
+	position: absolute;
+	z-index: 4;
+	margin-left: 20%;
+	margin-top: 10vh;
+	width: 60%; 
+	height: 40%;
+	background-color: #020;
+}
+
+.opaqueCurtain {
+	background-color: #ddd;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	z-index: 3;
+}
+
 .white {
     color: #f2eacc;
 }
@@ -74,6 +131,7 @@ html {
 	padding: 0.5em 0em;
 	margin-top: 1em;
 	text-align: left;
+	text-shadow: 0px 0px 4px 4px rgba(0,0,0,0.9);
 	/*background-image: url("images/metaldoor_flipped.png");
 	background-repeat: no-repeat;
 	background-position: 656px 10px;*/
@@ -100,6 +158,7 @@ html {
 	cursor: pointer;
 	background-size: cover;
 	background-repeat: no-repeat;
+	box-shadow: 0px 0px 4px 4px rgba(0,0,0,0.1);
 }
 
 .projectBtn .nameBox {

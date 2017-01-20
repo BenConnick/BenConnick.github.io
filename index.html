@@ -14,6 +14,13 @@ Author: Ben Connick
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     </head>
     <body>
+    	<div class="arcadeContainer" style="background-color: red">
+			<div class="arcadeScreen"></div> 
+			<img class="arcadeOverlay" src="images/plz.svg"></img>
+			<img class="arcadeMiniInstructions blinktext" src="images/clicktoplay_text.png"></img>
+    	</div>
+    	<div class="opaqueCurtain"></div>
+    	
     	<div class="darkOverlay"></div>
     	<div id="floatingFrame">
     		<div id="csSect" class="projectSection">
@@ -248,7 +255,8 @@ Author: Ben Connick
         <!-- the navigation bar and spacer -->
         <div id="pagetop"></div>
         <div id="nav">
-            <div class="navBox rightAlignedNavBox" id="AboutMeBtn">Contact</div>
+            <!-- actual contact icons go here -->
+            <img class="rightAlignedNavBox" src="images/fakecontacticons.png"></img>
         </div>
         
         <!-- the content -->
@@ -388,6 +396,7 @@ Author: Ben Connick
            		<img style="float: right; height: 5em" src="images/meeple.png" alt="Ben Connick">
             </div>
         </div>  
+        <script src="blinkText.js"></script>
         <script src="pictureLinks.js"></script>
         <script src="canvasGame.js"></script>
         
