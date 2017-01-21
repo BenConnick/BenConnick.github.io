@@ -201,6 +201,7 @@ html {
 .slideshowSlide .tag {
 	font-size: 0.8em;
 	padding: 0.2em 0.6em;
+	margin-left: 0;
 }
 
 .slideProjDesc {
