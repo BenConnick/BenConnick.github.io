@@ -21,6 +21,9 @@ function closeViewer() {
 	if (viewer.frame!=undefined) {
 		setViewerDisplay("none");
 	}
+	if (viewer.querySelector("iframe") != undefined) {
+		toggleVideo(viewer.querySelector("iframe"), 'hide');
+	}
 }
 
 function showViewer() {
@@ -30,6 +33,13 @@ function showViewer() {
 	}
 	// make sure you're at the top
 	viewer.frame.scrollTop = 0;
+}
+
+function toggleVideo(frame, state) {
+    // if state == 'hide', hide. Else: show video
+    var iframe = frame.contentWindow;
+    func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+    iframe.postMessage('{"event":"command","func":"' + func + '","args":""}','*');
 }
 
 function init() {

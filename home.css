@@ -132,18 +132,19 @@ html {
 }
 
 .nameTitleCrop {
-	height: 100%;
+	height: 6em;
 	width: 100%;
 	position: relative;
 	background-image: url("images/nametitle.svg");
-	background-size: 115%;
+	background-size: 120%;
 	background-repeat: no-repeat;
 	background-position: center;
 	transition: background-size 0.2s;
+	margin: 3em 0 2em 0;
 }
 
 .nameTitleCrop:hover {
-	background-size: 120%;
+	background-size: 118%;
 }
 
 .closeProjectSection {
@@ -193,14 +194,31 @@ html {
 	overflow: hidden;
 }
 
+.slideshowSlide a {
+	color: #99f;
+}
+
+.slideshowSlide .tag {
+	font-size: 0.8em;
+	padding: 0.2em 0.6em;
+}
+
 .slideProjDesc {
 	display: inline-block;
 	width: calc(35% - 4em);
 	height: calc(100% - 4em);
-	background-color: rgba(0,0,0,0.1);
+	background-color: #333;
+	color: #ddd;
 	margin: 0;
 	padding: 2em;
 	overflow: scroll;
+}
+
+.slideProjDesc h2 {
+	color: #fff;
+}
+.slideProjDesc p {
+	color: #eee;
 }
 
 .slideProjImg {
@@ -211,6 +229,29 @@ html {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     margin: 0;
+    overflow: hidden;
+}
+
+.slideshowButtons {
+	margin: 1em;
+	text-align: center;
+	height: 3em;
+}
+
+.slideButton {
+	border: solid 2px #333;
+	background-color: #333;
+	border-radius: 1000em; /* infinite */
+	width: 2em;
+	height: 2em;
+	display: inline-block;
+	margin: 0 1em;
+	cursor: pointer;
+}
+
+.slideButton:hover {
+	width: 2.1em;
+	height: 2.1em;
 }
 
 #nameTitleClickBox {
