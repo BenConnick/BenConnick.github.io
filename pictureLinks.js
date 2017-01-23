@@ -20,9 +20,9 @@ function closeViewer() {
 	// if defined
 	if (viewer.frame!=undefined) {
 		setViewerDisplay("none");
-	}
-	if (viewer.querySelector("iframe") != undefined) {
-		toggleVideo(viewer.querySelector("iframe"), 'hide');
+		if (viewer.frame.querySelector("iframe") != undefined) {
+			toggleVideo(viewer.frame.querySelector("iframe"), 'hide');
+		}
 	}
 }
 
@@ -38,7 +38,7 @@ function showViewer() {
 function toggleVideo(frame, state) {
     // if state == 'hide', hide. Else: show video
     var iframe = frame.contentWindow;
-    func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+    var func = state == 'hide' ? 'pauseVideo' : 'playVideo';
     iframe.postMessage('{"event":"command","func":"' + func + '","args":""}','*');
 }
 
