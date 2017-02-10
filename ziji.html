@@ -110,7 +110,11 @@ del {
 	text-decoration: line-through;	
 }
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.onclick = function() { attemptInit(); };
+.newspaper, .newspaper span {
+	color: black !important;
+	text-shadow: none !important;
+	font-family: "Times" !important;	
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.onclick = function() { attemptInit(); };
 
 var timeTraveled = false;
 // globally available var
@@ -191,13 +195,28 @@ the [[door-&gt;ask the janitor about the door]]
 I have questions about [[myself-&gt;janus myself]]
 [[nothing-&gt;Start]]</tw-passagedata>
 <tw-passagedata pid="13" name="go through the door" tags="" position="762,550">Which side of the door do you go through? The [[side you came in through]] or [[the other side]]?</tw-passagedata>
-<tw-passagedata pid="14" name="side you came in through" tags="" position="1430,2606">THE IRISH TIMES
-Woman murders judge who ordered tumor removal
+<tw-passagedata pid="14" name="side you came in through" tags="" position="1430,2606">&lt;script&gt;
+document.body.style.transitionDuration = &quot;0s&quot;;
+document.body.style.backgroundColor=&quot;white&quot;;
+&lt;/script&gt;
+&lt;span class=&quot;newspaper&quot;&gt;
+&lt;span style=&quot;font-size: 3em&quot;&gt;THE IRISH TIMES&lt;/span&gt;
+&lt;br&gt;
+&lt;span style=&quot;font-size: 2em&quot;&gt;Woman murders judge who ordered tumor removal&lt;/span&gt;
+&lt;hr&gt;
 A judge who ordered surgery to remove a brain tumor to be carried out on a woman without her consent was today found dead in…
-</tw-passagedata>
-<tw-passagedata pid="15" name="the other side" tags="" position="1022,2602">THE IRISH TIMES
-Woman gives chocolates to judge who ordered tumor removal
-A judge who ordered surgery to remove a brain tumor to be carried out on a woman without her consent was today presented with…</tw-passagedata>
+&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="15" name="the other side" tags="" position="1022,2602">&lt;script&gt;
+document.body.style.transitionDuration = &quot;0s&quot;;
+document.body.style.backgroundColor=&quot;white&quot;;
+&lt;/script&gt;
+&lt;span class=&quot;newspaper&quot;&gt;
+&lt;span style=&quot;font-size: 3em&quot;&gt;THE IRISH TIMES&lt;/span&gt;
+&lt;br&gt;
+&lt;span style=&quot;font-size: 2em&quot;&gt;Woman gives chocolates to judge who ordered tumor removal&lt;/span&gt;
+&lt;hr&gt;
+A judge who ordered surgery to remove a brain tumor to be carried out on a woman without her consent was today presented with…
+&lt;/span&gt;</tw-passagedata>
 <tw-passagedata pid="16" name="belong" tags="" position="458,1150">(belong)
 Janus says, “then, if you are ready, you may [[leave-&gt;double door]] through the other door.”
 ---
