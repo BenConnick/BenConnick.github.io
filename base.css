@@ -10,7 +10,7 @@ html, * {
 body {
     font-family: 'Open Sans', 'Helvetica Nue', sans-serif;
     /*background-color: #C63D0F;*/
-    background-color: #eee;
+    background-color: #fafafa;
     margin: 0px;
     width: 100%;
     overflow-x: hidden;
@@ -65,7 +65,7 @@ h2 {
 
 #bounds {
     z-index: 0;
-    background-color: #eee;
+    background-color: #fafafa;
     position: relative;
     margin: 0 auto;
     width: 800px;
@@ -84,4 +84,32 @@ h2 {
     background-size: 50%;
     text-align: center;
     min-height: 20px;
+}
+
+/* mobile */
+@media (min-width: 0px) {
+	#bounds {
+		width: 400px;
+	}
+}
+
+/* small window */
+@media (min-width: 800px) {
+	#bounds {
+		width: 800px;
+	}
+}
+
+/* monitor */
+@media (min-width: 1200px) {
+	#bounds {
+		width: 1200px;
+	}
+}
+
+/* wide monitor */
+@media (min-width: 1800px) {
+	#bounds {
+		width: 1600px;
+	}
 }
