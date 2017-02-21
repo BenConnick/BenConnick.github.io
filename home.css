@@ -6,6 +6,27 @@ html {
     /*overflow-x: hidden;*/
 }
 
+.bigLogoContainer {
+	position: relative;
+	margin-top: 3em;
+	height: 13em;
+	width: 100%;
+}
+
+.bigLogo {
+	position: absolute;
+	top: 0;
+	left: 30%;
+	width: 40%;
+	height: 100%;
+	opacity: 1;
+}
+
+.bigLogo:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
 .white {
     color: #f2eacc;
 }
@@ -268,6 +289,7 @@ html {
 }
 
 #floatingFrame {
+	overflow-x: hidden;
 	overflow-y: scroll;
 	padding: 4em;
 	display: none;
@@ -435,14 +457,25 @@ html {
 /* mobile */
 @media (min-width: 0px) {
 	.projectBtn {
-		width: 190px;
-		height: 120px;
+		width: 300px;
+		height: 170px;
 	}
 	.slideProjDesc {
 		display: none;
 	}
 	.slideProjImg {
 		width: 100%;
+	}
+	#floatingFrame {
+		max-width: 60vw;
+		left: calc(50% - 30vw - 4em);
+	}
+	.projectBtn .nameBox {
+		visibility: visible;
+		font-size: 0.75em;
+	}
+	.bigLogoContainer {
+		height: 9em;
 	}
 }
 
@@ -467,24 +500,40 @@ html {
 	.nameTitleCrop {
 		height: 6em;
 	}
+	#floatingFrame {
+		max-width: 800px;
+		left: calc(50% - 400px - 4em);
+	}
+	.projectBtn .nameBox {
+		visibility: hidden;
+		font-size: 1em;
+	}
+	.bigLogoContainer {
+		height: 13em;
+	}
 }
 
 /* monitor */
 @media (min-width: 1200px) {
 	.projectBtn {
-		width: 375px;
-		height: 225px;	
+		width: 395px;
+		height: 245px;	
 	}
 	.slideshow {
 		height: 35em;
 	}
-	
 	.nameTitleCrop {
-		height: 10em;
+		height: 11em;
+	}
+	.bigLogoContainer {
+		height: 15em;
 	}
 }
 
 /* wide monitor */
 @media (min-width: 1800px) {
-	
+	.projectBtn {
+		width: 530px;
+		height: 345px;	
+	}
 }
