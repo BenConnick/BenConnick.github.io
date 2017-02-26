@@ -1,80 +1,80 @@
 
-#csBtn {
+.csBtn {
 	background-image: url("images/CatStackBanner.png");
 }
 
-#ddBtn {
+.ddBtn {
 	background-image: url("images/buddies.png");
 	background-position: center;
 }
 
-#dbumsBtn {
+.dbumsBtn {
 	background-image: url("images/DungeonBumsScreenshot.png");
 }
 
-#dtBtn {
+.dtBtn {
 	background-image: url("images/DragonThumbnail.jpg");
 	background-position: center;
 }
 
-#stsBtn {
+.stsBtn {
 	background-image: url("images/smashTheStackPreview.jpg");
 	background-position: center;
 }
 
-#dguBtn {
+.dguBtn {
 	background-image: url("images/DontGrowUp.png");
 	background-size: 12%;
 	background-position: center;
 }
 
-#sndBtn {
+.sndBtn {
 	background-image: url("images/smartphonesanddragons.jpg");
 }
 
-#douBtn {
+.douBtn {
 	background-image: url("images/boy.png");
 }
 
-#chupBtn {
+.chupBtn {
 	background-image: url("images/chupacabra.png");
 }
 
-#dbBtn {
+.dbBtn {
 	background-image: url("images/DigitalBardPreview.png");
 }
 
-#loiBtn {
+.loiBtn {
 	background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/36/Minority_superhero_art-3.jpg");
 }
 
-#seBtn {
+.seBtn {
 	background-image: url("images/infAlg.jpg");
 }
 
-#dqiBtn {
+.dqiBtn {
 	background-image: url("images/DontQuestionIt.jpg");
 }
 
-#geBtn {
+.geBtn {
 	background-image: url("images/googlyEyes.jpg");
 }
 
-#ftBtn {
+.ftBtn {
 	background-image: url("images/emoney.jpg");
 }
 
-#cvrBtn {
+.cvrBtn {
 	background-image: url("images/CatsVsRobots.jpg");
 }
 
-#phBtn { 
+.phBtn { 
 	background-image: url("images/procrastinatorhero.jpg");
 }
-#musBtn {
+.musBtn {
 	background-image: url("images/museLabel.png");
 }
-#feBtn {
+.feBtn {
 	background-image: url("images/fragileequilibrium.jpg");
 }
 

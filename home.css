@@ -280,6 +280,31 @@ html {
 	border: solid 2px #fff;
 }
 
+.filterBtn {
+	background-color: #ddd;
+    margin: 5px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.filterBtn:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.filter {
+	display: none;
+}
+
+.all-filter {
+	display: block;
+}
+
+.filterContainer {
+	margin-top: 2em;
+	margin-bottom: -1em;
+}
+
 #nameTitleClickBox {
 	position: absolute;
 	display: block;
