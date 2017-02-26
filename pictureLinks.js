@@ -83,4 +83,5 @@ function init() {
 	document.getElementById("PHscreenshot").onclick = function() { console.log("click"); window.location = 'http://people.rit.edu/bxc3201/ProcrastinatorHero'; };
 	document.getElementById("googlyScreenshot").onclick = function() { console.log("click"); window.location = 'http://bengames.x10host.com/GooglyEyes/UnityWorldProject.html'; };
 	document.getElementById("dreamsOfUsScreenshot").onclick = function() { console.log("click"); window.location = 'DreamsOfUs/index.html'; };
+	document.getElementById("fragileEQScreenshot").onclick = function() { console.log("click"); window.location = 'https://www.facebook.com/fragileeq'; };
 }

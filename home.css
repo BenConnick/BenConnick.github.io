@@ -48,9 +48,11 @@ html {
 
 .tag {
 	background-color: #eee;
-	margin: 5px;
-	padding: 10px;
-	display: inline-block;
+    margin: 5px;
+    margin-bottom: 24px;
+    margin-top: -10px;
+    padding: 10px;
+    display: inline-block;
 }
 
 .description {
@@ -477,6 +479,9 @@ html {
 	.bigLogoContainer {
 		height: 9em;
 	}
+	#walkCycle {
+		display: none;
+	}
 }
 
 @media (max-width: 799px) {
@@ -510,6 +515,9 @@ html {
 	}
 	.bigLogoContainer {
 		height: 13em;
+	}
+	#walkCycle {
+		display: block;
 	}
 }
 
