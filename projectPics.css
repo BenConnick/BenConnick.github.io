@@ -210,3 +210,8 @@
     background-size: 100%;
     background-repeat: no-repeat;
 }
+
+img.screenshot {
+	width: 100%;
+	height: initial;
+}
