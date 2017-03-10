@@ -1,5 +1,8 @@
+// loader.js
+// author: Ben Connick
+// last modified: 3/9/2017
+
 /*
-loader.js
 variable 'app' is in global scope - i.e. a property of window.
 app is the single global object literal - all other functions and properties of 
 the game will be properties of app.

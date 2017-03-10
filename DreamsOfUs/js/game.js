@@ -1,3 +1,7 @@
+// game.js
+// author: Ben Connick
+// last modified: 3/9/2017
+
 "use strict";
 
 // if app exists get a reference, otherwise create app

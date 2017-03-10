@@ -1,3 +1,7 @@
+// keys.js
+// author: Ben Connick
+// last modified: 3/9/2017
+
 "use strict";
 
 console.log("app.keys exists");
