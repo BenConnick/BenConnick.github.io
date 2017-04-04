@@ -1,5 +1,5 @@
 // emitter.js
-// author: Tony Jefferson
+// author: Tony Jefferson (used with permission)
 // last modified: 3/12/2014
 
 "use strict";

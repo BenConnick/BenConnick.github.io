@@ -1,12 +1,12 @@
 /* Styles for the various canvases */
 
 #bigCanvas {
-    border: solid white; 
-    /*display: block; */
-    display: none;
-    margin: auto;
-    margin-top: 30px; 
-    margin-bottom: 30px;
+    display: block;
+	position: absolute;
+	z-index: -1;
+	top: 100px;
+	left: calc(50% - 350px);
+	border: white;
 }
 
 .miniCanvas {

@@ -1,0 +1,130 @@
+<div 
+id="player"
+style="position: absolute; z-index: -100; top: 0; left: 0;" 
+width="800" 
+height="600" 
+frameborder="0"></div>
+<canvas 
+width="800" 
+height="600"
+style="position: absolute; z-index: 100; top: 0; left: 0;"></canvas>
+<script type='text/javascript'>
+	var numMunny = 20;
+	var munnies = []; // holds money objects
+	var munnyImages = [];
+	var prevTime = 0;
+	var deltaTime = 0;
+	function init() {
+		initImages();
+		canvas = document.querySelector("canvas");
+		ctx = canvas.getContext("2d");
+		initMunny();
+		window.requestAnimationFrame(tick);
+	}
+	function Munny() {
+		this.image = munnyImages[Math.floor(Math.random()*3)];
+		this.x = 0;
+		this.y = 0;
+		this.vx = Math.random() * 2 - 1;
+		this.vy = 0;
+		this.ax = 0;
+		this.ay = 0.001;
+	}
+	function initMunny() {
+		for (var i=0; i<numMunny; i++) {
+			// add money objects
+			munnies.push(new Munny());
+		}
+	}
+	function initImages() {
+		var ten = new Image();
+		var twenty = new Image();
+		var fifty = new Image();
+		ten.src = '10lbsnote.jpg';
+		twenty.src = '20lbsnote.jpg';
+		fifty.src = '50lbsnote.jpg';
+		munnyImages = [ten,twenty,fifty];
+	}
+	function tick(currentTime) {
+		deltaTime = currentTime - prevTime;
+		prevTime = currentTime;
+		update();
+		draw();
+		console.log(munnies[0].x);
+		window.requestAnimationFrame(tick);
+	}
+	function update() {
+		munnies.forEach(function(m) {
+			// update velocity
+			m.vx += m.ax * deltaTime;
+			m.vy += m.ay * deltaTime;
+			// update position
+			m.x += m.vx * deltaTime;
+			m.y += m.vy * deltaTime;
+			// check boundaries
+			checkBounds(m);
+		});
+	}
+	function checkBounds(m) {
+		// bounce off floor
+		if (m.y > 500) {
+			if (m.vy > 0) m.vy *= -1;
+		}
+		// when the money goes offscreen, launch it again
+		if (m.x < -200) {
+			m.y = 300 + Math.random();
+			m.vx = Math.random() * 1;
+		}
+		if (m.x > 800) {
+			m.y = 300 + Math.random();
+			m.vx = Math.random() * -1;
+		}
+	}
+	function draw() {
+		munnies.forEach(function(m) {
+			ctx.drawImage(m.image, m.x,m.y, 200, 100);
+		});
+	}
+	window.onload = init;
+</script>
+<script>
+  // 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player;
+  function onYouTubeIframeAPIReady() {
+	player = new YT.Player('player', {
+	  height: '600',
+	  width: '800',
+	  videoId: 'ULeDlxa3gyc',
+	  events: {
+		'onReady': onPlayerReady,
+		'onStateChange': onPlayerStateChange
+	  }
+	});
+  }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+	event.target.playVideo();
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+	/*if (event.data == YT.PlayerState.PLAYING && !done) {
+	  done = true;
+	}*/
+  }
+  function stopVideo() {
+	player.stopVideo();
+  }
+</script>

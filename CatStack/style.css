@@ -1,0 +1,14 @@
+body {
+	background-color: #EEBC49;
+	background-image: url("images/CatStripes.jpg");
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+.titleBanner {
+	margin-top: 1em;
+	position: relative;
+	font-size: 5em;
+	text-align: center;
+	width: 100%;
+}

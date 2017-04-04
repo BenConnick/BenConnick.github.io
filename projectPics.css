@@ -1,78 +1,81 @@
 
-#csBtn {
-	background-image: url("images/kawaii-cat-illustration.jpg");
+.csBtn {
+	background-image: url("images/CatStackBanner.png");
 }
 
-#ddBtn {
+.ddBtn {
 	background-image: url("images/buddies.png");
 	background-position: center;
 }
 
-#dbumsBtn {
+.dbumsBtn {
 	background-image: url("images/DungeonBumsScreenshot.png");
 }
 
-#dtBtn {
+.dtBtn {
 	background-image: url("images/DragonThumbnail.jpg");
 	background-position: center;
 }
 
-#stsBtn {
+.stsBtn {
 	background-image: url("images/smashTheStackPreview.jpg");
 	background-position: center;
 }
 
-#dguBtn {
+.dguBtn {
 	background-image: url("images/DontGrowUp.png");
 	background-size: 12%;
 	background-position: center;
 }
 
-#sndBtn {
+.sndBtn {
 	background-image: url("images/smartphonesanddragons.jpg");
 }
 
-#douBtn {
+.douBtn {
 	background-image: url("images/boy.png");
 }
 
-#chupBtn {
+.chupBtn {
 	background-image: url("images/chupacabra.png");
 }
 
-#dbBtn {
+.dbBtn {
 	background-image: url("images/DigitalBardPreview.png");
 }
 
-#loiBtn {
-	background-image: url("images/BrettJordan.jpg");
+.loiBtn {
+	background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/36/Minority_superhero_art-3.jpg");
 }
 
-#seBtn {
+.seBtn {
 	background-image: url("images/infAlg.jpg");
 }
 
-#dqiBtn {
+.dqiBtn {
 	background-image: url("images/DontQuestionIt.jpg");
 }
 
-#geBtn {
+.geBtn {
 	background-image: url("images/googlyEyes.jpg");
 }
 
-#ftBtn {
+.ftBtn {
 	background-image: url("images/emoney.jpg");
 }
 
-#cvrBtn {
+.cvrBtn {
 	background-image: url("images/CatsVsRobots.jpg");
 }
 
-#phBtn { 
+.phBtn { 
 	background-image: url("images/procrastinatorhero.jpg");
 }
-#musBtn {
+.musBtn {
 	background-image: url("images/museLabel.png");
+}
+.feBtn {
+	background-image: url("images/fragileequilibrium.jpg");
 }
 
 #googlyScreenshot {
@@ -140,17 +143,15 @@
 }
 
 #smartphonesAndDragonsScreenshot {
-	background-image: url("images/SPhoneDragons.png");
 	margin-top: 25px;
     cursor: pointer;
-    background-size: 50%;
-    background-repeat: no-repeat;
+    width: 30vw;
 }
 
 #safexScreenshot {
 	background-image: url("images/safexScreenshot.jpg");
 	margin-top: 25px;
-
+	height: 475px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -162,7 +163,7 @@
     background-repeat: no-repeat;
 }
 #dreamsOfUsScreenshot {
-	background-image: url("images/DreamsOfUsScreenshot.png");
+	background-image: url("images/DreamsOfUs.jpg");
 	margin-top: 25px;
 	cursor: pointer;
     background-size: 100%;
@@ -176,9 +177,9 @@
     background-repeat: no-repeat;
 }
 #WoaLScreenshot {
-	background-image: url("images/WoaLScreenshot.png");
+	background-image: url("images/WoaLScreenshotBright.png");
 	margin-top: 25px;
-
+	height: 450px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -190,9 +191,27 @@
     background-size: 100%;
     background-repeat: no-repeat;
 }
+#fragileEQScreenshot {
+	background-image: url("images/fragileequilibrium.jpg");
+	height: initial;
+	cursor: pointer;
+}
+
+.screenshotImg {
+	width: 100%;
+	min-width: 500px;
+}
 
 .screenshot {
 	width: 768px;
-    height: 603px;
+    height: 503px;
     margin: 0 auto;
+    margin-top: 25px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+img.screenshot {
+	width: 100%;
+	height: initial;
 }

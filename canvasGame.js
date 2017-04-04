@@ -649,13 +649,13 @@ function onFocus() {
  }
  
  // start button
- startButtonElem.addEventListener("click", function() {
+ /*startButtonElem.addEventListener("click", function() {
  	startButtonElem.style.display = "none"; // hide button
  	document.getElementById("bigCanvas").style.display = "block"; // show canvas
  	targetH = 200; // scroll into view
  	getDoorHeights();
- });
- 
+ });*/
+ /*
  // click navigation
  document.getElementById("HomeBtn").addEventListener("click", function() { 
  	targetH = 50; 
@@ -670,6 +670,7 @@ function onFocus() {
  document.getElementById("ProjectsBtn").addEventListener("click", function() { 
  	window.location.assign("https://bencgames.wordpress.com/"); 
  });
+ */
  document.getElementById("miniCanvas").addEventListener("click", function() { targetH = 420; });
 /*document.getElementById("ProCanvas").addEventListener("click", function() { targetH = 420; });
 document.getElementById("CatCanvas").addEventListener("click", function() { targetH = 420; });
