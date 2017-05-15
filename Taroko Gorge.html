@@ -30,8 +30,8 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 body {
  background: white;
  color: black;
- margin: 0 24pt 0 24pt;
- font-family: Optima, sans-serif;
+ margin: 0 24px 0 24px;
+ font-family: Helvetica Neue, Optima, sans-serif;
  font-size: 30px;
 }
 a {
@@ -41,13 +41,56 @@ a {
 #main {
   width: 400px;
   height: 350px;
-  overflow: scroll;
+  overflow: hidden;
   background-image: url("iphone.png");
   background-size: 100%;
   background-repeat: no-repeat;
   padding: 120px;
   padding-top: 350px;
 } 
+#main div {
+  margin: 10px;
+}
+
+#main div > span {
+  font-size: 20px;
+  background-image: url("TextBubble.png");
+  background-repeat: no-repeat;
+  height: 40px;
+  display: inline-block;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+/* text bubble front */
+#main div .front {
+  padding: 5px;
+  padding-left: 25px;
+}
+
+/* text bubble back */
+.front + span {
+  padding: 5px;
+  width: 20px;
+  background-position: -245px 0px;
+  color: rgba(0,0,0,0);
+  overflow-y: hidden;
+}
+
+.igorge {
+  position: absolute;
+  top: 256px;
+  left: 297px;
+  text-shadow: -1px -1px 1px black;
+  color: white;
+}
+.sources {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color:#0b3; 
+  height:60pt
+}
 /* ]]> */
 </style>
 <script type="text/javascript">
@@ -57,10 +100,9 @@ var paths=0;
 var above='😺,🙉,🐶,🎸,🛁,🎻,🕰,🎉'.split(',');
 var below='🍑,💣,🛌,📿,🔪 ,👾 ,📞,🖥'.split(',');
 var trans='🏄,💪,🏹,🏂,🏌,🎤,⛳,💔'.split(',');
-var imper='🚿,⚡,⏱,🌧,🔇,🏆,🔥,🌬';
-imper=imper.split(',');
+var imper='🚿,⚡,⏱,🌧,🔇,🏆,🔥,🌬'.split(',');
 var intrans='🏇,🏋,🚴,🎳,🏓 ,🎯,🎲'.split(',');
-var s='s,'.split(',');
+var s=' s,'.split(',');
 var texture='😀,🙁'.split(',');
 function rand_range(max) {
  return Math.floor(Math.random()*(max+1));
@@ -86,7 +128,7 @@ function site() {
  } else {
   words+=choose(below);
  }
- words+='s '+choose(intrans)+'.';
+ words+=' s '+choose(intrans)+'.';
  return words;
 }
 function cave() {
@@ -95,7 +137,7 @@ function cave() {
  while (adjs.length>target) {
   adjs.splice(rand_range(adjs.length),1);
   }
- var words='\u00a0\u00a0'+choose(imper)+' the '+adjs.join(' ')+' \u2014';
+ var words=choose(imper)+' the '+adjs.join(' ')+' \u2014';
  return words;
 }
 function do_line() {
@@ -105,8 +147,12 @@ function do_line() {
  } else {
   main.removeChild(document.getElementById('main').firstChild);
  }
+ 
+ n+=1;
  if (n===0) {
-  text=' ';
+  last=document.createElement('span');
+  main.appendChild(last);
+  return;
  } else if (n==1) {
   paths=2+rand_range(2);
   text=path();
@@ -115,17 +161,28 @@ function do_line() {
  } else if (n==paths) {
   text=path();
  } else if (n==paths+1) {
-  text=' ';
+  last=document.createElement('span');
+  main.appendChild(last);
+  return;
  } else if (n==paths+2) {
   text=cave();
  } else {
-  text=' ';
   n=0;
+  last=document.createElement('span');
+  main.appendChild(last);
+  return;
  }
- n+=1;
  text=text.substring(0,1).toUpperCase()+text.substring(1,text.length);
  last=document.createElement('div');
- last.appendChild(document.createTextNode(text));
+ var front = document.createElement('span');
+ var back = document.createElement('span');
+ front.setAttribute('class','front');
+ front.appendChild(document.createTextNode(text));
+ back.appendChild(document.createTextNode(text));
+ last.appendChild(front);
+ last.appendChild(back);
+ 
+ 
  main.appendChild(last);
 }
 function poem() {
@@ -134,14 +191,15 @@ function poem() {
 </script>
   <title>Taroko Gorge</title>
 </head>
-  <body onload="poem()">
-  <div style="float:right; margin-top:12px; color:#0b3; height:60pt">
+<body onload="poem()">
+  <div class="sources">
   <div>Taroko Gorge · 2009-01-08</div>
   <a href="http://nickm.com/">Nick Montfort · 2016-03-01</a>
   </div>
-<div id="main">
+  <div class="igorge">iGorge</div>
+  <div id="main">
 
-</div>
+  </div>
 
 
 </body></html>
