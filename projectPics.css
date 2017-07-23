@@ -159,7 +159,6 @@
 #safexScreenshot {
 	background-image: url("images/safexScreenshot.jpg");
 	margin-top: 25px;
-	height: 475px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -187,14 +186,12 @@
 #WoaLScreenshot {
 	background-image: url("images/WoaLScreenshotBright.png");
 	margin-top: 25px;
-	height: 450px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
 #dontGrowUpScreenshot {
 	background-image: url("images/GGG_DesDoc.png");
 	margin-top: 25px;
-	height: 767px;
 
     background-size: 100%;
     background-repeat: no-repeat;
@@ -205,21 +202,13 @@
 	cursor: pointer;
 }
 
-.screenshotImg {
-	width: 100%;
-	min-width: 500px;
-}
-
 .screenshot {
-	width: 768px;
-    height: 503px;
-    margin: 0 auto;
+    display: block;
+    margin: 1em 0em;
     margin-top: 25px;
     background-size: 100%;
     background-repeat: no-repeat;
-}
-
-img.screenshot {
-	width: 100%;
-	height: initial;
+    max-width: 100%;
+    height: initial;
+	  max-height: 100vh;
 }
