@@ -2,10 +2,6 @@
 styles for index.html
 */
 
-html {
-    /*overflow-x: hidden;*/
-}
-
 .bigLogoContainer {
 	position: relative;
 	margin-top: 3em;
@@ -335,15 +331,19 @@ html {
 #floatingFrame {
 	overflow-x: hidden;
 	overflow-y: scroll;
-	padding: 4em;
 	display: none;
 	position: fixed;
 	z-index: 5;
-	max-width: 800px;
-	max-height: calc(100% - 150px);
-	left: calc(50% - 400px - 4em);
-	top: 40px;
-	background-color: white;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+}
+
+#floatingFrame .projectSection {
+  padding: 1em;
+  margin: 1em;
+  background-color: white;
 	box-shadow: 0px 0px 200px black;
 }
 
@@ -351,8 +351,9 @@ html {
 	display: none;
 	position: fixed;
 	z-index: 6;
-	left: calc(50% + 400px + 4em - 75px);
-	top: 60px;
+	/*left: calc(50% + 400px + 4em - 75px);*/
+	top: 1em;
+	right: 1em;
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
@@ -510,9 +511,8 @@ html {
 	.slideProjImg {
 		width: 100%;
 	}
-	#floatingFrame {
-		max-width: 60vw;
-		left: calc(50% - 30vw - 4em);
+	#floatingFrame .projectSection {
+		padding: 0.5em;
 	}
 	.projectBtn .nameBox {
 		visibility: visible;
@@ -547,9 +547,14 @@ html {
 	.nameTitleCrop {
 		height: 6em;
 	}
-	#floatingFrame {
-		max-width: 800px;
-		left: calc(50% - 400px - 4em);
+	#floatingFrame .projectSection {
+	  margin: 4em;
+		padding: 4em;
+	}
+	
+	#closeFloatingFrameBtn {
+	  top: 5em;
+	  right: 5em;
 	}
 	.projectBtn .nameBox {
 		visibility: hidden;
