@@ -1,3 +1,11 @@
+.atBtn {
+  background-image: url("images/AceTrackIcon.png");
+  background-position: center;
+}
+
+.zpBtn {
+  background-image: url("images/zoomrIcon.png");
+}
 
 .csBtn {
 	background-image: url("images/CatStackBanner.png");

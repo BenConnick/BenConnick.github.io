@@ -305,6 +305,23 @@ html {
 	margin-bottom: -1em;
 }
 
+.storeBtn {
+  display: inline-block;
+  width: 20em;
+  height: 7em;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.appStoreImage {
+  background-image: url("https://www.digimarc.com/images/default-source/default-album/apple-app-store-icon.png?sfvrsn=0");
+}
+
+.playStoreImage {
+  background-image: url("https://www.lexialearning.com/sites/default/files/google%20play%20icon.JPG");
+}
+
 #nameTitleClickBox {
 	position: absolute;
 	display: block;
