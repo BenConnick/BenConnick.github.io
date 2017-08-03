@@ -113,6 +113,8 @@ var app = app || {};
      	// don't draw if the object is disabled
      	if (!this.enabled) return;
      	
+     	// don't draw if the object is invisible
+     	// object invisible off and on when "flashing"
      	if (this.flashingTime > 0) {
      		this.flashingTime -= deltaTime;
      		if (this.flashingTime%100 > 50) {

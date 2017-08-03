@@ -27,7 +27,6 @@ app.game = (function() {
 		this.player1.x = app.graphics.canvasWidth/2;
 		this.player1.y = app.graphics.canvasHeight/2;
 		this.player1.anims["idle"] = new Animation("idle", 106, 200, 3, app.graphics.boyImg);
-		//player1.anims["hurt"] = new Animation("hurt", 106, 155, 1, boySquintImg);
 		this.player1.anim = "idle";
 		this.player1.rotateWithXVel = true;
 		this.player1.bounds = [0, app.graphics.canvasWidth, 0, app.graphics.canvasHeight];
@@ -38,14 +37,13 @@ app.game = (function() {
 		this.p1face.anims["hurt"] = new Animation("hurt",77,34,1,app.graphics.boySquintImg);
 		this.p1face.yanchor=9.5;
 		this.p1face.xanchor=4;
-		//this.player1.child = this.p1face;
+
 		// p2
 		this.player2 = new GameObject();
 		this.player2.name = "girl";
 		this.player2.x = app.graphics.canvasWidth/2;
 		this.player2.y = app.graphics.canvasHeight/2;
 		this.player2.anims["idle"] = new Animation("idle", 113, 200, 3, app.graphics.girlImg);
-		//player2.anims["hurt"] = new Animation("hurt", 113, 150, 1, girlSquintImg);
 		this.player2.anim = "idle";
 		this.player2.rotateWithXVel = true;
 		this.player2.bounds = [0, 0, 0, app.graphics.canvasHeight];
@@ -56,7 +54,6 @@ app.game = (function() {
 		this.p2face.anims["hurt"] = new Animation("hurt",77,34,1, app.graphics.girlSquintImg);
 		this.p2face.yanchor=-8;
 		this.p2face.xanchor=2;
-		//this.player2.child = this.p2face;
 		
 		// screens
 		this.mainMenuScreen = q("#mainMenu");

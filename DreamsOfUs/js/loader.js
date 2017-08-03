@@ -13,10 +13,8 @@ the game will be properties of app.
 // else create a new empty object literal
 var app = app || {};
 
-
 window.onload = function(){
 	//console.log("window.onload called");
-	
 	
 	// Preload Images and Sound
 	app.queue = new createjs.LoadQueue(false);
@@ -27,15 +25,10 @@ window.onload = function(){
 		app.game.Emitter = app.Emitter;
 		// activate keyboard listeners
 		app.keys.init();
-		// activate sound controls
-		/*app.sound.init();*/
 		// activate drawing controls
 		app.graphics.init();
 		// play the game
 		app.game.init(); 
-		//initializeLoadingBar();
-		//app.game.start(); wait for start button click
-		
 		// clear loading text
 		q(".loadingText").style.display = "none";
 		// show start button

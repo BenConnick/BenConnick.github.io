@@ -303,8 +303,8 @@ styles for index.html
 
 .storeBtn {
   display: inline-block;
-  width: 20em;
-  height: 7em;
+  width: 5em;
+  height: 1.75em;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -570,6 +570,10 @@ styles for index.html
 	#walkCycle {
 		display: block;
 	}
+	.storeBtn {
+	  width: 10em;
+    height: 3.5em;
+	}
 }
 
 /* monitor */
@@ -586,6 +590,10 @@ styles for index.html
 	}
 	.bigLogoContainer {
 		height: 15em;
+	}
+	.storeBtn {
+	  width: 20em;
+    height: 7em;
 	}
 }
 
