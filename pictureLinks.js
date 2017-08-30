@@ -10,18 +10,25 @@ var forEach = function (array, callback, scope) {
   }
 };
 
+function toggleViewer() {
+  viewer.hidden = !viewer.hidden;
+  viewer.frame.style.left = viewer.hidden ? "-150%" : "0%";
+  viewer.closeBtn.style.display = viewer.hidden ? "none" : "block";
+}
+
 function setViewerDisplay(dispString) {
 	viewer.frame.style.display = dispString;
-	viewer.dark.style.display = dispString;
+	//viewer.dark.style.display = dispString;
 	viewer.closeBtn.style.display = dispString;
 }
 
 function closeViewer() {
 	// if defined
 	if (viewer.frame!=undefined) {
-		setViewerDisplay("none");
-		if (viewer.frame.querySelector("iframe") != undefined) {
-			toggleVideo(viewer.frame.querySelector("iframe"), 'hide');
+		//setViewerDisplay("none");
+		toggleViewer();
+		if (viewer.section.querySelector("iframe") != undefined) {
+			toggleVideo(viewer.section.querySelector("iframe"), 'pause');
 		}
 	}
 }
@@ -29,17 +36,24 @@ function closeViewer() {
 function showViewer() {
 	// if defined
 	if  (viewer.frame!=undefined) {
-		setViewerDisplay("block");
+		toggleViewer();
 	}
 	// make sure you're at the top
 	viewer.frame.scrollTop = 0;
 }
 
 function toggleVideo(frame, state) {
-    // if state == 'hide', hide. Else: show video
+    // if state == 'pause', pause. Else: show video
     var iframe = frame.contentWindow;
-    var func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+    var func = state == 'pause' ? 'pauseVideo' : 'playVideo';
     iframe.postMessage('{"event":"command","func":"' + func + '","args":""}','*');
+}
+
+function linkIdToUrl(id, url) {
+  document.getElementById(id).onclick = function() { 
+    console.log(id+" clicked"); 
+    window.location = url; 
+  };
 }
 
 function init() {
@@ -48,6 +62,7 @@ function init() {
 	viewer.frame = document.querySelector("#floatingFrame");
 	viewer.dark = document.querySelector(".darkOverlay");
 	viewer.closeBtn = document.querySelector("#closeFloatingFrameBtn");
+	viewer.hidden = true;
 	
 	// exit
 	viewer.dark.onclick = function() { closeViewer(); };
@@ -72,12 +87,11 @@ function init() {
 	console.log("thumbnails linked");
 
 	// clicking
-	document.getElementById("emoney").onclick = function() { console.log("click"); window.location = 'FinancialTimeline/index.html'; };
-	document.getElementById("CvRscreenshot").onclick = function() { console.log("click"); window.location = 'https://bitbucket.org/theHooloovoo/amalgamation'; };
-	document.getElementById("PHscreenshot").onclick = function() { console.log("click"); window.location = 'http://people.rit.edu/bxc3201/ProcrastinatorHero'; };
-	document.getElementById("googlyScreenshot").onclick = function() { console.log("click"); window.location = 'http://bengames.x10host.com/GooglyEyes/UnityWorldProject.html'; };
-	document.getElementById("dreamsOfUsScreenshot").onclick = function() { console.log("click"); window.location = 'DreamsOfUs/index.html'; };
-	//document.getElementById("fragileEQScreenshot").onclick = function() { console.log("click"); window.location = 'https://www.facebook.com/fragileeq'; };
+	linkIdToUrl('emoney','FinancialTimeline/index.html');
+	linkIdToUrl('CvRscreenshot','https://bitbucket.org/theHooloovoo/amalgamation');
+	//linkIdToUrl('PHscreenshot','http://people.rit.edu/bxc3201/ProcrastinatorHero');
+	//linkIdToUrl('googlyScreenshot','http://bengames.x10host.com/GooglyEyes/UnityWorldProject.html');
+	linkIdToUrl('dreamsOfUsScreenshot','DreamsOfUs/index.html');
 }
 
 function linkThumbnailBtnToSection(button) {
@@ -92,7 +106,9 @@ function linkThumbnailBtnToSection(button) {
 		//console.log(sectId);
 		//document.querySelector("#"+sectId).style.display = "block";
 		//viewer.frame.innerHTML = document.querySelector("#"+sectId).innerHTML;
-		document.querySelector("#"+sectId).style.display = "block";
+		// store a reference to the section
+		viewer.section = document.querySelector("#"+sectId);
+		viewer.section.style.display = "block";
 		showViewer();
 	}
 }
