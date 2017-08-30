@@ -12,6 +12,10 @@ var forEach = function (array, callback, scope) {
 
 function toggleViewer() {
   viewer.hidden = !viewer.hidden;
+  updateViewer();
+}
+
+function updateViewer() {
   viewer.frame.style.left = viewer.hidden ? "-150%" : "0%";
   viewer.closeBtn.style.display = viewer.hidden ? "none" : "block";
 }
@@ -26,7 +30,8 @@ function closeViewer() {
 	// if defined
 	if (viewer.frame!=undefined) {
 		//setViewerDisplay("none");
-		toggleViewer();
+		viewer.hidden = true; 
+		updateViewer();
 		if (viewer.section.querySelector("iframe") != undefined) {
 			toggleVideo(viewer.section.querySelector("iframe"), 'pause');
 		}
@@ -36,7 +41,8 @@ function closeViewer() {
 function showViewer() {
 	// if defined
 	if  (viewer.frame!=undefined) {
-		toggleViewer();
+		viewer.hidden = false; 
+		updateViewer();
 	}
 	// make sure you're at the top
 	viewer.frame.scrollTop = 0;

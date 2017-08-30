@@ -330,7 +330,7 @@ styles for index.html
 
 #floatingFrame {
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	display: block;
 	position: fixed;
 	z-index: 5;
@@ -339,6 +339,7 @@ styles for index.html
 	left: -150%;
 	top: 0;
 	transition: left 0.5s;
+	max-width: 800px;
 	
 }
 
@@ -347,14 +348,15 @@ styles for index.html
   margin: 1em;
   background-color: white;
 	box-shadow: 0px 0px 50px black;
-	max-width: 600px;
+	overflow-y: scroll;
+	height: calc(100vh - 4em);
 }
 
 #closeFloatingFrameBtn {
 	display: none;
 	position: absolute;
 	z-index: 6;
-	left: 700px;
+	right: 1em;
 	top: 1em;
 	width: 50px;
 	height: 50px;
@@ -514,7 +516,7 @@ styles for index.html
 		width: 100%;
 	}
 	#floatingFrame .projectSection {
-		padding: 1.5em;
+	  height: calc(100vh - 4em);
 	}
 	.projectBtn .nameBox {
 		visibility: visible;
@@ -556,6 +558,7 @@ styles for index.html
 	#floatingFrame .projectSection {
 	  margin: 4em;
 		padding: 4em;
+		height: calc(100vh - 16em);
 	}
 	
 	#closeFloatingFrameBtn {
