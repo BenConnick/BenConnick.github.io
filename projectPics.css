@@ -85,6 +85,10 @@
 .feBtn {
 	background-image: url("images/fragileequilibrium.jpg");
 }
+.msBtn {
+  background-image: url("images/MeowssengerBanner.png");
+  background-position: center;
+}
 
 #googlyScreenshot {
     cursor: pointer;
@@ -197,6 +201,11 @@
 }
 #fragileEQScreenshot {
 	background-image: url("images/fragileequilibrium.jpg");
+	height: initial;
+	cursor: pointer;
+}
+#meowssengerScreenshot {
+	background-image: url("images/MeowssengerScreenshot.png");
 	height: initial;
 	cursor: pointer;
 }
