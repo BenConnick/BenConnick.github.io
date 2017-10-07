@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="https://expmaker.com"
+  href="BenSpaceInvaders.jnlp">
+  <information>
+    <title>Space Invaders 101</title>
+    <vendor>Ben Connick</vendor>
+    <homepage href="https://expmaker.com"/>
+    <description>Space Invaders 101, Tutorial Example</description>
+    <description kind="short">Space Invaders 101, Tutorial Example</description>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se href="http://java.sun.com/products/autodl/j2se" version="1.4+"/>
+    <jar href="si101.jar"/>    
+  </resources>  <application-desc/>
+</jnlp>
