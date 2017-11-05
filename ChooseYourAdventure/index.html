@@ -236,7 +236,11 @@ html[data-debug-view] .debug.hidden .debug {
 
 
 
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
 
 
 
@@ -347,9 +351,9 @@ You catch yourself before you plummet to your doom. This isn&#39;t a crater, it&
 
 Wait... if this is a nest, then that [[shaking]] rock over there is actually a-</tw-passagedata>
 <tw-passagedata pid="16" name="Search the crater" tags="" position="957,1343">You look around, climbing nimbly across the trees. Like a needle in a haystack, you find a little shiny treasure tucked between the branches:
-&lt;img src=&quot;bracelet.png&quot;/&gt;
+&lt;img src=&quot;bracelet.png&quot;/&gt;&lt;&lt;set $braceletFound to true&gt;&gt;
 
-It&#39;s a little silver bracelet, with some initials marked into it. &quot;RS + BT&quot;.
+&lt;&lt;if $braceletFound&gt;&gt;It&#39;s a little silver bracelet, with some initials marked into it. &quot;RS + BT&quot;.&lt;&lt;endif&gt;&gt;
 
 Now what will you do?
 
@@ -363,8 +367,73 @@ A huge crack appears!
 
 &lt;img src=&quot;egg_crack.png&quot;/&gt;
 
-[[And then...]]</tw-passagedata>
-<tw-passagedata pid="18" name="And then..." tags="" position="657,1643">That&#39;s all for today!
+[[Jump out of the nest]]
+[[Stick around to see what happens]]</tw-passagedata>
+<tw-passagedata pid="18" name="Jump out of the nest" tags="" position="532,1643">That&#39;s all for today!
+
+See you tomorrow!</tw-passagedata>
+<tw-passagedata pid="19" name="Stick around to see what happens" tags="" position="807,1643">The &quot;rock&quot; splits open.
+
+You hurriedly dodge between thick branches to avoid being crushed by the falling fragments, which are coming away in thin, curved sheets.
+
+It becomes quickly apparent that this isn&#39;t a rock at all.
+
+[[It&#39;s an egg]].</tw-passagedata>
+<tw-passagedata pid="20" name="It&#39;s an egg" tags="" position="807,1793">&lt;img src=&quot;chick.png&quot;/&gt;
+From the shell of the egg, wet and mostly featherless, erupts an enormous baby bird.
+
+It falls over.
+
+It flops around for a while before managing to attain a sitting position. It looks around and chirps expectantly.
+
+[[Fight-&gt;fight_baby]]
+[[Talk-&gt;talk_baby]]
+[[Item-&gt;item_baby]]
+[[Run-&gt;run_baby]]
+</tw-passagedata>
+<tw-passagedata pid="21" name="fight_baby" tags="" position="682.0001,1940">You unleash your claws! You stab at the chick, sinking your fierce, cartilige blades into its thick flesh. 
+
+It &quot;peeps&quot; again, and sort of idly swats at your with its stub-like wings.
+
+[[Fight-&gt;fight_baby2]]
+[[Talk-&gt;talk_baby]]
+[[Item-&gt;item_baby]]
+[[Run-&gt;run_baby]]</tw-passagedata>
+<tw-passagedata pid="22" name="talk_baby" tags="" position="807.0002,1941">You emerge from your hiding place and weave around the chunks of eggshell.
+
+You stand before the gigantic birdling, which is big enough to swallow you in a single gulp.
+
+You greet it, and upon seeing you it cranes its neck towards you. It opens its break. Then it says, &quot;[[Mama]]?&quot;</tw-passagedata>
+<tw-passagedata pid="23" name="item_baby" tags="" position="932,1943">&lt;&lt;if $braceletFound&gt;&gt;[[Use bracelet-&gt;bracelet_baby]]
+&lt;&lt;else&gt;&gt;You do not have any items.&lt;&lt;endif&gt;&gt;
+
+[[back-&gt;It&#39;s an egg]]</tw-passagedata>
+<tw-passagedata pid="24" name="run_baby" tags="" position="1057,1943">You book it outta there.
+
+The only way out, is down.
+
+[[Jump out of the nest]]</tw-passagedata>
+<tw-passagedata pid="25" name="fight_baby2" tags="" position="682.0001,2090">You repeatedly unleash devastating blows, seemingly to no effect.
+
+You are panting, almost out of energy. The chick lowers its beak to scratch the itchy spot that you created.
+
+Now is your chance to go for the eye.
+
+[[Fight-&gt;fight_baby3]]
+[[Talk-&gt;talk_baby]]
+[[Item-&gt;item_baby]]
+[[Run-&gt;run_baby]]</tw-passagedata>
+<tw-passagedata pid="26" name="fight_baby3" tags="" position="682.0001,2240">That&#39;s all for today!
+
+See you tomorrow!</tw-passagedata>
+<tw-passagedata pid="27" name="bracelet_baby" tags="" position="932,2093">You press the bracelet against the chick, but this produces no result.
+
+You wave the bracelet at the chick. The evening light glints off of the silver and flashes in its eyes. It turns to look at you. It cranes its long, avian neck towards you and fixates on you with its huge, dark eyes.
+
+It opens its beak and says, &quot;[[Mama]]?&quot;
+
+</tw-passagedata>
+<tw-passagedata pid="28" name="Mama" tags="" position="932,2243">That&#39;s all for today!
 
 See you tomorrow!</tw-passagedata>
 </tw-storydata>
