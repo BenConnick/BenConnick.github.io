@@ -231,6 +231,13 @@ html[data-debug-view] .debug.hidden .debug {
 	background-color: #bbb;
 }
 
+input {
+	background-color: white;	
+	font-family: inherit;
+}
+
+
+
 
 
 
@@ -239,6 +246,9 @@ html[data-debug-view] .debug.hidden .debug {
 
 
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
+
 
 
 
@@ -391,7 +401,7 @@ It flops around for a while before managing to attain a sitting position. It loo
 [[Item-&gt;item_baby]]
 [[Run-&gt;run_baby]]
 </tw-passagedata>
-<tw-passagedata pid="21" name="fight_baby" tags="" position="682.0001,1940">You unleash your claws! You stab at the chick, sinking your fierce, cartilige blades into its thick flesh. 
+<tw-passagedata pid="21" name="fight_baby" tags="" position="682,1940">You unleash your claws! You stab at the chick, sinking your fierce, cartilige blades into its thick flesh. 
 
 It &quot;peeps&quot; again, and sort of idly swats at your with its stub-like wings.
 
@@ -399,7 +409,7 @@ It &quot;peeps&quot; again, and sort of idly swats at your with its stub-like wi
 [[Talk-&gt;talk_baby]]
 [[Item-&gt;item_baby]]
 [[Run-&gt;run_baby]]</tw-passagedata>
-<tw-passagedata pid="22" name="talk_baby" tags="" position="807.0002,1941">You emerge from your hiding place and weave around the chunks of eggshell.
+<tw-passagedata pid="22" name="talk_baby" tags="" position="807,1941">You emerge from your hiding place and weave around the chunks of eggshell.
 
 You stand before the gigantic birdling, which is big enough to swallow you in a single gulp.
 
@@ -413,7 +423,7 @@ You greet it, and upon seeing you it cranes its neck towards you. It opens its b
 The only way out, is down.
 
 [[Jump out of the nest]]</tw-passagedata>
-<tw-passagedata pid="25" name="fight_baby2" tags="" position="682.0001,2090">You repeatedly unleash devastating blows, seemingly to no effect.
+<tw-passagedata pid="25" name="fight_baby2" tags="" position="682,2090">You repeatedly unleash devastating blows, seemingly to no effect.
 
 You are panting, almost out of energy. The chick lowers its beak to scratch the itchy spot that you created.
 
@@ -423,7 +433,7 @@ Now is your chance to go for the eye.
 [[Talk-&gt;talk_baby]]
 [[Item-&gt;item_baby]]
 [[Run-&gt;run_baby]]</tw-passagedata>
-<tw-passagedata pid="26" name="fight_baby3" tags="" position="682.0001,2240">That&#39;s all for today!
+<tw-passagedata pid="26" name="fight_baby3" tags="" position="682,2240">That&#39;s all for today!
 
 See you tomorrow!</tw-passagedata>
 <tw-passagedata pid="27" name="bracelet_baby" tags="" position="932,2093">You press the bracelet against the chick, but this produces no result.
@@ -433,7 +443,42 @@ You wave the bracelet at the chick. The evening light glints off of the silver a
 It opens its beak and says, &quot;[[Mama]]?&quot;
 
 </tw-passagedata>
-<tw-passagedata pid="28" name="Mama" tags="" position="932,2243">That&#39;s all for today!
+<tw-passagedata pid="28" name="Mama" tags="" position="932,2243">[[Meow (Yes!) -&gt;mama2]]
+[[Meow Meow (No, you are mistaken, I am not your mother) -&gt;mama2]].</tw-passagedata>
+<tw-passagedata pid="29" name="mama2" tags="" position="931,2384">The chick responds with excited chirp: &quot;MAMA!!!&quot;
+
+... maybe that&#39;s all the chick can say...
+
+You wander the perimiter of the nest, looking for a way down.
+
+The chick follows you.
+
+You go left, the chick goes left. 
+
+You go right, the chick goes right.
+
+You stop, and the chick falls over tying stop behind you.
+
+You know, it really doesn&#39;t seem right to keep calling her &quot;the chick&quot;. You should give her a name.
+
+&lt;&lt;textbox &quot;$chickName&quot; &quot;Enter A Name&quot; &quot;named&quot;&gt;&gt;
+
+[[Done-&gt;named]]</tw-passagedata>
+<tw-passagedata pid="30" name="named" tags="" position="931,2509">$chickName huh?
+
+Interesting choice.
+
+Anyway, you still need to get down from here if you are ever going to find the treasure on the map.
+
+Do you...
+
+[[jump down-&gt;Jump to the ground]]
+[[climb down]]
+[[ask]] $chickName how to get down.</tw-passagedata>
+<tw-passagedata pid="31" name="climb down" tags="" position="931,2656">That&#39;s all for today!
+
+See you tomorrow!</tw-passagedata>
+<tw-passagedata pid="32" name="ask" tags="" position="1081,2656">That&#39;s all for today!
 
 See you tomorrow!</tw-passagedata>
 </tw-storydata>
