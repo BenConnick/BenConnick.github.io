@@ -248,7 +248,9 @@ input {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
 
 
 
@@ -507,9 +509,27 @@ There is a stone bridge here, that arches over the river. You could [[cross the 
 If you keep walking along the outside, you will have to [[go through the forest]], which looks spooky. 
 
 If you are crazy, you could always [[swim across]].</tw-passagedata>
-<tw-passagedata pid="36" name="cross the bridge" tags="" position="1231,3106">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="36" name="cross the bridge" tags="" position="1231,3106">You approach the bridge.
+
+A figure emerges from under the bridge. It&#39;s hulking, humanoid frame shambles toward you.
+
+&lt;img src=&quot;troll.png&quot;&gt;
+&quot;HALT!&quot; he bellows. &quot;I AM BRIDGE TROLL. YOU PAY BRIDGE TOLL.&quot; And with this, he holds out an expectant hand.
+
+[[Item-&gt;toll_item]]
+[[Go back-&gt;follow the river]]
+[[Fight-&gt;fight_troll]]
+Tell $chickName to [[eat him]].
+</tw-passagedata>
 <tw-passagedata pid="37" name="go through the forest" tags="" position="1381,3106">That&#39;s all for today!</tw-passagedata>
 <tw-passagedata pid="38" name="swim across" tags="" position="1531,3106">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="39" name="toll_item" tags="" position="1231,3256">&lt;&lt;if $braceletFound&gt;&gt;[[Use bracelet-&gt;bracelet_troll]]
+&lt;&lt;else&gt;&gt;You do not have any items.&lt;&lt;endif&gt;&gt;
+
+[[back-&gt;cross the bridge]]</tw-passagedata>
+<tw-passagedata pid="40" name="eat him" tags="" position="1531,3255">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="41" name="fight_troll" tags="" position="1382,3258">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="42" name="bracelet_troll" tags="" position="1231,3406">That&#39;s all for today!</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
