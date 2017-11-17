@@ -250,7 +250,11 @@ input {
 
 
 
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
 
 
 
@@ -520,7 +524,6 @@ A figure emerges from under the bridge. Its hulking, humanoid frame shambles tow
 
 [[Item-&gt;toll_item]]
 [[Go back-&gt;follow the river]]
-[[Fight-&gt;fight_troll]]
 Tell $chickName to [[eat him]].
 [[Talk to him]]</tw-passagedata>
 <tw-passagedata pid="37" name="go through the forest" tags="" position="1381,3106">That&#39;s all for today!</tw-passagedata>
@@ -530,9 +533,15 @@ Tell $chickName to [[eat him]].
 
 [[back-&gt;cross the bridge]]</tw-passagedata>
 <tw-passagedata pid="40" name="eat him" tags="" position="1531,3255">That&#39;s all for today!</tw-passagedata>
-<tw-passagedata pid="41" name="fight_troll" tags="" position="1382,3258">That&#39;s all for today!</tw-passagedata>
-<tw-passagedata pid="42" name="bracelet_troll" tags="" position="1231,3406">That&#39;s all for today!</tw-passagedata>
-<tw-passagedata pid="43" name="Talk to him" tags="" position="1106,3256">You ask the bridge troll why he collects tolls on this bridge.
+<tw-passagedata pid="41" name="bracelet_troll" tags="" position="1235,3406">The troll&#39;s eyes go wide. 
+
+&quot;THAT&#39;S MINE! GIMME!&quot;
+
+He reaches for the bracelet, but so quickly and forcefully that it is clear he intends to grab you in his gigantic palm.
+
+[[Dodge-&gt;bt_dodge]]
+</tw-passagedata>
+<tw-passagedata pid="42" name="Talk to him" tags="" position="1106,3256">You ask the bridge troll why he collects tolls on this bridge.
 
 He says, &quot;BRIDGE TROLL FRIENDS WITH RIVER SPIRIT.&quot; 
 
@@ -541,8 +550,86 @@ He says, &quot;BRIDGE TROLL FRIENDS WITH RIVER SPIRIT.&quot;
 Ask about the [[River Spirit]]
 Ask about the [[Toll]]
 [[back-&gt;cross the bridge]]</tw-passagedata>
-<tw-passagedata pid="44" name="River Spirit" tags="" position="1106,3406">That&#39;s all for today!</tw-passagedata>
-<tw-passagedata pid="45" name="Toll" tags="" position="979,3408">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="43" name="River Spirit" tags="" position="1106,3406">The Troll avoids your eyes. 
+
+&quot;RIVER SPIRIT AND BRIDGE TROLL BEST FRIENDS... EXCEPT MAYBE NOT ANYMORE.&quot;
+
+He kicks a small rock. 
+(Not into the river)
+
+&quot;RIVER SPIRIT MAD AT BRIDGE TROLL...&quot;
+
+[[Ask why the River Spirit is mad.]]
+[[Ask what this has to do with you.]]
+[[Ask if you can cross the bridge for free.]]
+Look over there, it&#39;s the River Spirit! [[Run past]]</tw-passagedata>
+<tw-passagedata pid="44" name="Toll" tags="" position="979,3408">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="45" name="Ask why the River Spirit is mad." tags="" position="1106,3556">&quot;RIVER SPIRIT MADE BRACELET FOR BRIDGE TROLL. BRIDGE TROLL LOST BRACELET IN FIGHT WITH BIG BIRD. RIVER SPIRIT THINK MAYBE BRIDGE TROLL DOESN&#39;T LIKE RIVER SPIRIT.&quot;
+
+He looks back into your eyes with a sudden imploring look, his volume increasing to an uncomfotable level, &quot;BUT IS NOT TRUE! BRIDGE TROLL REALLY REALLY REALLY REALLY LIKES RIVER SPIRIT!&quot;
+
+He is bellowing this so excitedly that spit and little bits of his lunch splatter on your face. It smells terrible.
+
+[[Ask if you can cross the bridge for free.]]
+&lt;&lt;if $braceletFound&gt;&gt;[[Show him the bracelet-&gt;bracelet_troll]]&lt;&lt;endif&gt;&gt;
+[[Back-&gt;back to bridge]]</tw-passagedata>
+<tw-passagedata pid="46" name="Ask what this has to do with you." tags="" position="1256,3556">This inquiry startles the troll out of his momentary vulnerable posture. He raises himself up to his full height.
+
+&quot;BRIDGE TROLL THINK YOU TRICKY. YOU ASK QUESTION SO YOU NO PAY. [[YOU PAY TOLL NOW-&gt;back to bridge]]. </tw-passagedata>
+<tw-passagedata pid="47" name="Ask if you can cross the bridge for free." tags="" position="1406,3556">&quot;NO.&quot;
+
+[[Back-&gt;back to bridge]]</tw-passagedata>
+<tw-passagedata pid="48" name="Run past" tags="" position="1556,3556">&quot;WHERE? WHERE?&quot; He searches to no avail. He looks to you for a hint, and notices that your previous spot is vacant.
+&quot;HEY... WHERE YOU GO?! GET BACK HERE!&quot;
+
+He lumbers after you for a few steps, but ultimately does not seem to want to leave his brige unattended.</tw-passagedata>
+<tw-passagedata pid="49" name="back to bridge" tags="" position="1405,3405">&lt;img src=&quot;troll.png&quot;&gt;
+
+[[Item-&gt;toll_item]]
+[[Go back-&gt;follow the river]]
+Tell $chickName to [[eat him]].
+[[Talk to him]]</tw-passagedata>
+<tw-passagedata pid="50" name="bt_dodge" tags="" position="1107,3704">..but you dodge out of the way. 
+
+&quot;GIVE IT BACK!!!&quot; He yells and swings another grab towards you, nearly crushing you. 
+
+[[Dodge-&gt;bt_dodge2]]</tw-passagedata>
+<tw-passagedata pid="51" name="bt_dodge2" tags="" position="1107,3854">Again, you evade the likely-lethal swat, dodging behind him. Causing him to almost fall. 
+
+He turns around to stomp on you.
+
+[[Run behind him]]</tw-passagedata>
+<tw-passagedata pid="52" name="Run behind him" tags="" position="1107,4004">..and you keep running. He spins. You run. He grabs. You duck. He kicks. You jump.
+
+$chickName looks on perplexedly.
+
+Around and around and around you go. After a few spins, the troll becomes visibly dizzy. His movements less coordinated.
+
+He looks like he is about to fall over.
+
+[[Jump on top of him]]</tw-passagedata>
+<tw-passagedata pid="53" name="Jump on top of him" tags="" position="1107,4151">You leap onto the Troll&#39;s head, which sways as he circles around and around in search of you.
+
+&quot;WHERE YOU GO? I SQUISH YOU. TAKE IT. I CAN&#39;T GIVE UUUHH OH!&quot;
+
+And with a thud, the Troll lands on the ground. 
+
+You dismount gracefully.
+
+[[You hear a low noise]]</tw-passagedata>
+<tw-passagedata pid="54" name="You hear a low noise" tags="" position="1107,4301">You listen, and you hear that the noise is coming from the fallen troll.
+
+... he&#39;s crying. Sobbing really. Low, moaning noises that crescendo into great wails of pathos.
+
+&quot;I SORRY RIVER S-S-SPIRIT, I S-S-SORRY, I SORRY..&quot; he repeats between gasps for air and blubbering sobs.
+
+[[Cross the bridge and leave him.]]
+[[Give him the bracelet.]]
+[[Finish him off.]]
+</tw-passagedata>
+<tw-passagedata pid="55" name="Cross the bridge and leave him." tags="" position="1107,4451">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="56" name="Give him the bracelet." tags="" position="1257,4451">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="57" name="Finish him off." tags="" position="1407,4451">That&#39;s all for today!</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
