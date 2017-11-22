@@ -257,7 +257,9 @@ input {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
 
 
 
@@ -730,7 +732,70 @@ Tell her to [[walk through the rain]]
 <tw-passagedata pid="68" name="walk through the rain" tags="" position="1407,5793">That&#39;s all for today!</tw-passagedata>
 <tw-passagedata pid="69" name="hide under a mushroom" tags="" position="1557,5793">&lt;img src=&quot;mushroom_umbrella.png&quot;/&gt;
 
+The rain patters slowly around you. It is actually quite relaxing. Just as you are about to doze off, you think that you see a purple glow between the toadstools.
+
+A strange figure approaches through the rain. The person has a wide brimmed hat that looks kind of like a mushroom cap, and a slick cloak that causes the water to run off in little streams. All of their clothes are the color of swamp mud. They are carrying a stick with a hook at the top. A ball that dangles off of the hook from a rope emits a dim purple glow.
+
+&quot;Mind if I dry off under there, young one?&quot; calls the stranger.
+
+Meow [[yes-&gt;witch]]
+Meow [[no-&gt;no_witch]]</tw-passagedata>
+<tw-passagedata pid="70" name="witch" tags="" position="1557,5943">&quot;Many thanks&quot;, says the stranger, with a voice like the creaking of an ancient door. 
+
+The stranger removes her large hat and heavy cloak and comes to sit with you under the mushroom.
+&lt;img src=&quot;fortune_teller.png&quot;&gt;
+
+She removes the glowing ball from the rope and places it in her lap.
+
+[[Look at the ball]]
+[[Pretend to not be interested]]</tw-passagedata>
+<tw-passagedata pid="71" name="no_witch" tags="" position="1707,5943">&quot;Let&#39;s make a deal&quot; says the figure, with a voice like the creaking of ancient hinges. 
+
+&quot;If you can tell me what the greatest treasure is, I will tell you where to find it.&quot;
+
+&quot;If you can&#39;t, I get to sit under the mushroom.&quot;
+
+&quot;What do you say? Do we have a deal?&quot;
+
+Meow [[I know what the greatest treasure is]]
+Meow [[No, go away]]</tw-passagedata>
+<tw-passagedata pid="72" name="Look at the ball" tags="" position="1557,6093">&quot;You have the wandering eye of a treasure-seeker.&quot; She says with a grin. 
+
+&quot;Tell me, seeker, what is the greatest treasure of all?&quot;
+
+Meow [[Lots of money-&gt;wrong_treasure]]
+Meow [[A huge army-&gt;wrong_treasure]]
+Meow [[Gold and jewels-&gt;wrong_treasure]]
+Meow [[Magic powers-&gt;wrong_treasure]]
+Meow [[Ultimate knowledge-&gt;wrong_treasure]]</tw-passagedata>
+<tw-passagedata pid="73" name="Pretend to not be interested" tags="" position="1707,6093">&quot;I see you looking, you know!&quot; She says with a grin. &quot;You may think you have me fooled, but I see you have the wandering eye of a treasure-seeker.&quot;
+
+&quot;Tell me, seeker, what is the greatest treasure of all?&quot;
+
+Meow [[Lots of money-&gt;wrong_treasure]]
+Meow [[A huge army-&gt;wrong_treasure]]
+Meow [[Gold and jewels-&gt;wrong_treasure]]
+Meow [[Magic powers-&gt;wrong_treasure]]
+Meow [[Ultimate knowledge-&gt;wrong_treasure]]</tw-passagedata>
+<tw-passagedata pid="74" name="wrong_treasure" tags="" position="1557,6243">&quot;WROOOOOOONG!&quot;, she yells suddenly, causing $chickName to startle.
+
+&quot;Try again!&quot;
+
+&lt;&lt;textbox &quot;$myTreasure&quot; &quot;&quot; &quot;my_treasure&quot;&gt;&gt;
+
+[[Answer-&gt;my_treasure]]</tw-passagedata>
+<tw-passagedata pid="75" name="my_treasure" tags="" position="1557,6393">$myTreasure ...
+
 That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="76" name="I know what the greatest treasure is" tags="" position="2006,6094">&lt;&lt;textbox &quot;$myTreasure&quot; &quot;&quot; &quot;my_treasure&quot;&gt;&gt;
+
+[[Answer-&gt;my_treasure]]</tw-passagedata>
+<tw-passagedata pid="77" name="No, go away" tags="" position="1857,6093">&quot;Hmmph&quot; the figure scoffs at you and then dissapears, like a dream...
+
+[[go to sleep-&gt;mushroom_sleep]]
+[[keep watch all night]]</tw-passagedata>
+<tw-passagedata pid="78" name="mushroom_sleep" tags="" position="1857,6243">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="79" name="keep watch all night" tags="" position="1732,6243">That&#39;s all for today!</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
