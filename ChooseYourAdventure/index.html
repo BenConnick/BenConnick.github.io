@@ -258,7 +258,11 @@ input {
 
 
 
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
 
 
 
@@ -784,9 +788,16 @@ Meow [[Ultimate knowledge-&gt;wrong_treasure]]</tw-passagedata>
 &lt;&lt;textbox &quot;$myTreasure&quot; &quot;&quot; &quot;my_treasure&quot;&gt;&gt;
 
 [[Answer-&gt;my_treasure]]</tw-passagedata>
-<tw-passagedata pid="75" name="my_treasure" tags="" position="1557,6393">$myTreasure ...
+<tw-passagedata pid="75" name="my_treasure" tags="" position="1557,6393">&quot;$myTreasure ...&quot; she looks at you intently. &quot;Perhaps you will find $myTreasure.&quot; 
 
-That&#39;s all for today!</tw-passagedata>
+&quot;You are nearing the end of your journey.&quot;
+
+&quot;If you intend to find &lt;em&gt;The Treasure&lt;/em&gt;, there is something that you must take with you, and something that you must leave behind.&quot;
+
+She continues, &quot;I think you may already know what they are.&quot;
+
+[[Look-&gt;take]] at the envelope
+[[Look-&gt;leave_behind]] at $chickName</tw-passagedata>
 <tw-passagedata pid="76" name="I know what the greatest treasure is" tags="" position="2006,6094">&lt;&lt;textbox &quot;$myTreasure&quot; &quot;&quot; &quot;my_treasure&quot;&gt;&gt;
 
 [[Answer-&gt;my_treasure]]</tw-passagedata>
@@ -796,6 +807,122 @@ That&#39;s all for today!</tw-passagedata>
 [[keep watch all night]]</tw-passagedata>
 <tw-passagedata pid="78" name="mushroom_sleep" tags="" position="1857,6243">That&#39;s all for today!</tw-passagedata>
 <tw-passagedata pid="79" name="keep watch all night" tags="" position="1732,6243">That&#39;s all for today!</tw-passagedata>
+<tw-passagedata pid="80" name="take" tags="" position="1432,6543">&quot;Ah, yes.&quot; she says. &quot;That item is no mere necklace, it has an important role to play in your journey. You may think that it is fortune that brought it to you, but it is destiny.&quot;
+
+&quot;Ah!&quot; she looks up suddenly, &quot;I think someone is hungry!&quot; and she points over your shoulder.
+
+[[Follow her finger]]</tw-passagedata>
+<tw-passagedata pid="81" name="leave_behind" tags="" position="1582,6543">$chickName is eating some swamp grass under her mushroom. She quickly spits it out. &quot;Maaaaa!&quot; She squacks, in a sad tone. You can almost feel the earth shake as her enourmous stomach begins to rumble.
+
+&quot;Her mother misses her terribly&quot;, says the Mountain Witch. &quot;This, and many more things, I know.&quot;
+
+&quot;I know [[what it is you carry]], and where you will take it.&quot;</tw-passagedata>
+<tw-passagedata pid="82" name="Follow her finger" tags="" position="1432,6693">$chickName is eating some swamp grass under her mushroom. She quickly spits it out. &quot;Maaaaa!&quot; She squacks, in a sad tone. You can almost feel the earth shake as her enourmous stomach begins to rumble.
+
+&quot;Her mother misses her terribly&quot;, says the Mountain Witch.
+
+&quot;Speaking of her mother...&quot;, the Witch whispers, pointing a bony finger upward.
+
+[[Look up]]</tw-passagedata>
+<tw-passagedata pid="83" name="what it is you carry" tags="" position="1582,6693">&quot;Ah, yes.&quot; she says. &quot;That item is no mere necklace, it has an important role to play in your journey. You may think that it is fortune that brought it to you, but it is destiny.&quot;
+
+&quot;Ah!&quot; she looks up suddenly, &quot;I think it is time for you to get going!&quot; and she points up into the sky.
+
+[[Look up]]</tw-passagedata>
+<tw-passagedata pid="84" name="Look up" tags="" position="1582,6842">The night is dark. Great rainclouds fill the sky. You see nothing, as you scan the dark horizon from under your toadstool. 
+
+The wind changes direction.
+
+&quot;If I were you right now...&quot;, she begins.
+
+It changes direction again. &lt;em&gt;WHOOSH.&lt;/em&gt;
+
+&quot;... I would make a run for the cave.&quot;
+
+&lt;em&gt;Whoosh.&lt;/em&gt;
+
+This time the force of the wind almost sends you flying.
+
+&lt;em&gt;WHOOSH.&lt;/em&gt;
+
+&lt;em&gt;Whoosh.&lt;/em&gt; &lt;em&gt;WHOOSH.&lt;/em&gt; &lt;em&gt;WHOOSHwhooshWOOSHwhoossh-&lt;/em&gt;
+
+[[Run]]
+Nudge $chickname [[get her to run with you]].</tw-passagedata>
+<tw-passagedata pid="85" name="Run" tags="" position="1582,6993">You leave $chickName behind to face her mother&#39;s wrath alone and run for the cave. 
+
+Behind you, you feel great gusts of wind pushing you, no, &lt;em&gt;throwing&lt;/em&gt; you forward.
+
+You make it to the cave without incident.
+
+[[Go into the cave]]</tw-passagedata>
+<tw-passagedata pid="86" name="get her to run with you" tags="" position="1732,6993">$chickName scoops you up without hesitation and dashes forward at alarming speed. It takes all of your strength to hang on.
+
+Behind you, the enourmous bird utters a cry so loud that the rain hangs in the air, shivering with the vibration. Your ears ring long after the sound has ended. 
+
+Great gusts of wind from tremendous wings send you and $chickName [[tumbling towards the cliff]] face and break-neck speed!
+
+</tw-passagedata>
+<tw-passagedata pid="87" name="Go into the cave" tags="" position="1582,7143">The cave is dark. Even your eyes begin to have trouble seeeing the ground in front of you. 
+
+&lt;span class=&quot;lighter&quot;&gt;As the ground gets harder to see, it also gets harder to feel. Your feet feel like they are pedaling in the air. And you begin to get drowsy.&lt;/span&gt;
+
+&lt;span class=&quot;evenlighter&quot;&gt;
+You start to see a faint, warm glow that seems to seep through the darkness in front of and around you.&lt;/span&gt;
+
+[[Try to go back]]
+[[Keep going into the light]]
+
+&lt;style&gt;.lighter {color: #770000;} .evenlighter {color: #aa0000;}&lt;/style&gt;</tw-passagedata>
+<tw-passagedata pid="88" name="tumbling towards the cliff" tags="" position="1732,7143">With incredible luck, you and $chickName tumble directly into the mouth of the cave, which is only a little bigger than $chickName herself!
+
+Her mother reaches the enterance, but cannot fit inside.
+
+She sticks her beak inside and makes pathetic cawwing noises, which would be more pathetic if she weren&#39;t 30 meters tall. 
+
+[[breathe]]</tw-passagedata>
+<tw-passagedata pid="89" name="breathe" tags="" position="1732,7293">Whew! You take a moment to catch your breath.
+
+But now what?
+
+$chickName looks at the new arrival with intense interest.
+
+[[Let her go]]
+[[Tell her to stay]]</tw-passagedata>
+<tw-passagedata pid="90" name="Let her go" tags="" position="1732,7443">$chickName eyes you pleadingly. You nod in the affirmative, and she runs back to her birth mother. 
+
+The two make a sequence of chirping noises that are difficult for you to follow, but even though they are alien to you, you get the sense that they are happy.
+
+The birds leave, and the rain lets up.
+
+[[Continue deeper into the cave-&gt;Go into the cave]]</tw-passagedata>
+<tw-passagedata pid="91" name="Tell her to stay" tags="" position="1882,7442">Not wanting  to let her out of your sign, you tug her deeper into the cave. The passage gets narrower, and soon she is unable to follow you.
+
+You look back at $chickName. Her baby feathers are wetter than when she emerged from her shell. Her claws are filled with swamp-grass, and her entire body is coated in mud. Her beak is chipped from when she hit the cave floor. 
+
+In short, she looks a mess.
+
+Do the right thing and [[let her go-&gt;Let her go]].
+[[Try to find another way]].</tw-passagedata>
+<tw-passagedata pid="92" name="Try to find another way" tags="" position="2032,7593">You struggle to find another way to bring $chickName with you.
+
+You think back to when the Mountain Witch said, &quot;something that must be left behind...&quot;
+
+You shake it off. You &lt;em&gt;WILL&lt;/em&gt; find a way.
+
+You look around. Maybe you can find something slippery? No, she&#39;s already as slippery as she can get.
+
+You look for another path. You see none.
+
+You try to see if you can find something to widen the path, but there&#39;s no explosives or tools. It would take years to scratch a passage.
+
+It is time to accept what must be. It&#39;s not so bad. She will be with her real mom. She needs someone to teach her to fly. To teach her to hunt. A feeling tugs at you, like you are needed somewhere else.
+
+[[Let her go]]
+[[No!]]</tw-passagedata>
+<tw-passagedata pid="93" name="No!" tags="" position="2032,7743">That&#39;s all for now!</tw-passagedata>
+<tw-passagedata pid="94" name="Try to go back" tags="" position="1582,7293">That&#39;s all for now!</tw-passagedata>
+<tw-passagedata pid="95" name="Keep going into the light" tags="" position="1427,7293">That&#39;s all for now!</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
