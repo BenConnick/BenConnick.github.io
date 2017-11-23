@@ -848,7 +848,7 @@ This time the force of the wind almost sends you flying.
 &lt;em&gt;Whoosh.&lt;/em&gt; &lt;em&gt;WHOOSH.&lt;/em&gt; &lt;em&gt;WHOOSHwhooshWOOSHwhoossh-&lt;/em&gt;
 
 [[Run]]
-Nudge $chickname [[get her to run with you]].</tw-passagedata>
+Nudge $chickName [[get her to run with you]].</tw-passagedata>
 <tw-passagedata pid="85" name="Run" tags="" position="1582,6993">You leave $chickName behind to face her mother&#39;s wrath alone and run for the cave. 
 
 Behind you, you feel great gusts of wind pushing you, no, &lt;em&gt;throwing&lt;/em&gt; you forward.
@@ -929,9 +929,31 @@ It is time to accept what must be. It&#39;s not so bad. She will be with her rea
 	50%		{background-color: ffaaaa;}
     100%	{background-color: white;}
 }
+@-webkit-keyframes example {
+    0%		{background-color: black;}
+	50%		{background-color: ffaaaa;}
+    100%	{background-color: white;}
+}
+
+@-moz-keyframes example {
+    0%		{background-color: black;}
+	50%		{background-color: ffaaaa;}
+    100%	{background-color: white;}
+}
+
+@-ms-keyframes example {
+    0%		{background-color: black;}
+	50%		{background-color: ffaaaa;}
+    100%	{background-color: white;}
+}
+
+@-o-keyframes keyarm {
+    0%		{background-color: black;}
+	50%		{background-color: ffaaaa;}
+    100%	{background-color: white;}
+}
 body {
 	color: black;
-	background-color: black;
 	animation-name: example;
 	animation-duration: 5s;
 }
