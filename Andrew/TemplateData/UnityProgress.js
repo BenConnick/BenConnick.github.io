@@ -117,7 +117,7 @@ function UnityProgress (dom) {
 		this.messageArea.style.textAlign = 'center';
 		this.messageArea.innerHTML = this.message;
 		
-		if (progress >= 1) {
+		if (this.progress >= 1) {
 			document.querySelector(".title").innerHTML = "";
 		}
 	}
