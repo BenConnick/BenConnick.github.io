@@ -95,7 +95,7 @@ function init() {
   });
 
   // home page
-  if (window.location.href.indexOf("index") > -1) {
+  if (document.getElementById("landingPage") != undefined) {
     // check if the url contains image query
     var linkParts = window.location.href.split(/[\?\#]/);
     if (linkParts != undefined && linkParts[1] != undefined) {
