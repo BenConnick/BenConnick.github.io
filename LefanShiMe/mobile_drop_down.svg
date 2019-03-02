@@ -1,0 +1,17 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #243841;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <title>mobile_drop_down</title>
+  <line class="cls-1" x1="1.5" y1="1.5" x2="31.5" y2="1.5"/>
+  <line class="cls-1" x1="1.5" y1="12.5" x2="31.5" y2="12.5"/>
+  <line class="cls-1" x1="1.5" y1="23.5" x2="31.5" y2="23.5"/>
+</svg>

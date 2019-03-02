@@ -1,0 +1,80 @@
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  <div id="navbar">
+    <a id="work" class="navel" href="index.html">
+      WORK
+    </a>
+    <a id="blog" class="navel" href="blog.html">
+      BLOG
+    </a>
+    <div id="home" class="navel">
+      <img id="logo" src="logo.svg"/>
+      Lefan Shi
+    </div>
+    <a id="about" class="navel" href="about.html">
+      ABOUT
+    </a>
+    <a id="contact" class="navel" href="contact.html">
+      CONTACT
+    </a>
+  </div>
+
+  <div id="mobilenav">
+    <div id="home" class="mobilelogo">
+      <img id="logo" src="logo.svg"/>
+      Lefan Shi
+    </div>
+    <img class="hamburger" src="mobile_drop_down.svg"></img>
+    <div class="mobileNavInner hidden">
+      <a id="work" class="mobilenavel" href="index.html">
+        WORK
+      </a>
+      <a id="blog" class="mobilenavel" href="blog.html">
+        BLOG
+      </a>
+      <a id="about" class="mobilenavel" href="about.html">
+        ABOUT
+      </a>
+      <a id="contact" class="mobilenavel" href="contact.html">
+        CONTACT
+      </a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 class="floatup">Say hello to Lefan!</h1>
+    <div class=mediumspacer></div>
+    <p>Use the form below, or send an email to <a style="text-decoration: underline;">hello@lefanshi.me</a></p>
+    <form method="POST" action="http://formspree.io/hello@lefanshi.me">
+      <div class="inputcontainer">
+        <p class="inputheader">Subject*:</p>
+        <input class="input" name="email"></input>
+      </div>
+      <div class="inputcontainer">
+        <p class="inputheader">Your Email*:</p>
+        <input class="input" name="subject"></input>
+      </div>
+      <div class="inputcontainer">
+        <p class="inputheader">Your Message*:</p>
+        <textarea class="input" id="messagearea" name="message"></textarea>
+      </div>
+
+      <button id="sendmail" class="roundbutton">
+        Send
+      </button>
+    </form>
+  </div>
+
+  <div id="footer">
+  Design & Development by Lefan Shi
+  </div>
+
+  <script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
