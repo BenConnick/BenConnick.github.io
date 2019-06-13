@@ -31,6 +31,17 @@
         selectEl.innerHTML = allOptions;
         tick();
       }
+      function openFullscreen(elem) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+          elem.msRequestFullscreen();
+        }
+      }
       function getSectionValueNormalized(sectionString) {
         return getSectionValue(sectionString) / getSectionNumValues(sectionString);
       }
@@ -82,6 +93,7 @@
     <select>
       <option value="error">error</option>
     </select>
+    <button onclick="requestFullscreen(document.body)">Fullscreen</button>
     </form>
   </body>
 </html>
