@@ -81,6 +81,7 @@ function startNextRound() {
 
 // play a card
 function playCard(handIndex) {
+  console.log("handIndex " + handIndex);
   var removed = cardsInHand.splice(handIndex,1);
   cardsInPlay.push(removed[0]);
 }
@@ -142,15 +143,17 @@ function startScreen() {
 }
 
 function chooseCardScreen() {
+  function playCardLocal(idx) {
+    return function() {
+      playCard(idx);
+      gameState = ROUND_ACTION_MODE;
+      updateUI();
+    }
+  }
   for (var i = 0; i < cardsInHand.length; i++) {
-    var localIndex = i;
     addButton(
       cardNames[cardsInHand[i]],
-      () => {
-        playCard(localIndex);
-        gameState = ROUND_ACTION_MODE;
-        updateUI();
-      },
+      playCardLocal(i),
       "2em");
   }
 }
