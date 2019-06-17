@@ -26,11 +26,12 @@ function init() {
 }
 
 // util
-function addButton(name, listener, fontSize) {
+function addButton(name, listener, fontSize, className) {
   var button = document.createElement("button");
   button.innerText = name;
   button.onclick = listener;
   if (fontSize != undefined) button.style.fontSize = fontSize;
+  if (className != undefined) button.className = className;
   content.appendChild(button);
 }
 
@@ -154,7 +155,9 @@ function chooseCardScreen() {
     addButton(
       cardNames[cardsInHand[i]],
       playCardLocal(i),
-      "2em");
+      "2em",
+      "card"
+    );
   }
 }
 
