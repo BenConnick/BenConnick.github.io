@@ -3,18 +3,35 @@ var content;
 var timeLabel;
 var cardsLabel;
 var gameState = 0;
-const START_MODE = 0;
-const CHOOSE_CARD_MODE = 1;
-const ROUND_ACTION_MODE = 2;
-const ROUND_RESULT_MODE = 3;
-const PASS_MODE = 4;
+const FLIP_CARD_MODE = 0;
+const PLAY_CARD_MODE = 1;
+const REMOVE_CARD_MODE = 2;
 var startTime = Date.now();
 const startingCards = [1,1,1,2];
-const cardNames = [""," 🌹 "," 💀 "]
-var cardsInHand = [];
-var cardsInPlay = [];
+const cardNames = ["INVALID"," 🌹 "," 💀 "]
+var cards = [];
+var cardStack = [];
+var revealed = [];
 var wins = 0;
 window.onload = init;
+
+class Card {
+  constructor(uniqueId) {
+    this.uniqueId = uniqueId;
+    this.type = startingCards[uniqueId];
+    this.played = false;
+    this.flipped = false;
+    this.removed = false;
+  }
+
+  getName() {
+    return cardNames[this.type];
+  }
+
+  flip() {
+    this.flipped = !this.flipped;
+  }
+}
 
 // initializer
 function init() {
@@ -22,10 +39,16 @@ function init() {
   document.body.appendChild(content);
   cardsLabel = document.getElementById("numCards");
   timeLabel = document.getElementById("time");
+  clearState();
   updateUI();
 }
 
 // util
+// ---
+function addRow() {
+  content.appendChild(document.createElement("p"));
+}
+
 function addButton(name, listener, fontSize, className) {
   var button = document.createElement("button");
   button.innerText = name;
@@ -35,146 +58,187 @@ function addButton(name, listener, fontSize, className) {
   content.appendChild(button);
 }
 
+function addCardButton(card, click) {
+  var button = document.createElement("button");
+  var cardName = card.getName();
+  if (card.flipped) cardName = "❓";
+  button.innerText = cardName;
+  button.onclick = click;
+  button.style.fontSize = "3em";
+  var className = "card";
+  if (card.removed) className += " removed";
+  button.className = className;
+  content.appendChild(button);
+}
+
+function addModeButton(name, mode) {
+  addButton(name, () => { gameState = mode; updateUI(); }, "1em", gameState == mode ? "selected" : "");
+}
+
 // clear the content and add new content
 function updateUI() {
   // clear first
   content.innerHTML = "";
-  // switch on mode
+  // mode buttons
+  addModeButton("Flip", FLIP_CARD_MODE);
+  addModeButton("Play", PLAY_CARD_MODE);
+  addModeButton("Remove", REMOVE_CARD_MODE);
+  addRow();
+
+  // switch on state
   switch(gameState) {
-    case START_MODE:
-      clearState();
-      startScreen();
+    case FLIP_CARD_MODE:
+      flipMode();
       break;
-    case CHOOSE_CARD_MODE:
-      chooseCardScreen();
+    case PLAY_CARD_MODE:
+      playMode();
       break;
-    case ROUND_ACTION_MODE:
-      roundActionScreen();
-      break;
-    case ROUND_RESULT_MODE:
-      roundResultScreen();
-      break;
-    case PASS_MODE:
-      passScreen();
+    case REMOVE_CARD_MODE:
+      removeMode();
       break;
   }
-  // cross-screen ui
-  numCards.innerHTML = "In Hand: " + cardsInHand.length + " <br>On Mat: " + cardsInPlay.length;
+
+  addRow();
+
+  // show / hide button
+  privatePublicButton();
 }
 
 // clear the game state
 function clearState() {
   wins = 0;
-  cardsInHand = startingCards.slice();
-  cardsInPlay = [];
-  gameState = 1;
+  gameState = 0;
+  getNewHand();
   startTime = Date.now();
 }
 
-function startNextRound() {
-  for (var i = 0; i < cardsInPlay.length; i++) {
-    cardsInHand.push(cardsInPlay[i]);
+function getNewHand() {
+  cardsInHand = [];
+  for (var i = 0; i < startingCards.length; i++) {
+    cards.push(new Card(i)); // use int for type
   }
-  cardsInPlay = [];
-  gameState = CHOOSE_CARD_MODE;
-  updateUI();
-}
+  console.log(cards);
+  var indices = getShuffleArr(cards);
 
-// play a card
-function playCard(handIndex) {
-  console.log("handIndex " + handIndex);
-  var removed = cardsInHand.splice(handIndex,1);
-  cardsInPlay.push(removed[0]);
-}
-
-function choosePlayCard() {
-  gameState = CHOOSE_CARD_MODE;
-  updateUI();
-}
-
-function chooseChallenge() {
-  gameState = ROUND_RESULT_MODE;
-  updateUI();
-}
-
-function choosePass() {
-  gameState = PASS_MODE;
-  updateUI();
-}
-
-function chooseWin() {
-  wins++;
-  if (wins > 1) {
-    alert("YOU WIN!");
-    gameState = START_MODE;
-    updateUI();
-  } else {
-    startNextRound();
+  console.log(indices);
+  console.log("---");
+  var temp = [];
+  for (var i = 0; i < indices.length; i++) {
+    temp.push(cards[indices[i]]);
   }
+  cards = temp;
+  console.log(cards);
 }
 
-function chooseLose() {
-  for (var i = 0; i < cardsInPlay.length; i++) {
-    cardsInHand.push(cardsInPlay[i]);
-  }
-  cardsInPlay = [];
-  var removed = cardsInHand.splice(Math.floor(Math.random() * cardsInHand.length),1); // remove random
-  if (cardsInHand.length <= 0) {
-    alert("YOU LOST! GAME OVER");
-    gameState = START_MODE;
-    updateUI();
-  } else {
-    alert("YOU LOST: " +cardNames[removed[0]]);
-    startNextRound();
-  }
+function flip(card) {
+  card.flip();
 }
 
-function reveal() {
-  var popped = cardsInPlay.pop();
-  cardsInHand.push(popped);
-  alert(cardNames[popped]);
+function toggleRemoved(card) {
+  card.removed = !card.removed;
+}
+
+function play(card) {
+  if (card.removed) return;
+  cardStack.push(card);
+  card.played = true;
+  card.flipped = true;
+}
+
+function flipMode() {
+  cardState(flip);
+}
+
+function removeMode() {
+  cardState(toggleRemoved);
+}
+
+function playMode() {
+  cardState(play);
+}
+
+function revealPlayedCard() {
+  if (cardStack.length <= 0) return;
+  var c = cardStack[cardStack.length-1];
+  console.log(cardStack);
+  cardStack.pop(); // splice(revealed.indexOf(c),1)
+  console.log(cardStack);
+  revealed.push(c);
+  c.flipped = false;
   updateUI();
 }
 
-function startScreen() {
-  addButton("start", () => {
-    clearState();
-    updateUI();
-  });
+function returnPlayedCard(card) {
+  revealed.splice(indexOfCard(revealed,card),1);
+  card.played = false;
 }
 
-function chooseCardScreen() {
-  function playCardLocal(idx) {
+function indexOfCard(arr, card) {
+  return indexOfCardWithId(arr,card.uniqueId)
+}
+
+function indexOfCardWithId(arr, id) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].uniqueId == id) return i;
+  }
+  return -1;
+}
+
+function cardState(cardAction) {
+  function useCardLocal(action, c) {
     return function() {
-      playCard(idx);
-      gameState = ROUND_ACTION_MODE;
+      action(c);
       updateUI();
     }
   }
-  for (var i = 0; i < cardsInHand.length; i++) {
-    addButton(
-      cardNames[cardsInHand[i]],
-      playCardLocal(i),
-      "2em",
-      "card"
-    );
+  addButton("Stack: " + cardStack.length, revealPlayedCard)
+  for (var i = 0; i < revealed.length; i++) {
+      addCardButton(revealed[i], useCardLocal(returnPlayedCard, revealed[i]));
+  }
+  addRow();
+  for (var i = 0; i < cards.length; i++) {
+    if (!cards[i].played)
+      addCardButton(cards[i], useCardLocal(cardAction, cards[i]));
   }
 }
 
-function roundActionScreen() {
-  if (cardsInHand.length > 0) addButton("Play Another Card", choosePlayCard);
-  addButton("Challenge", chooseChallenge);
-  addButton("Pass", choosePass);
+function showHideAll(flipped) {
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].played) continue; // don't mess with played cardStack
+    cards[i].flipped = flipped;
+  }
+  updateUI();
 }
 
-function roundResultScreen() {
-  if (cardsInPlay.length > 0) addButton("Reveal Top Card",reveal);
-  addButton("Win",chooseWin);
-  addButton("Lose",chooseLose);
-  addButton("Pass",choosePass);
+function privatePublicButton() {
+  addButton("Hide All", () => { showHideAll(true); });
+  addButton("Show All", () => { showHideAll(false); });
 }
 
-function passScreen() {
-  if (cardsInPlay.length > 0) addButton("Reveal Top Card",reveal);
-  addButton("Next Round", startNextRound);
+function getShuffleArr(arr) {
+  var vals = [];
+  var indices = [];
+  for (var i = 0; i < arr.length; i++) {
+    indices.push(i);
+    vals.push(Math.random());
+  }
+  console.log(indices);
+  console.log(vals);
+  for (var i = 0; i < arr.length; i++) {
+    var min = 100;
+    var minIndex = -1;
+    for (var j = i; j < arr.length; j++) {
+      if (vals[j] < min) {
+        min = vals[j];
+        minIndex = j;
+      }
+    }
+    var temp = vals[i];
+    var temp2 = indices[i];
+    vals[i] = min;
+    indices[i] = indices[minIndex];
+    vals[minIndex] = temp;
+    indices[minIndex] = temp2;
+  }
+  return indices;
 }
