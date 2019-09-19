@@ -107,7 +107,7 @@ styles for index.html
 }
 
 .projectBtnHolder {
-	
+
 }
 
 .projectBtn {
@@ -340,16 +340,16 @@ styles for index.html
 	top: 0;
 	transition: left 0.5s;
 	max-width: 800px;
-	
+
 }
 
 #floatingFrame .projectSection {
   padding: 1em;
-  margin: 1em;
+  margin-right: 1em;
   background-color: white;
-	box-shadow: 0px 0px 50px black;
+	box-shadow: 0px 0px 5px black;
 	overflow-y: scroll;
-	height: calc(100vh - 4em);
+	height: calc(100vh);
 }
 
 #closeFloatingFrameBtn {
@@ -420,7 +420,7 @@ styles for index.html
 }
 
 #Resume {
-    font-size: 3em; 
+    font-size: 3em;
     /*width: 700px;*/
     /*text-align: center;*/
 }
@@ -432,28 +432,28 @@ styles for index.html
 }
 
 #interactiveFictionContainer {
-    width: 700px; 
-    height: 430px; 
-    padding: 20px; 
-    background: white; 
+    width: 700px;
+    height: 430px;
+    padding: 20px;
+    background: white;
     border: solid skyblue;
 }
 
 #uIn {
     width: 670px;
-    font-size: 15pt; 
+    font-size: 15pt;
     font-family: 'Serif';
 }
 
 #scroll {
-    width: 700px; 
-    height: 400px; 
+    width: 700px;
+    height: 400px;
     overflow-y: scroll;
 }
 
 #output {
-    font-size: 13pt; 
-    font-family: 'Serif'; 
+    font-size: 13pt;
+    font-family: 'Serif';
 }
 
 
@@ -556,13 +556,13 @@ styles for index.html
 		height: 6em;
 	}
 	#floatingFrame .projectSection {
-	  margin: 4em;
-		padding: 4em;
-		height: calc(100vh - 16em);
+	  margin-right: 4em;
+    margin-left: 0;
+		height: calc(100vh);
 	}
-	
+
 	#closeFloatingFrameBtn {
-	  top: 5em;
+	  top: 1em;
 	  right: 5em;
 	}
 	.projectBtn .nameBox {
@@ -585,7 +585,7 @@ styles for index.html
 @media (min-width: 1200px) {
 	.projectBtn {
 		width: 395px;
-		height: 245px;	
+		height: 245px;
 	}
 	.slideshow {
 		height: 35em;
@@ -606,6 +606,6 @@ styles for index.html
 @media (min-width: 1800px) {
 	.projectBtn {
 		width: 530px;
-		height: 345px;	
+		height: 345px;
 	}
 }

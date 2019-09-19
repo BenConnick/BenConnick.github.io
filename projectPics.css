@@ -89,6 +89,18 @@
   background-image: url("images/MeowssengerBanner.png");
   background-position: center;
 }
+.pqBtn {
+  background-image: url("images/PortalQuestIcon.png");
+  background-position: center;
+}
+.dhBtn {
+  background-image: url("images/DisneyHeroesIcon.png");
+  background-position: center;
+}
+.pfBtn {
+  background-image: url("images/PuzzleForceIcon.jpg");
+  background-position: center;
+}
 
 #googlyScreenshot {
     cursor: pointer;
@@ -132,7 +144,7 @@
 
 #dontQuestionItScreenshot {
 	margin-top: 25px;
-	
+
     background-image: url("images/DontQuestionIt.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -208,6 +220,24 @@
 	background-image: url("images/MeowssengerScreenshot.png");
 	height: initial;
 	cursor: pointer;
+}
+#portalQuestScreenshot {
+  cursor: pointer;
+}
+#disneyHeroesScreenshot {
+  cursor: pointer;
+}
+#puzzleForceScreenshot {
+  /*background-image: url("images/PuzzleForceScreenshot1.jpg");*/
+  cursor: pointer;
+  display: inline;
+  padding-right: 1em;
+
+}
+#puzzleForceScreenshot2 {
+  /*background-image: url("images/PuzzleForceScreenshot2.jpg");*/
+  cursor: pointer;
+  display: inline;
 }
 
 .screenshot {
