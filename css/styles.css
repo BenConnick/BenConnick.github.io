@@ -474,6 +474,12 @@ iframe {
   border: 0;
 }
 
+.vidframe {
+  width: 100%;
+  height: 20rem !important;
+  margin-bottom: 3rem;
+}
+
 summary {
   display: list-item;
   cursor: pointer;
@@ -11052,4 +11058,12 @@ html {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  background-image: url("../assets/img/icon-self-portrait.png"), url("../assets/img/icon-self-portrait-circle.png");
+  background-size: contain;
+}
+
+.aboutIconInner {
+  width: 15em;
+  height: 18.107rem;
+  display: block;
 }
