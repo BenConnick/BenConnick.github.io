@@ -9,28 +9,31 @@ const complexLinkReplaceRegex = "<a href='' data-target='$2' onclick='handleLink
 let ui = {
     outputTextField: undefined,
     inputTextField: undefined,
-    chapterInputField: undefined,
-    chapterDropdownButton: undefined,
-    saveButton: undefined,
+    passageInputField: undefined,
+    passageDropdownButton: undefined,
+    submitButton: undefined,
     deleteButton: undefined,
     toggleButton: undefined,
     viewPanel: undefined,
     editPanel: undefined,
     toast: undefined,
     historyPanel: undefined,
+    downloadButton: undefined,
+    uploadButton: undefined,
 }
 
 // saved state
 let state = {
     progress: 0,
     currentSelection: 0,
-    chapters: {},
+    passages:    {},
     lastSaveTime: '',
 }
 
 // values that are not saved
 let sessionState = {
-    history: []
+    history: [],
+    lastSavedLink: undefined,
 }
 
 function onLoad() {
@@ -50,6 +53,11 @@ function overloadSaveKeyboardShortcut() {
             saveSession();
             showSavedToast(1500);
         }
+
+        if ((event.ctrlKey || event.metaKey) && event.keyCode === 13) {
+            event.preventDefault(); // Prevent the default save action
+            onPassageSubmit();
+        } 
     });
 }
 
@@ -64,9 +72,11 @@ function linkUI() {
     }
     
     ui.outputTextField = $("#outputTextField");
-    ui.chapterDropdownButton.onchange = onChapterUIChanged;
-    ui.saveButton.onclick = onSaveEditedChapterPressed;
+    ui.passageDropdownButton.onchange = onPassageUIChanged;
+    ui.submitButton.onclick = onPassageSubmit;
     ui.deleteButton.onclick = onDeletePressed;
+    ui.uploadButton.onclick = onUploadPressed;
+    ui.downloadButton.onclick = onDownloadPressed;
     
     // special
     ui.toggleButton = $("#toggleButton input");
@@ -77,42 +87,42 @@ function onEditModeToggled() {
     updateUI();
 }
 
-function onChapterUIChanged() {
-    let optionIndex = ui.chapterDropdownButton.value;
+function onPassageUIChanged() {
+    let optionIndex = ui.passageDropdownButton.value;
     if (optionIndex == undefined || optionIndex == Number.NaN) return;
     state.currentSelection = optionIndex;
     rebuildUI();
 }
 
 function rebuildUI() {
-    ui.chapterDropdownButton.innerHTML = "";
-    if (state == undefined || state.chapters == undefined) {
+    ui.passageDropdownButton.innerHTML = "";
+    if (state == undefined || state.passages == undefined) {
         console.error("cannot refresh ui, state is undefined")
     }
-    let chapterKeys = getChapterKeys();
-    let numChapters = chapterKeys.length;
-    for (let i = 0; i < numChapters; i++) {
-        let selectChild = `<option value='${[i]}'>${chapterKeys[i]}</option>`;
-        ui.chapterDropdownButton.innerHTML += selectChild;
+    let passageKeys = getPassageKeys();
+    let numPassages = passageKeys.length;
+    for (let i = 0; i < numPassages; i++) {
+        let selectChild = `<option value='${[i]}'>${passageKeys[i]}</option>`;
+        ui.passageDropdownButton.innerHTML += selectChild;
     }
     updateUI();
 }
 
-function getChapterKeys() {
-    let chapterKeys = Object.keys(state.chapters);
-    return chapterKeys;
+function getPassageKeys() {
+    let passageKeys = Object.keys(state.passages);
+    return passageKeys;
 }
 
-function getChapterID(index) {
-    return getChapterKeys()[index];
+function getPassageID(index) {
+    return getPassageKeys()[index];
 }
 
-function getChapter(index) {
-    return state.chapters[getChapterID(index)];
+function getPassage(ID) {
+    return state.passages[ID];
 }
 
-function getChapterIndex(chapterID) {
-    return getChapterKeys().indexOf(chapterID);
+function getPassageIndex(passageID) {
+    return getPassageKeys().indexOf(passageID);
 }
 
 function saveSession() {
@@ -143,22 +153,57 @@ function migrateLegacySession(sessionObject) {
     return sessionObject;
 }
 
-function onSaveEditedChapterPressed() {
-    if (ui.chapterInputField.value == undefined || chapterInputField.value == "") {
+function onPassageSubmit() {
+    if (ui.passageInputField.value == undefined || passageInputField.value == "") {
         alert('Did not save, ID field must is required');
         return;
     }
-    let idValue = ui.chapterInputField.value;
+    let idValue = ui.passageInputField.value;
     let contentValue = ui.inputTextField.value;
-    addChapter(idValue, contentValue);
-    state.currentSelection = getChapterIndex(idValue);
+    addPassage(idValue, contentValue);
+    
+    // if there is are link in the passage that don't exist yet, create new passages
+    let newPassageObject = { ID: undefined };
+    createLinkedPassages(contentValue, newPassageObject);
+    // auto select most recent new passage for ease of continuous editing
+    let nextSelection = newPassageObject.ID ?? idValue;
+    state.currentSelection = getPassageIndex(nextSelection);
     saveSession();
     showSavedToast(500);
     rebuildUI();
 }
 
-function addChapter(id, content) {
-    state.chapters[id] = content;
+function createLinkedPassages(rawText, outObject) {
+    let matches = rawText.match(linkRegex);
+    if (matches == undefined || matches.length == 0) {
+        return;
+    }
+    for (let i = 0; i < matches.length; i++) {
+        let linkID = matches[i];
+        linkID = linkID.replace(complexLinkRegex, '$2');
+        linkID = linkID.replace(linkRegex, '$1');
+        if (passageExists(linkID) == false) {
+            addPassage(linkID, "");
+            if (outObject) outObject.ID = linkID;
+        }
+    }
+}
+
+function getLastLink(rawText) {
+    let matches = rawText.match(linkRegex);
+    if (matches == undefined || matches.length == 0) {
+        return undefined;
+    }
+    let linkID = matches.at(-1);
+    linkID = linkID.replace(complexLinkRegex, '$2');
+    linkID = linkID.replace(linkRegex, '$1');
+    sessionState.lastSavedLink = linkID;
+    console.log(linkID);
+    return linkID;
+}
+
+function addPassage(id, content) {
+    state.passages[id] = content;
 }
 
 function updateUI() {
@@ -167,7 +212,7 @@ function updateUI() {
 }
 
 function updatePassageUI() {
-    displayChapter(getChapterID(state.currentSelection));
+    displayPassage(getPassageID(state.currentSelection));
 }
 
 function updateHistoryUI() {
@@ -194,23 +239,23 @@ function togglePanels() {
     }
 }
 
-function displayChapter(id) {
+function displayPassage(id) {
     togglePanels();
-    let chapterContent = state.chapters[id];
-    if (chapterContent == undefined) {
-        ui.outputTextField.innerHTML = `Chapter with id '${id}' not found`;
+    let passageContent = getPassage(id);
+    if (passageContent == undefined) {
+        ui.outputTextField.innerHTML = `Passage with id '${id}' not found.`;
     }
     else {
-        displayChapterInner(id, chapterContent);
+        displayPassageInner(id, passageContent);
     }
 }
 
-function displayChapterInner(id, content) {
+function displayPassageInner(id, content) {
     ui.outputTextField.innerHTML = reformatLinksInString(content);
-    ui.chapterInputField.value = id;
+    ui.passageInputField.value = id;
     ui.inputTextField.value = content;
-    state.currentSelection = getChapterIndex(id);
-    ui.chapterDropdownButton.value = state.currentSelection;
+    state.currentSelection = getPassageIndex(id);
+    ui.passageDropdownButton.value = state.currentSelection;
     automaticallyAddToHistory(id);
 }
 
@@ -247,14 +292,20 @@ function alertErrors() {
 }
 
 function onDeletePressed() {
-    let confirmMessage = `Delete chapter '${getChapterID(state.currentSelection)}'?`;
+    let confirmMessage = `Delete passage '${getPassageID(state.currentSelection)}'?`;
     if (confirm(confirmMessage)) {
-        let prevSelection = state.currentSelection;
-        Reflect.deleteProperty(state.chapters, getChapterID(state.currentSelection));
+        Reflect.deleteProperty(state.passages, getPassageID(state.currentSelection));
+        if (state.currentSelection >= getPassageKeys().length) {
+            state.currentSelection--;
+        }
         saveSession();
         showSavedToast(500);
         rebuildUI();
     }
+}
+
+function passageExists(id) {
+    return getPassage(id) != undefined;
 }
 
 function handleLinkClick(event) {
@@ -262,9 +313,13 @@ function handleLinkClick(event) {
     try {
         // Get the href attribute of the clicked <a> tag
         const id = event.srcElement.dataset.target;
+        
+        if (!passageExists(id)) {
+            showToast(`Passage with id '${id}' not found.`);
+        }
 
-        // show the chapter specified
-        displayChapter(id);
+        // show the passage specified
+        displayPassage(id);
 
         // Print the href value to the console
         console.log("Link href:", id);
@@ -276,6 +331,56 @@ function handleLinkClick(event) {
         // Prevent the default behavior of the <a> tag
         event.preventDefault();
     }
+}
+
+function onDownloadPressed() {
+    let exportName = "story"
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+    let downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+function onUploadPressed() {
+    let input = document.createElement('input');
+    document.body.appendChild(input); // required for firefox
+    input.type = 'file';
+    input.onchange = onFileUploaded;
+    input.click();
+    input.remove();
+}
+
+function onFileUploaded(event) {
+    let file = event.target.files[0];
+    console.log(file);
+    let reader = new FileReader();
+    reader.onload = onUploadedFileRead;
+    reader.filename = file.name;
+    reader.readAsText(file,'UTF-8');
+}
+
+function onUploadedFileRead(e) {
+    let fileText = e.target.result;
+    console.log(fileText);
+    let stateProxy = JSON.parse(fileText);
+    if (stateProxy == undefined) {
+        console.error("Could not read this file")
+        showToast("Could not read the uploaded file, run the file through a json parser to check it is valid json");
+        return;
+    }
+    stateProxy = migrateLegacySession(stateProxy);
+    if (stateProxy == undefined) {
+        console.error("Could not read this file")
+        showToast("old save file incompatible, this should never happen");
+        return;
+    }
+    state = stateProxy;
+    rebuildUI();
+    console.log(e);
+    showToast(`File read '${e.target.filename}'`)
 }
 
 function showToast(message, durationMs) {

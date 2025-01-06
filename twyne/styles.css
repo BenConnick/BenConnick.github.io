@@ -2,8 +2,20 @@ input {
     font-family: monospace;
 }
 
+pre {
+    font-family: serif;
+}
+
 details a {
     margin-left: 1em;
+}
+
+.svgButton {
+    min-width: 2em;
+}
+
+.svgButton svg {
+    margin: -0.3em;
 }
 
 .fullwidth {
