@@ -1,0 +1,44 @@
+input {
+    font-family: monospace;
+}
+
+details a {
+    margin-left: 1em;
+}
+
+.fullwidth {
+    display: block;
+    width: calc(100vw - 25px); 
+}
+
+.hidden {
+    display: none;
+}
+
+.navspacer {
+    display: inline-block;
+    width: .5em;
+}
+
+.toast {
+    visibility: hidden; /* Hidden by default */
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}

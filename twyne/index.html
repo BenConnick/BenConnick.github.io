@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="helper.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<label for="chapterDropdownButton">Passages: </label><select id="chapterDropdownButton"></select>
+<span class="navspacer"></span>
+Edit
+<label class="toggle" id="toggleButton">
+    <input type="checkbox" id="toggleSwitch" checked="true">
+</label>
+<span class="navspacer"></span>
+<button id="deleteButton">Delete</button>
+<div id="viewPanel">
+    <p id="outputTextField"></p>
+</div>
+<div id="editPanel">
+    <label for="chapterInputField">Title</label><input class="fullwidth" id="chapterInputField"/>
+    <label for="inputTextField">Text</label><textarea class="fullwidth" rows="10" id="inputTextField"></textarea>
+    <button class="fullwidth" id="saveButton">Save</button>
+</div>
+<details summary="history" id="historyPanel">
+</details>
+<div id="toast" class="toast"></div>
+</body>
+</html>
