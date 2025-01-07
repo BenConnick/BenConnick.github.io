@@ -53,7 +53,7 @@ function tryLoadFromLink() {
     if (tryGetShareLinkGame(loadResult) && loadResult.decoded != undefined) {
         state = migrateLegacySession(loadResult.decoded);
         ui.toggleButton.checked = false;
-        state.currentSelection = 0; // this is a playtest link, load the first passage
+        changeSelectionInternal(0); // this is a playtest link, load the first passage
         sessionState.playtest = true;
     }
 }
@@ -126,7 +126,7 @@ function onEditModeToggled() {
 function onPassageUIChanged() {
     let optionIndex = ui.passageDropdownButton.value;
     if (optionIndex == undefined || optionIndex == Number.NaN) return;
-    state.currentSelection = optionIndex;
+    changeSelectionInternal(optionIndex);
     rebuildUI();
 }
 
@@ -203,7 +203,7 @@ function onPassageSubmit() {
     createLinkedPassages(contentValue, newPassageObject);
     // auto select most recent new passage for ease of continuous editing
     let nextSelection = newPassageObject.ID ?? idValue;
-    state.currentSelection = getPassageIndex(nextSelection);
+    changeSelectionInternal(getPassageIndex(nextSelection));
     saveSession();
     showSavedToast(500);
     rebuildUI();
@@ -296,26 +296,35 @@ function displayPassageInner(id, content) {
     ui.outputTextField.innerHTML = reformatLinksInString(content);
     ui.passageInputField.value = id;
     ui.inputTextField.value = content;
-    state.currentSelection = getPassageIndex(id);
+    changeSelectionInternal(getPassageIndex(id));
     ui.passageDropdownButton.value = state.currentSelection;
     automaticallyAddToHistory(id);
 }
 
 function automaticallyAddToHistory(id) {
     const maxHistoryLength = 10;
-    let hist = sessionState.history;
-    let historyLength = hist.length;
-    for (let i = 0; i < historyLength; i++) {
-        if (hist[i] == id) {
-            hist.splice(i,1);
+    let h = sessionState.history;
+    let len = h.length;
+    
+    // remove old entry, will add back later
+    for (let i = 0; i < len; i++) {
+        if (h[i] == id) {
+            h.splice(i,1);
             break;
         }
     }
-    historyLength = hist.length;
-    if (historyLength >= maxHistoryLength) {
-        hist.splice(0, historyLength-maxHistoryLength);
+    len = h.length; // length may have changed
+    
+    // limit history length
+    if (len >= maxHistoryLength) {
+        h.splice(0, len-maxHistoryLength);
     }
-    hist.push(id);
+    h.push(id);
+}
+
+function changeSelectionInternal(index) {
+    // note: does not update UI
+    state.currentSelection = index;
 }
 
 function reformatLinksInString(source) {
@@ -359,9 +368,14 @@ function handleLinkClick(event) {
         if (!passageExists(id)) {
             showToast(`Passage with id '${id}' not found.`);
         }
-
-        // show the passage specified
-        displayPassage(id);
+        else {
+            // add to history
+            automaticallyAddToHistory(id);
+            
+            // show the passage specified
+            changeSelectionInternal(getPassageIndex(id));
+            updateUI();
+        }
 
         // Print the href value to the console
         console.log("Link href:", id);
@@ -384,6 +398,10 @@ function onDownloadPressed() {
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+}
+
+function onHelpPressed() {
+    saveSession();
 }
 
 function getStateJsonString() {
