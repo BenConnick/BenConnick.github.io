@@ -1,0 +1,47 @@
+/* some AI nonsense */
+
+/* Basic styles for the toggle */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 1em;
+}
+
+.toggle input {
+    display: none; /* Hide the default checkbox */
+}
+
+.slider {
+    position: absolute;
+    top: 0.2em;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    background-color: #ccc;
+    border-radius: 1.5em;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+/* The slider handle */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: .8em;
+    width: .8em;
+    left: .1em;
+    bottom: .1em;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.1s;
+}
+
+/* When the input is checked */
+input:checked + .slider {
+    background-color: #4caf50;
+}
+
+input:checked + .slider::before {
+    transform: translateX(1em);
+}

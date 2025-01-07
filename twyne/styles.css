@@ -54,3 +54,7 @@ details a {
     visibility: visible;
     opacity: 1;
 }
+
+#historyPanel * {
+    color: #aaa;
+}

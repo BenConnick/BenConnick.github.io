@@ -20,29 +20,63 @@ let ui = {
     historyPanel: undefined,
     downloadButton: undefined,
     uploadButton: undefined,
+    shareButton: undefined,
+    editingToolbar: undefined,
 }
 
 // saved state
 let state = {
-    progress: 0,
     currentSelection: 0,
     passages:    {},
-    lastSaveTime: '',
 }
 
 // values that are not saved
 let sessionState = {
     history: [],
     lastSavedLink: undefined,
+    lastSaveTime: '',
+    playtest: false
 }
 
 function onLoad() {
     alertErrors();
     overloadSaveKeyboardShortcut();
     linkUI();
-    state = migrateLegacySession(loadSession());
-    saveSession();
+    state = migrateLegacySession(getLocallySavedSession());
+    tryLoadFromLink();
     rebuildUI();
+}
+
+function tryLoadFromLink() {
+    // is this a share link 
+    let loadResult = { decoded: undefined };
+    if (tryGetShareLinkGame(loadResult) && loadResult.decoded != undefined) {
+        state = migrateLegacySession(loadResult.decoded);
+        ui.toggleButton.checked = false;
+        state.currentSelection = 0; // this is a playtest link, load the first passage
+        sessionState.playtest = true;
+    }
+}
+
+function tryGetShareLinkGame(loadResult) {
+    if (window.location.href.indexOf("?") > -1) {
+        let decoded = decodeUrl();
+        if (decoded != undefined) {
+            loadResult.decoded = decoded;
+            return true;
+        }
+    }
+    return false;
+}
+
+function decodeUrl() {
+    let start = window.location.href.indexOf("?");
+    let encoded = window.location.href.substring(start+1);
+    if (encoded === undefined) {
+        return undefined;
+    }
+    let json = decodeURI(encoded);
+    return JSON.parse(json);
 }
 
 function overloadSaveKeyboardShortcut() {
@@ -77,6 +111,7 @@ function linkUI() {
     ui.deleteButton.onclick = onDeletePressed;
     ui.uploadButton.onclick = onUploadPressed;
     ui.downloadButton.onclick = onDownloadPressed;
+    ui.shareButton.onclick = onSharePressed;
     
     // special
     ui.toggleButton = $("#toggleButton input");
@@ -84,6 +119,7 @@ function linkUI() {
 }
 
 function onEditModeToggled() {
+    sessionState.playtest = false;
     updateUI();
 }
 
@@ -126,18 +162,18 @@ function getPassageIndex(passageID) {
 }
 
 function saveSession() {
-    state.lastSaveTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
-    let saveMessage = "saved " + state.lastSaveTime;
+    sessionState.lastSaveTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    localStorage.setItem(SAVE_KEY, getStateJsonString());
+    let saveMessage = "saved " + sessionState.lastSaveTime;
     console.log(saveMessage);
 }
 
 function showSavedToast(durationMs) {
-    let saveMessage = "saved " + state.lastSaveTime;
+    let saveMessage = "saved " + sessionState.lastSaveTime;
     showToast(saveMessage, durationMs);
 }
 
-function loadSession() {
+function getLocallySavedSession() {
     var sessionString = localStorage.getItem(SAVE_KEY);
     if (sessionString == undefined) sessionString = JSON.stringify(state);
     return JSON.parse(sessionString);
@@ -228,7 +264,7 @@ function isEditMode() {
     return ui.toggleButton.checked;
 }
 
-function togglePanels() {
+function updatePanelsVisibility() {
     if (isEditMode()) {
         ui.viewPanel.classList.add("hidden");
         ui.editPanel.classList.remove("hidden");
@@ -237,10 +273,16 @@ function togglePanels() {
         ui.viewPanel.classList.remove("hidden");
         ui.editPanel.classList.add("hidden");
     }
+    if (sessionState.playtest) {
+        ui.editingToolbar.classList.add("hidden");
+    }
+    else {
+        ui.editingToolbar.classList.remove("hidden");
+    }
 }
 
 function displayPassage(id) {
-    togglePanels();
+    updatePanelsVisibility();
     let passageContent = getPassage(id);
     if (passageContent == undefined) {
         ui.outputTextField.innerHTML = `Passage with id '${id}' not found.`;
@@ -335,13 +377,17 @@ function handleLinkClick(event) {
 
 function onDownloadPressed() {
     let exportName = "story"
-    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(getStateJsonString());
     let downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href",     dataStr);
     downloadAnchorNode.setAttribute("download", exportName + ".json");
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+}
+
+function getStateJsonString() {
+    return JSON.stringify(state);
 }
 
 function onUploadPressed() {
@@ -381,6 +427,15 @@ function onUploadedFileRead(e) {
     rebuildUI();
     console.log(e);
     showToast(`File read '${e.target.filename}'`)
+}
+
+function onSharePressed() {
+    let url = window.location.href;
+    let length = url.indexOf("?");
+    if (length < 0) length = url.length;
+    let prefix = url.substring(0,length) + "?";
+    navigator.clipboard.writeText(prefix + encodeURI(getStateJsonString()));
+    showToast("Copied to clipboard");
 }
 
 function showToast(message, durationMs) {
