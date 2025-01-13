@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.hourglass {
+    display: inline-block;
+    height: 2em;
+    background-color: grey;
+    margin-right: 1em;
+}
+
+.hourglass > * {
+    height: 100%;
+}
+
+.hourglass:active {
+    scale: 100% 95%;
+}
+
+.hourglass.empty {
+    background-color: red;
+}
+
+.fill {
+    background-color: blue;
+}
+
+.hidden {
+    display: none;
+}
+
+.navspacer {
+    display: inline-block;
+    width: .5em;
+}
+
+.toast {
+    visibility: hidden; /* Hidden by default */
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#gameParent {
+    display: block;
+    height: 90vh;
+    width: 100vw;
+}
+
+#scoreLabel {
+    text-align: center;
+}
+
+#gameOverPanel {
+    position: fixed;
+    width: 20vw;
+    left: 40vw;
+    top: 10vh;
+    display: block;
+    background-color: darkslategrey;
+    text-align: center;
+}
+
+#gameOverPanel.hidden {
+    display: none;
+}
+
+#gameOverPanel h2, #gameOverPanel button {
+    margin-bottom: 2vh;
+}
