@@ -131,3 +131,18 @@ function showToast(message, durationMs) {
 function hideToast() {
     ui.toast.classList.remove("show");
 }
+
+var supportsTouch = false;
+if ('ontouchstart' in window) {
+    //iOS & android
+    supportsTouch = true;
+
+} else if(window.navigator.msPointerEnabled) {
+
+    // Windows
+    // To test for touch capable hardware 
+    if(navigator.msMaxTouchPoints) {
+        supportsTouch = true;
+    }
+
+}

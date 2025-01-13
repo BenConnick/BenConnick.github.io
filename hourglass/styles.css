@@ -6,11 +6,22 @@ body {
     padding: 0;
 }
 
+@keyframes slideInFromLeft {
+    0% {
+        transform: scaleY(0%);
+    }
+    100% {
+        transform: scaleY(100%);
+    }
+}
+
 .hourglass {
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: .4s cubic-bezier(0.270, 1.650, 0.785, 0.755) 0s 1 slideInFromLeft;
     display: inline-block;
     height: 2em;
     background-color: grey;
-    margin-right: 1em;
+    margin-right: 0.5ex;
 }
 
 .hourglass > * {
@@ -73,8 +84,9 @@ body {
 
 #gameOverPanel {
     position: fixed;
-    width: 20vw;
-    left: 40vw;
+    padding: 3em;
+    left: 50%;
+    transform: translate(-50%, 0);
     top: 10vh;
     display: block;
     background-color: darkslategrey;
@@ -87,4 +99,6 @@ body {
 
 #gameOverPanel h2, #gameOverPanel button {
     margin-bottom: 2vh;
+    margin-left: 8vh;
+    margin-right: 8vh;
 }

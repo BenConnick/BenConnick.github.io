@@ -7,7 +7,16 @@ class Hourglass {
         this.secondsRemaining = durationSeconds;
         this.renderer = renderer;
         this.clickCount = 0;
-        this.renderer.outer.onclick = () => {this.onClick()};
+        if (supportsTouch) {
+            this.renderer.outer.ontouchstart = () => {
+                this.onClick()
+            };
+        }
+        else {
+            this.renderer.outer.onclick = () => {
+                this.onClick()
+            };
+        }
     }
     
     getPercent() {
