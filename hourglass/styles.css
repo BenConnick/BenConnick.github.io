@@ -1,9 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #111;
+    font-family: "Fugaz One", Arial, sans-serif;
+    background-color: #5e7e8e;
     color: white;
     margin: 0;
     padding: 0;
+}
+
+button {
+    font-family: "Fugaz One", sans-serif;
 }
 
 @keyframes slideInFromLeft {
@@ -19,9 +23,11 @@ body {
     /* This section calls the slideInFromLeft animation we defined above */
     animation: .4s cubic-bezier(0.270, 1.650, 0.785, 0.755) 0s 1 slideInFromLeft;
     display: inline-block;
-    height: 2em;
-    background-color: grey;
+    width: 12em;
+    height: 12em;
+    background-color: #00000000;
     margin-right: 0.5ex;
+    text-align: center;
 }
 
 .hourglass > * {
@@ -29,7 +35,7 @@ body {
 }
 
 .hourglass:active {
-    scale: 100% 95%;
+    scale: 95% 95%;
 }
 
 .hourglass.empty {
@@ -37,6 +43,8 @@ body {
 }
 
 .fill {
+    margin-left: auto;
+    margin-right: auto;
     background-color: blue;
 }
 
@@ -89,8 +97,9 @@ body {
     transform: translate(-50%, 0);
     top: 10vh;
     display: block;
-    background-color: darkslategrey;
+    background-color: #006464;
     text-align: center;
+    border-radius: 5em;
 }
 
 #gameOverPanel.hidden {

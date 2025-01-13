@@ -67,6 +67,50 @@ class GradientKey {
     }
 }
 
+function createSvgArc(radius, degrees, thickness = 10, padding = 10, color = "black") {
+    //console.log(`createSvgArc(${radius},${degrees},${padding},${color})`)
+    const svgNamespace = "http://www.w3.org/2000/svg";
+
+    // Calculate SVG dimensions
+    const size = radius * 2 + padding * 2;
+    const centerX = size / 2;
+    const centerY = size / 2;
+
+    // Convert degrees to radians and calculate the end point
+    const radians = (Math.PI / 180) * degrees;
+    const startX = centerX; // Topmost point
+    const startY = centerY - radius; // Topmost point
+    const endX = centerX + radius * Math.sin(radians); // X-axis uses sine for clockwise
+    const endY = centerY - radius * Math.cos(radians); // Y-axis uses cosine for clockwise
+
+    // Determine if the arc is large or small
+    const largeArcFlag = degrees > 180 ? 1 : 0;
+
+    // Create the path data for the arc
+    const pathData = [
+        `M ${startX},${startY}`, // Start at the topmost point
+        `A ${radius},${radius} 0 ${largeArcFlag},1 ${endX},${endY}` // Arc command
+    ].join(" ");
+
+    // Create the SVG element
+    const svg = document.createElementNS(svgNamespace, "svg");
+    svg.setAttribute("width", size);
+    svg.setAttribute("height", size);
+    svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+
+    // Create the path element for the arc
+    const path = document.createElementNS(svgNamespace, "path");
+    path.setAttribute("d", pathData);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", color);
+    path.setAttribute("stroke-width", thickness);
+
+    // Append the path to the SVG
+    svg.appendChild(path);
+
+    return svg;
+}
+
 function lerpColors(a, b, percent) {
     let x = 1 - percent;
     let y = percent;

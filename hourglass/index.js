@@ -7,16 +7,14 @@ class Hourglass {
         this.secondsRemaining = durationSeconds;
         this.renderer = renderer;
         this.clickCount = 0;
-        if (supportsTouch) {
-            this.renderer.outer.ontouchstart = () => {
-                this.onClick()
-            };
-        }
-        else {
-            this.renderer.outer.onclick = () => {
-                this.onClick()
-            };
-        }
+        this.fillReverse = false;
+        this.refillStartSecondsRemaining = 1;
+        
+        this.renderer.outer.ontouchstart = () => {
+            this.onClick()
+        };this.renderer.outer.onmousedown = () => {
+            this.onClick()
+        };
     }
     
     getPercent() {
@@ -24,7 +22,15 @@ class Hourglass {
     }
     
     update(dt) {
-        this.secondsRemaining -= dt / 1000;
+        this.secondsRemaining += (this.fillReverse ? 1 : -1) * dt / 1000;
+        
+        // if refill reached max
+        if (this.secondsRemaining > this.durationSeconds) {
+            this.fillReverse = false;
+            this.durationSeconds += this.durationSeconds - this.refillStartSecondsRemaining;
+            this.secondsRemaining = this.durationSeconds - dt/1000;
+            this.refillStartSecondsRemaining = this.secondsRemaining;
+        }
     }
     
     draw() {
@@ -32,7 +38,7 @@ class Hourglass {
             this.renderer.setBarLength(this.durationSeconds);
             this.prevDuration = this.durationSeconds;
         }
-        this.renderer.setPercentFill(this.getPercent());
+        this.renderer.setPercentFill(this.getPercent(), this.durationSeconds, this.fillReverse);
     }
     
     restartTimer() {
@@ -40,16 +46,14 @@ class Hourglass {
     }
     
     onClick() {
-        if (this.getPercent()) {
-            if (this.clickCount == 0) {
-                createNextHourglass();
-            }
-            this.clickCount++;
-            this.durationSeconds += this.durationSeconds-this.secondsRemaining;
-            this.secondsRemaining = this.durationSeconds;
+        if (this.fillReverse) {
+            return;
         }
-        else {
-            this.renderer.playShakeAnimation();
+        this.clickCount++;
+        this.fillReverse = true;
+        this.refillStartSecondsRemaining = this.secondsRemaining;
+        if (this.clickCount == 1) {
+            createNextHourglass();
         }
     }
 }
@@ -59,14 +63,22 @@ class HourglassRenderer {
         this.outer = hourglassDOMElement; 
         this.inner = hourglassDOMElement.children[0];
     }
-    setPercentFill(percentile) {
-        this.inner.style.width = `${percentile*100}%`;
-        let colorString = `${hourglassGradient.getColor(percentile)}`;
-        this.inner.style.backgroundColor = colorString;
+    setPercentFill(percentile, duration, isRefilling) {
+        const countdownStart = 10;
+        let secondsRemaining = percentile * duration;
+        let colorGradientParam = (secondsRemaining / countdownStart);
+        let color = hourglassGradient.getColor(colorGradientParam);
+        if (isRefilling) color = lerpColors(color, new Color(1,1,1), 1-percentile);
+        let colorString = `${color}`;
+        // this.inner.style.backgroundColor = colorString;
+        this.outer.removeChild(this.inner);
+        this.inner = createSvgArc(50, percentile * 360, 50, 30, colorString);
+        this.outer.appendChild(this.inner);
+        // this.inner.style.width = `${percentile*100}%`;
     }
     
     setBarLength(barLength) {
-        this.outer.style.width = barLength + 'ex';
+        //this.outer.style.width = barLength + 'ex';
     }
     
     playFlipAnimation() {
